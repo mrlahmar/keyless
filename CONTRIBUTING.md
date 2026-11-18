@@ -67,5 +67,5 @@ unchanged. Please open an issue first to agree on the approach for blocking inpu
 1. Update the version in the root `Cargo.toml` and move the `[Unreleased]` notes in
    `CHANGELOG.md` under the new version.
 2. Commit (`chore(release): v1.2.3`), then tag: `git tag v1.2.3 && git push origin v1.2.3`.
-3. The release workflow builds, packages and publishes the GitHub release. Versions below
-   1.0 and versions with a suffix (`v1.3.0-beta.1`) are published as pre-releases.
+3. The release workflow builds, packages and publishes the GitHub release. Versions with a
+   suffix (`v1.3.0-beta.1`, `v1.3.0-rc.1`) are published as pre-releases.

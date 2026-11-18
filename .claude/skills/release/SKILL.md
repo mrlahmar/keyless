@@ -6,8 +6,8 @@ description: Prepare a new Keyless version (version bump, changelog, local packa
 # Prepare a release
 
 Versions follow SemVer. Pushing a tag `vX.Y.Z` runs `.github/workflows/release.yml`, which
-builds, packages and publishes the GitHub release. Tags starting with `v0.` or containing
-`-` are published as pre-releases.
+builds, packages and publishes the GitHub release. Tags with a suffix, such as
+`v1.2.0-beta.1` or `v1.2.0-rc.1`, are published as pre-releases.
 
 1. Pick the version with the maintainer: fixes are patch, new options are minor.
 2. Set `version` under `[workspace.package]` in the root `Cargo.toml`. That is the only

@@ -11,8 +11,8 @@ pub use layout::{KeyCap, LAYOUT_KEYS};
 pub use settings::{AUTO_RESUME_CHOICES, Appearance, Edge, Settings};
 pub use shortcut::{Key, Modifiers, Shortcut};
 
-/// True for versions that are not yet stable: `0.x.y`, or any version with a pre-release
-/// part such as `1.2.0-rc.1`. Matches how the release workflow marks pre-releases.
+/// True for versions shown as beta in the app: `0.x.y`, or any version with a suffix such
+/// as `1.2.0-beta.1` or `1.2.0-rc.1`. GitHub marks only the suffixed ones as pre-releases.
 pub fn is_prerelease(version: &str) -> bool {
     version.starts_with("0.") || version.contains('-')
 }
