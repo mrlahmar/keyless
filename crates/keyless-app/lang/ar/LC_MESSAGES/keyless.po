@@ -1,0 +1,358 @@
+# Keyless, Arabic translation.
+# Edit the msgstr lines. Keep {} placeholders; key names (Ctrl, Alt, Shift, Win) stay as they are.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keyless\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+msgid "OFF"
+msgstr "معطّل"
+
+msgid "never"
+msgstr "أبدًا"
+
+msgid "after 5 minutes"
+msgstr "بعد 5 دقائق"
+
+msgid "after 15 minutes"
+msgstr "بعد 15 دقيقة"
+
+msgid "after 30 minutes"
+msgstr "بعد 30 دقيقة"
+
+msgid "after 60 minutes"
+msgstr "بعد 60 دقيقة"
+
+msgid "AFTER 5 MIN"
+msgstr "بعد 5 دقائق"
+
+msgid "AFTER 15 MIN"
+msgstr "بعد 15 دقيقة"
+
+msgid "AFTER 30 MIN"
+msgstr "بعد 30 دقيقة"
+
+msgid "AFTER 60 MIN"
+msgstr "بعد 60 دقيقة"
+
+msgid "Same as Windows"
+msgstr "مثل Windows"
+
+msgid "Keyboard paused"
+msgstr "لوحة المفاتيح متوقفة مؤقتًا"
+
+msgid "Keyboard on"
+msgstr "لوحة المفاتيح تعمل"
+
+msgid "Rest anything on it. Your mouse still works."
+msgstr "ضع عليها ما تشاء. الفأرة لا تزال تعمل."
+
+msgid "Flip the switch or press {}."
+msgstr "اقلب المفتاح أو اضغط {}."
+
+msgid "Flip the switch to pause."
+msgstr "اقلب المفتاح للإيقاف المؤقت."
+
+msgid "AUTO-RESUME"
+msgstr "استئناف تلقائي"
+
+msgid "BACK ON IN {}"
+msgstr "يعود بعد {}"
+
+msgid "UNTIL YOU RESUME"
+msgstr "حتى تستأنف"
+
+msgid "NEVER"
+msgstr "أبدًا"
+
+msgid "Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."
+msgstr "الفأرة تعمل دائمًا. يُستأنف عمل لوحة المفاتيح عند قفل الشاشة أو تسجيل الخروج أو السكون."
+
+msgid "Click your new shortcut"
+msgstr "انقر على اختصارك الجديد"
+
+msgid "Shortcut"
+msgstr "الاختصار"
+
+msgid "Modifiers first, then one key."
+msgstr "مفاتيح التعديل أولًا، ثم مفتاح واحد."
+
+msgid "Press the new combination now."
+msgstr "اضغط المجموعة الجديدة الآن."
+
+msgid "Pauses and resumes from any app."
+msgstr "يوقف مؤقتًا ويستأنف من أي تطبيق."
+
+msgid "Listening… press keys"
+msgstr "بانتظار المفاتيح… اضغطها الآن"
+
+msgid "Not set"
+msgstr "غير مُعيَّن"
+
+msgid "Type it"
+msgstr "اكتبه"
+
+msgid "Change shortcut by typing it"
+msgstr "تغيير الاختصار بكتابته"
+
+msgid "Click keys"
+msgstr "انقر المفاتيح"
+
+msgid "Change shortcut by clicking keys"
+msgstr "تغيير الاختصار بالنقر على المفاتيح"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cancel shortcut change"
+msgstr "إلغاء تغيير الاختصار"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Save shortcut {}"
+msgstr "حفظ الاختصار {}"
+
+msgid "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, number or F-key."
+msgstr "لا يمكن استخدام هذه المجموعة. استخدم Ctrl أو Alt أو Shift أو Win مع حرف أو رقم أو مفتاح F."
+
+msgid "{} is used by another app. Choose a different shortcut."
+msgstr "يستخدم تطبيق آخر {}. اختر اختصارًا مختلفًا."
+
+msgid "The shortcut could not be set."
+msgstr "تعذّر تعيين الاختصار."
+
+msgid "Shortcut can resume"
+msgstr "يمكن للاختصار الاستئناف"
+
+msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
+msgstr "عند الإيقاف: اليدان المستندتان تستطيعان الإيقاف المؤقت فقط، لا الاستئناف. استأنف بالفأرة."
+
+msgid "Appearance: {}"
+msgstr "المظهر: {}"
+
+msgid "Show the paused tag at the top"
+msgstr "إظهار مؤشر الإيقاف في الأعلى"
+
+msgid "Show the paused tag at the bottom"
+msgstr "إظهار مؤشر الإيقاف في الأسفل"
+
+msgid "Show the paused tag on the left"
+msgstr "إظهار مؤشر الإيقاف على اليسار"
+
+msgid "Show the paused tag on the right"
+msgstr "إظهار مؤشر الإيقاف على اليمين"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Startup, display, language and the paused tag."
+msgstr "بدء التشغيل والعرض واللغة ومؤشر الإيقاف."
+
+msgid "STARTUP"
+msgstr "بدء التشغيل"
+
+msgid "Start at sign-in"
+msgstr "التشغيل عند تسجيل الدخول"
+
+msgid "Always starts with keys on."
+msgstr "يبدأ دائمًا ولوحة المفاتيح تعمل."
+
+msgid "DISPLAY"
+msgstr "العرض"
+
+msgid "AUTO"
+msgstr "تلقائي"
+
+msgid "follow Windows"
+msgstr "مثل Windows"
+
+msgid "LIGHT"
+msgstr "فاتح"
+
+msgid "light"
+msgstr "فاتح"
+
+msgid "DARK"
+msgstr "داكن"
+
+msgid "dark"
+msgstr "داكن"
+
+msgid "LANGUAGE"
+msgstr "اللغة"
+
+msgid "Follows Windows unless you pick one."
+msgstr "تتبع Windows ما لم تختر لغة."
+
+msgid "PAUSED TAG"
+msgstr "مؤشر الإيقاف"
+
+msgid "Show while paused"
+msgstr "إظهاره أثناء الإيقاف"
+
+msgid "Off: only the tray icon turns orange."
+msgstr "عند الإيقاف: تتحول أيقونة منطقة الإعلامات فقط إلى البرتقالي."
+
+msgid "CUSTOM SPOT"
+msgstr "موضع مخصّص"
+
+msgid "TOP"
+msgstr "أعلى"
+
+msgid "BOTTOM"
+msgstr "أسفل"
+
+msgid "LEFT"
+msgstr "يسار"
+
+msgid "RIGHT"
+msgstr "يمين"
+
+msgid "Reset"
+msgstr "إعادة تعيين"
+
+msgid "Reset the paused tag position"
+msgstr "إعادة تعيين موضع مؤشر الإيقاف"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes."
+msgstr "اختر حافة، أو اسحب المؤشر إلى أي مكان. يتذكر Keyless المكان الذي تتركه فيه. زر «استئناف» فيه وحده يستأنف."
+
+msgid "Resume"
+msgstr "استئناف"
+
+msgid "Pause to try it"
+msgstr "أوقف مؤقتًا للتجربة"
+
+msgid "Pause your keyboard. Keep your mouse."
+msgstr "أوقف لوحة المفاتيح مؤقتًا، واحتفظ بالفأرة."
+
+msgid "VERSION {} · MIT LICENSE"
+msgstr "الإصدار {} · رخصة MIT"
+
+msgid "PRIVACY"
+msgstr "الخصوصية"
+
+msgid "Keyless looks at each key only to decide whether to block it. Nothing is recorded, stored or sent. No network, no telemetry."
+msgstr "ينظر Keyless إلى كل مفتاح فقط ليقرّر هل يحجبه أم لا. لا يُسجَّل شيء ولا يُحفظ ولا يُرسَل. لا اتصال بالشبكة ولا قياس عن بُعد."
+
+msgid "GOOD TO KNOW"
+msgstr "معلومة مفيدة"
+
+msgid "Control Alt Delete always works."
+msgstr "يعمل Ctrl Alt Delete دائمًا."
+
+msgid "always works."
+msgstr "يعمل دائمًا."
+
+msgid "On-screen keyboards and voice typing keep working while paused."
+msgstr "تظل لوحة المفاتيح على الشاشة والكتابة الصوتية تعملان أثناء الإيقاف."
+
+msgid "Source code"
+msgstr "الشيفرة المصدرية"
+
+msgid "Report a problem"
+msgstr "الإبلاغ عن مشكلة"
+
+msgid "Third-party licenses"
+msgstr "تراخيص الجهات الخارجية"
+
+msgid "PAUSED"
+msgstr "متوقف مؤقتًا"
+
+msgid "ON"
+msgstr "مفعّل"
+
+msgid "Control"
+msgstr "التحكم"
+
+msgid "Pause and resume"
+msgstr "إيقاف مؤقت واستئناف"
+
+msgid "Display, language"
+msgstr "العرض واللغة"
+
+msgid "About"
+msgstr "حول"
+
+msgid "Version, privacy"
+msgstr "الإصدار والخصوصية"
+
+msgid "VERSION {}"
+msgstr "الإصدار {}"
+
+msgid "Back on in {}"
+msgstr "يعود بعد {}"
+
+msgid "Until you resume"
+msgstr "حتى تستأنف"
+
+msgid "Mouse always works"
+msgstr "الفأرة تعمل دائمًا"
+
+msgid "Open Keyless"
+msgstr "فتح Keyless"
+
+msgid "Resume automatically"
+msgstr "الاستئناف تلقائيًا"
+
+msgid "No shortcut"
+msgstr "لا يوجد اختصار"
+
+msgid "Quit"
+msgstr "إنهاء"
+
+msgid "Quit Keyless"
+msgstr "إنهاء Keyless"
+
+msgid "Keyless: keyboard paused"
+msgstr "Keyless: لوحة المفاتيح متوقفة مؤقتًا"
+
+msgid "KEYS ASLEEP"
+msgstr "المفاتيح نائمة"
+
+msgid "BACK IN {}"
+msgstr "تعود بعد {}"
+
+msgid "MOUSE AWAKE"
+msgstr "الفأرة مستيقظة"
+
+msgid "RESUME"
+msgstr "استئناف"
+
+msgid "Resume keyboard"
+msgstr "استئناف لوحة المفاتيح"
+
+msgid "Keyless: keyboard on"
+msgstr "Keyless: لوحة المفاتيح تعمل"
+
+msgid "Pause keyboard"
+msgstr "إيقاف لوحة المفاتيح مؤقتًا"
+
+msgid "About Keyless"
+msgstr "حول Keyless"
+
+msgid "PAUSE"
+msgstr "إيقاف مؤقت"
+
+msgid "Resume automatically: {}"
+msgstr "الاستئناف تلقائيًا: {}"
+
+msgid "{}: {}"
+msgstr "{}: {}"
+
+msgid "Beta version"
+msgstr "نسخة تجريبية"
+
+msgid "BETA"
+msgstr "تجريبي"
+
+msgid "Keyless (beta)"
+msgstr "Keyless (تجريبي)"

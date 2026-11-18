@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- Keyless app icon: a keyboard face, half awake and half asleep. -->
+  <defs><clipPath id="body"><rect x="16" y="58" width="224" height="148" rx="36"/></clipPath></defs>
+  <g clip-path="url(#body)">
+    <rect x="16" y="58" width="112" height="148" fill="#f7f7f8"/>
+    <rect x="128" y="58" width="112" height="148" fill="#ff4f12"/>
+  </g>
+  <rect x="16" y="58" width="224" height="148" rx="36" fill="none" stroke="#121212" stroke-width="14"/>
+  <circle cx="88" cy="126" r="17" fill="#121212"/>
+  <path d="M144 128 q25 22 50 0" fill="none" stroke="#121212" stroke-width="16" stroke-linecap="round"/>
+</svg>

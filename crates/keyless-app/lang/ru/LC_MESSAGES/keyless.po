@@ -1,0 +1,358 @@
+# Keyless, Russian translation.
+# Edit the msgstr lines. Keep {} placeholders; key names (Ctrl, Alt, Shift, Win) stay as they are.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keyless\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "OFF"
+msgstr "ВЫКЛ"
+
+msgid "never"
+msgstr "никогда"
+
+msgid "after 5 minutes"
+msgstr "через 5 минут"
+
+msgid "after 15 minutes"
+msgstr "через 15 минут"
+
+msgid "after 30 minutes"
+msgstr "через 30 минут"
+
+msgid "after 60 minutes"
+msgstr "через 60 минут"
+
+msgid "AFTER 5 MIN"
+msgstr "ЧЕРЕЗ 5 МИН"
+
+msgid "AFTER 15 MIN"
+msgstr "ЧЕРЕЗ 15 МИН"
+
+msgid "AFTER 30 MIN"
+msgstr "ЧЕРЕЗ 30 МИН"
+
+msgid "AFTER 60 MIN"
+msgstr "ЧЕРЕЗ 60 МИН"
+
+msgid "Same as Windows"
+msgstr "Как в Windows"
+
+msgid "Keyboard paused"
+msgstr "Клавиатура на паузе"
+
+msgid "Keyboard on"
+msgstr "Клавиатура включена"
+
+msgid "Rest anything on it. Your mouse still works."
+msgstr "Кладите на неё что угодно. Мышь продолжает работать."
+
+msgid "Flip the switch or press {}."
+msgstr "Переключите тумблер или нажмите {}."
+
+msgid "Flip the switch to pause."
+msgstr "Переключите тумблер, чтобы поставить на паузу."
+
+msgid "AUTO-RESUME"
+msgstr "АВТОВОЗОБНОВЛЕНИЕ"
+
+msgid "BACK ON IN {}"
+msgstr "ВКЛЮЧИТСЯ ЧЕРЕЗ {}"
+
+msgid "UNTIL YOU RESUME"
+msgstr "ДО ВОЗОБНОВЛЕНИЯ"
+
+msgid "NEVER"
+msgstr "НИКОГДА"
+
+msgid "Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."
+msgstr "Мышь работает всегда. При блокировке экрана, выходе из системы или переходе в сон клавиатура возобновляется."
+
+msgid "Click your new shortcut"
+msgstr "Выберите новое сочетание"
+
+msgid "Shortcut"
+msgstr "Сочетание клавиш"
+
+msgid "Modifiers first, then one key."
+msgstr "Сначала модификаторы, затем одна клавиша."
+
+msgid "Press the new combination now."
+msgstr "Нажмите новое сочетание."
+
+msgid "Pauses and resumes from any app."
+msgstr "Ставит на паузу и возобновляет из любого приложения."
+
+msgid "Listening… press keys"
+msgstr "Ожидание… нажмите клавиши"
+
+msgid "Not set"
+msgstr "Не задано"
+
+msgid "Type it"
+msgstr "Ввести"
+
+msgid "Change shortcut by typing it"
+msgstr "Изменить сочетание, введя его"
+
+msgid "Click keys"
+msgstr "Выбрать мышью"
+
+msgid "Change shortcut by clicking keys"
+msgstr "Изменить сочетание, выбрав клавиши мышью"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Cancel shortcut change"
+msgstr "Отменить изменение сочетания"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save shortcut {}"
+msgstr "Сохранить сочетание {}"
+
+msgid "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, number or F-key."
+msgstr "Это сочетание нельзя использовать. Используйте Ctrl, Alt, Shift или Win с буквой, цифрой или клавишей F."
+
+msgid "{} is used by another app. Choose a different shortcut."
+msgstr "{} уже используется другим приложением. Выберите другое сочетание."
+
+msgid "The shortcut could not be set."
+msgstr "Не удалось задать сочетание."
+
+msgid "Shortcut can resume"
+msgstr "Сочетание возобновляет"
+
+msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
+msgstr "Выключено: лежащие руки могут только поставить на паузу, но не возобновить. Возобновляйте мышью."
+
+msgid "Appearance: {}"
+msgstr "Оформление: {}"
+
+msgid "Show the paused tag at the top"
+msgstr "Показывать индикатор паузы сверху"
+
+msgid "Show the paused tag at the bottom"
+msgstr "Показывать индикатор паузы снизу"
+
+msgid "Show the paused tag on the left"
+msgstr "Показывать индикатор паузы слева"
+
+msgid "Show the paused tag on the right"
+msgstr "Показывать индикатор паузы справа"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Startup, display, language and the paused tag."
+msgstr "Запуск, оформление, язык и индикатор паузы."
+
+msgid "STARTUP"
+msgstr "ЗАПУСК"
+
+msgid "Start at sign-in"
+msgstr "Запускать при входе"
+
+msgid "Always starts with keys on."
+msgstr "Всегда запускается с включённой клавиатурой."
+
+msgid "DISPLAY"
+msgstr "ОФОРМЛЕНИЕ"
+
+msgid "AUTO"
+msgstr "АВТО"
+
+msgid "follow Windows"
+msgstr "как в Windows"
+
+msgid "LIGHT"
+msgstr "СВЕТЛАЯ"
+
+msgid "light"
+msgstr "светлая"
+
+msgid "DARK"
+msgstr "ТЁМНАЯ"
+
+msgid "dark"
+msgstr "тёмная"
+
+msgid "LANGUAGE"
+msgstr "ЯЗЫК"
+
+msgid "Follows Windows unless you pick one."
+msgstr "Как в Windows, если не выбрать другой."
+
+msgid "PAUSED TAG"
+msgstr "ИНДИКАТОР ПАУЗЫ"
+
+msgid "Show while paused"
+msgstr "Показывать на паузе"
+
+msgid "Off: only the tray icon turns orange."
+msgstr "Выключено: только значок в трее становится оранжевым."
+
+msgid "CUSTOM SPOT"
+msgstr "СВОЁ МЕСТО"
+
+msgid "TOP"
+msgstr "СВЕРХУ"
+
+msgid "BOTTOM"
+msgstr "СНИЗУ"
+
+msgid "LEFT"
+msgstr "СЛЕВА"
+
+msgid "RIGHT"
+msgstr "СПРАВА"
+
+msgid "Reset"
+msgstr "Сбросить"
+
+msgid "Reset the paused tag position"
+msgstr "Сбросить положение индикатора паузы"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes."
+msgstr "Выберите край или перетащите индикатор куда угодно. Keyless запомнит место. Возобновляет только его кнопка «Возобновить»."
+
+msgid "Resume"
+msgstr "Возобновить"
+
+msgid "Pause to try it"
+msgstr "Поставить на паузу"
+
+msgid "Pause your keyboard. Keep your mouse."
+msgstr "Клавиатура на паузе, мышь работает."
+
+msgid "VERSION {} · MIT LICENSE"
+msgstr "ВЕРСИЯ {} · ЛИЦЕНЗИЯ MIT"
+
+msgid "PRIVACY"
+msgstr "КОНФИДЕНЦИАЛЬНОСТЬ"
+
+msgid "Keyless looks at each key only to decide whether to block it. Nothing is recorded, stored or sent. No network, no telemetry."
+msgstr "Keyless проверяет каждую клавишу только для того, чтобы решить, блокировать ли её. Ничего не записывается, не сохраняется и не отправляется. Без сети и телеметрии."
+
+msgid "GOOD TO KNOW"
+msgstr "ПОЛЕЗНО ЗНАТЬ"
+
+msgid "Control Alt Delete always works."
+msgstr "Ctrl Alt Delete всегда работает."
+
+msgid "always works."
+msgstr "работает всегда."
+
+msgid "On-screen keyboards and voice typing keep working while paused."
+msgstr "Экранная клавиатура и голосовой ввод работают и на паузе."
+
+msgid "Source code"
+msgstr "Исходный код"
+
+msgid "Report a problem"
+msgstr "Сообщить о проблеме"
+
+msgid "Third-party licenses"
+msgstr "Сторонние лицензии"
+
+msgid "PAUSED"
+msgstr "НА ПАУЗЕ"
+
+msgid "ON"
+msgstr "ВКЛ"
+
+msgid "Control"
+msgstr "Управление"
+
+msgid "Pause and resume"
+msgstr "Пауза и возобновление"
+
+msgid "Display, language"
+msgstr "Оформление, язык"
+
+msgid "About"
+msgstr "О программе"
+
+msgid "Version, privacy"
+msgstr "Версия, конфиденциальность"
+
+msgid "VERSION {}"
+msgstr "ВЕРСИЯ {}"
+
+msgid "Back on in {}"
+msgstr "Включится через {}"
+
+msgid "Until you resume"
+msgstr "До возобновления"
+
+msgid "Mouse always works"
+msgstr "Мышь всегда работает"
+
+msgid "Open Keyless"
+msgstr "Открыть Keyless"
+
+msgid "Resume automatically"
+msgstr "Возобновлять автоматически"
+
+msgid "No shortcut"
+msgstr "Нет сочетания"
+
+msgid "Quit"
+msgstr "Выйти"
+
+msgid "Quit Keyless"
+msgstr "Выйти из Keyless"
+
+msgid "Keyless: keyboard paused"
+msgstr "Keyless: клавиатура на паузе"
+
+msgid "KEYS ASLEEP"
+msgstr "КЛАВИШИ СПЯТ"
+
+msgid "BACK IN {}"
+msgstr "ЧЕРЕЗ {}"
+
+msgid "MOUSE AWAKE"
+msgstr "МЫШЬ НЕ СПИТ"
+
+msgid "RESUME"
+msgstr "ВОЗОБНОВИТЬ"
+
+msgid "Resume keyboard"
+msgstr "Возобновить клавиатуру"
+
+msgid "Keyless: keyboard on"
+msgstr "Keyless: клавиатура включена"
+
+msgid "Pause keyboard"
+msgstr "Поставить клавиатуру на паузу"
+
+msgid "About Keyless"
+msgstr "О Keyless"
+
+msgid "PAUSE"
+msgstr "ПАУЗА"
+
+msgid "Resume automatically: {}"
+msgstr "Возобновлять автоматически: {}"
+
+msgid "{}: {}"
+msgstr "{}: {}"
+
+msgid "Beta version"
+msgstr "Бета-версия"
+
+msgid "BETA"
+msgstr "БЕТА"
+
+msgid "Keyless (beta)"
+msgstr "Keyless (бета)"

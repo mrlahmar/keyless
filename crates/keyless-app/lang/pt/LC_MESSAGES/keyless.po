@@ -1,0 +1,358 @@
+# Keyless, Portuguese (Brazil) translation.
+# Edit the msgstr lines. Keep {} placeholders; key names (Ctrl, Alt, Shift, Win) stay as they are.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keyless\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "OFF"
+msgstr "DESL."
+
+msgid "never"
+msgstr "nunca"
+
+msgid "after 5 minutes"
+msgstr "após 5 minutos"
+
+msgid "after 15 minutes"
+msgstr "após 15 minutos"
+
+msgid "after 30 minutes"
+msgstr "após 30 minutos"
+
+msgid "after 60 minutes"
+msgstr "após 60 minutos"
+
+msgid "AFTER 5 MIN"
+msgstr "APÓS 5 MIN"
+
+msgid "AFTER 15 MIN"
+msgstr "APÓS 15 MIN"
+
+msgid "AFTER 30 MIN"
+msgstr "APÓS 30 MIN"
+
+msgid "AFTER 60 MIN"
+msgstr "APÓS 60 MIN"
+
+msgid "Same as Windows"
+msgstr "Igual ao Windows"
+
+msgid "Keyboard paused"
+msgstr "Teclado pausado"
+
+msgid "Keyboard on"
+msgstr "Teclado ativo"
+
+msgid "Rest anything on it. Your mouse still works."
+msgstr "Apoie o que quiser nele. O mouse continua funcionando."
+
+msgid "Flip the switch or press {}."
+msgstr "Use o interruptor ou pressione {}."
+
+msgid "Flip the switch to pause."
+msgstr "Use o interruptor para pausar."
+
+msgid "AUTO-RESUME"
+msgstr "RETOMADA AUTOMÁTICA"
+
+msgid "BACK ON IN {}"
+msgstr "VOLTA EM {}"
+
+msgid "UNTIL YOU RESUME"
+msgstr "ATÉ VOCÊ RETOMAR"
+
+msgid "NEVER"
+msgstr "NUNCA"
+
+msgid "Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."
+msgstr "O mouse sempre funciona. Bloquear a tela, sair da conta ou suspender retoma o teclado."
+
+msgid "Click your new shortcut"
+msgstr "Clique no novo atalho"
+
+msgid "Shortcut"
+msgstr "Atalho"
+
+msgid "Modifiers first, then one key."
+msgstr "Primeiro os modificadores, depois uma tecla."
+
+msgid "Press the new combination now."
+msgstr "Pressione a nova combinação agora."
+
+msgid "Pauses and resumes from any app."
+msgstr "Pausa e retoma em qualquer aplicativo."
+
+msgid "Listening… press keys"
+msgstr "Aguardando… pressione as teclas"
+
+msgid "Not set"
+msgstr "Não definido"
+
+msgid "Type it"
+msgstr "Digitar"
+
+msgid "Change shortcut by typing it"
+msgstr "Alterar o atalho digitando-o"
+
+msgid "Click keys"
+msgstr "Clicar teclas"
+
+msgid "Change shortcut by clicking keys"
+msgstr "Alterar o atalho clicando nas teclas"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancel shortcut change"
+msgstr "Cancelar a alteração do atalho"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Save shortcut {}"
+msgstr "Salvar o atalho {}"
+
+msgid "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, number or F-key."
+msgstr "Essa combinação não pode ser usada. Use Ctrl, Alt, Shift ou Win com uma letra, um número ou uma tecla F."
+
+msgid "{} is used by another app. Choose a different shortcut."
+msgstr "{} já é usado por outro aplicativo. Escolha outro atalho."
+
+msgid "The shortcut could not be set."
+msgstr "Não foi possível definir o atalho."
+
+msgid "Shortcut can resume"
+msgstr "O atalho pode retomar"
+
+msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
+msgstr "Desativado: mãos apoiadas só podem pausar, nunca retomar. Retome com o mouse."
+
+msgid "Appearance: {}"
+msgstr "Aparência: {}"
+
+msgid "Show the paused tag at the top"
+msgstr "Mostrar o indicador de pausa em cima"
+
+msgid "Show the paused tag at the bottom"
+msgstr "Mostrar o indicador de pausa embaixo"
+
+msgid "Show the paused tag on the left"
+msgstr "Mostrar o indicador de pausa à esquerda"
+
+msgid "Show the paused tag on the right"
+msgstr "Mostrar o indicador de pausa à direita"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Startup, display, language and the paused tag."
+msgstr "Inicialização, exibição, idioma e indicador de pausa."
+
+msgid "STARTUP"
+msgstr "INICIALIZAÇÃO"
+
+msgid "Start at sign-in"
+msgstr "Iniciar ao entrar"
+
+msgid "Always starts with keys on."
+msgstr "Sempre inicia com o teclado ativo."
+
+msgid "DISPLAY"
+msgstr "EXIBIÇÃO"
+
+msgid "AUTO"
+msgstr "AUTO"
+
+msgid "follow Windows"
+msgstr "igual ao Windows"
+
+msgid "LIGHT"
+msgstr "CLARO"
+
+msgid "light"
+msgstr "claro"
+
+msgid "DARK"
+msgstr "ESCURO"
+
+msgid "dark"
+msgstr "escuro"
+
+msgid "LANGUAGE"
+msgstr "IDIOMA"
+
+msgid "Follows Windows unless you pick one."
+msgstr "Segue o Windows, a menos que você escolha um."
+
+msgid "PAUSED TAG"
+msgstr "INDICADOR DE PAUSA"
+
+msgid "Show while paused"
+msgstr "Mostrar durante a pausa"
+
+msgid "Off: only the tray icon turns orange."
+msgstr "Desativado: só o ícone da bandeja fica laranja."
+
+msgid "CUSTOM SPOT"
+msgstr "POSIÇÃO PERSONALIZADA"
+
+msgid "TOP"
+msgstr "EM CIMA"
+
+msgid "BOTTOM"
+msgstr "EMBAIXO"
+
+msgid "LEFT"
+msgstr "ESQUERDA"
+
+msgid "RIGHT"
+msgstr "DIREITA"
+
+msgid "Reset"
+msgstr "Redefinir"
+
+msgid "Reset the paused tag position"
+msgstr "Redefinir a posição do indicador de pausa"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes."
+msgstr "Escolha uma borda ou arraste o indicador para qualquer lugar. O Keyless lembra onde você o deixa. Só o botão Retomar dele retoma."
+
+msgid "Resume"
+msgstr "Retomar"
+
+msgid "Pause to try it"
+msgstr "Pausar para testar"
+
+msgid "Pause your keyboard. Keep your mouse."
+msgstr "Pause o teclado. Mantenha o mouse."
+
+msgid "VERSION {} · MIT LICENSE"
+msgstr "VERSÃO {} · LICENÇA MIT"
+
+msgid "PRIVACY"
+msgstr "PRIVACIDADE"
+
+msgid "Keyless looks at each key only to decide whether to block it. Nothing is recorded, stored or sent. No network, no telemetry."
+msgstr "O Keyless olha cada tecla só para decidir se deve bloqueá-la. Nada é gravado, armazenado ou enviado. Sem rede, sem telemetria."
+
+msgid "GOOD TO KNOW"
+msgstr "BOM SABER"
+
+msgid "Control Alt Delete always works."
+msgstr "Ctrl Alt Delete sempre funciona."
+
+msgid "always works."
+msgstr "sempre funciona."
+
+msgid "On-screen keyboards and voice typing keep working while paused."
+msgstr "O teclado virtual e a digitação por voz continuam funcionando durante a pausa."
+
+msgid "Source code"
+msgstr "Código-fonte"
+
+msgid "Report a problem"
+msgstr "Relatar um problema"
+
+msgid "Third-party licenses"
+msgstr "Licenças de terceiros"
+
+msgid "PAUSED"
+msgstr "PAUSADO"
+
+msgid "ON"
+msgstr "ATIVO"
+
+msgid "Control"
+msgstr "Controle"
+
+msgid "Pause and resume"
+msgstr "Pausar e retomar"
+
+msgid "Display, language"
+msgstr "Exibição, idioma"
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "Version, privacy"
+msgstr "Versão, privacidade"
+
+msgid "VERSION {}"
+msgstr "VERSÃO {}"
+
+msgid "Back on in {}"
+msgstr "Volta em {}"
+
+msgid "Until you resume"
+msgstr "Até você retomar"
+
+msgid "Mouse always works"
+msgstr "O mouse sempre funciona"
+
+msgid "Open Keyless"
+msgstr "Abrir o Keyless"
+
+msgid "Resume automatically"
+msgstr "Retomar automaticamente"
+
+msgid "No shortcut"
+msgstr "Sem atalho"
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid "Quit Keyless"
+msgstr "Sair do Keyless"
+
+msgid "Keyless: keyboard paused"
+msgstr "Keyless: teclado pausado"
+
+msgid "KEYS ASLEEP"
+msgstr "TECLAS DORMINDO"
+
+msgid "BACK IN {}"
+msgstr "VOLTA EM {}"
+
+msgid "MOUSE AWAKE"
+msgstr "MOUSE ACORDADO"
+
+msgid "RESUME"
+msgstr "RETOMAR"
+
+msgid "Resume keyboard"
+msgstr "Retomar o teclado"
+
+msgid "Keyless: keyboard on"
+msgstr "Keyless: teclado ativo"
+
+msgid "Pause keyboard"
+msgstr "Pausar o teclado"
+
+msgid "About Keyless"
+msgstr "Sobre o Keyless"
+
+msgid "PAUSE"
+msgstr "PAUSAR"
+
+msgid "Resume automatically: {}"
+msgstr "Retomar automaticamente: {}"
+
+msgid "{}: {}"
+msgstr "{}: {}"
+
+msgid "Beta version"
+msgstr "Versão beta"
+
+msgid "BETA"
+msgstr "BETA"
+
+msgid "Keyless (beta)"
+msgstr "Keyless (beta)"

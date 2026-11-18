@@ -1,0 +1,38 @@
+[package]
+name = "keyless"
+description = "Pause your keyboard so you can touch it without typing. The mouse keeps working."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[[bin]]
+name = "keyless"
+path = "src/main.rs"
+
+[dependencies]
+keyless-core.workspace = true
+keyless-platform.workspace = true
+directories = "6"
+sys-locale = "0.3"
+slint = { version = "1.19", default-features = false, features = [
+    "std",
+    "compat-1-2",
+    "backend-winit",
+    "renderer-software",
+    "accessibility",
+    "system-tray",
+    "software-renderer-path",
+    "unstable-winit-030",
+] }
+
+[build-dependencies]
+slint-build = "1.19"
+
+[target.'cfg(windows)'.build-dependencies]
+winresource = "0.1"
+
+[lints]
+workspace = true

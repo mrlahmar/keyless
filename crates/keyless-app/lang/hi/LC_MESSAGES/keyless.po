@@ -1,0 +1,358 @@
+# Keyless, Hindi translation.
+# Edit the msgstr lines. Keep {} placeholders; key names (Ctrl, Alt, Shift, Win) stay as they are.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keyless\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "OFF"
+msgstr "बंद"
+
+msgid "never"
+msgstr "कभी नहीं"
+
+msgid "after 5 minutes"
+msgstr "5 मिनट बाद"
+
+msgid "after 15 minutes"
+msgstr "15 मिनट बाद"
+
+msgid "after 30 minutes"
+msgstr "30 मिनट बाद"
+
+msgid "after 60 minutes"
+msgstr "60 मिनट बाद"
+
+msgid "AFTER 5 MIN"
+msgstr "5 मिनट बाद"
+
+msgid "AFTER 15 MIN"
+msgstr "15 मिनट बाद"
+
+msgid "AFTER 30 MIN"
+msgstr "30 मिनट बाद"
+
+msgid "AFTER 60 MIN"
+msgstr "60 मिनट बाद"
+
+msgid "Same as Windows"
+msgstr "Windows के अनुसार"
+
+msgid "Keyboard paused"
+msgstr "कीबोर्ड रुका हुआ है"
+
+msgid "Keyboard on"
+msgstr "कीबोर्ड चालू है"
+
+msgid "Rest anything on it. Your mouse still works."
+msgstr "इस पर कुछ भी रखें। आपका माउस काम करता रहेगा।"
+
+msgid "Flip the switch or press {}."
+msgstr "स्विच बदलें या {} दबाएँ।"
+
+msgid "Flip the switch to pause."
+msgstr "रोकने के लिए स्विच बदलें।"
+
+msgid "AUTO-RESUME"
+msgstr "अपने आप फिर शुरू"
+
+msgid "BACK ON IN {}"
+msgstr "{} में फिर चालू"
+
+msgid "UNTIL YOU RESUME"
+msgstr "जब तक आप फिर शुरू न करें"
+
+msgid "NEVER"
+msgstr "कभी नहीं"
+
+msgid "Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."
+msgstr "आपका माउस हमेशा काम करता है। स्क्रीन लॉक करने, साइन आउट करने या स्लीप पर कीबोर्ड फिर शुरू हो जाता है।"
+
+msgid "Click your new shortcut"
+msgstr "नया शॉर्टकट क्लिक करें"
+
+msgid "Shortcut"
+msgstr "शॉर्टकट"
+
+msgid "Modifiers first, then one key."
+msgstr "पहले मॉडिफ़ायर कुंजियाँ, फिर एक कुंजी।"
+
+msgid "Press the new combination now."
+msgstr "अब नया संयोजन दबाएँ।"
+
+msgid "Pauses and resumes from any app."
+msgstr "किसी भी ऐप से रोकता और फिर शुरू करता है।"
+
+msgid "Listening… press keys"
+msgstr "सुन रहा है… कुंजियाँ दबाएँ"
+
+msgid "Not set"
+msgstr "सेट नहीं"
+
+msgid "Type it"
+msgstr "टाइप करें"
+
+msgid "Change shortcut by typing it"
+msgstr "टाइप करके शॉर्टकट बदलें"
+
+msgid "Click keys"
+msgstr "कुंजियाँ क्लिक करें"
+
+msgid "Change shortcut by clicking keys"
+msgstr "कुंजियाँ क्लिक करके शॉर्टकट बदलें"
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "Cancel shortcut change"
+msgstr "शॉर्टकट बदलना रद्द करें"
+
+msgid "Save"
+msgstr "सहेजें"
+
+msgid "Save shortcut {}"
+msgstr "शॉर्टकट {} सहेजें"
+
+msgid "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, number or F-key."
+msgstr "यह संयोजन इस्तेमाल नहीं हो सकता। Ctrl, Alt, Shift या Win के साथ कोई अक्षर, अंक या F-कुंजी इस्तेमाल करें।"
+
+msgid "{} is used by another app. Choose a different shortcut."
+msgstr "{} कोई दूसरा ऐप इस्तेमाल कर रहा है। कोई दूसरा शॉर्टकट चुनें।"
+
+msgid "The shortcut could not be set."
+msgstr "शॉर्टकट सेट नहीं हो सका।"
+
+msgid "Shortcut can resume"
+msgstr "शॉर्टकट से फिर शुरू हो सकता है"
+
+msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
+msgstr "बंद होने पर: टिके हुए हाथ सिर्फ़ रोक सकते हैं, फिर शुरू नहीं कर सकते। माउस से फिर शुरू करें।"
+
+msgid "Appearance: {}"
+msgstr "रूप: {}"
+
+msgid "Show the paused tag at the top"
+msgstr "रोक संकेतक ऊपर दिखाएँ"
+
+msgid "Show the paused tag at the bottom"
+msgstr "रोक संकेतक नीचे दिखाएँ"
+
+msgid "Show the paused tag on the left"
+msgstr "रोक संकेतक बाईं ओर दिखाएँ"
+
+msgid "Show the paused tag on the right"
+msgstr "रोक संकेतक दाईं ओर दिखाएँ"
+
+msgid "Language"
+msgstr "भाषा"
+
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+msgid "Startup, display, language and the paused tag."
+msgstr "स्टार्टअप, डिस्प्ले, भाषा और रोक संकेतक।"
+
+msgid "STARTUP"
+msgstr "स्टार्टअप"
+
+msgid "Start at sign-in"
+msgstr "साइन इन पर शुरू करें"
+
+msgid "Always starts with keys on."
+msgstr "हमेशा कुंजियाँ चालू रखकर शुरू होता है।"
+
+msgid "DISPLAY"
+msgstr "डिस्प्ले"
+
+msgid "AUTO"
+msgstr "स्वतः"
+
+msgid "follow Windows"
+msgstr "Windows के अनुसार"
+
+msgid "LIGHT"
+msgstr "हल्का"
+
+msgid "light"
+msgstr "हल्का"
+
+msgid "DARK"
+msgstr "गहरा"
+
+msgid "dark"
+msgstr "गहरा"
+
+msgid "LANGUAGE"
+msgstr "भाषा"
+
+msgid "Follows Windows unless you pick one."
+msgstr "जब तक आप न चुनें, Windows के अनुसार रहती है।"
+
+msgid "PAUSED TAG"
+msgstr "रोक संकेतक"
+
+msgid "Show while paused"
+msgstr "रुके होने पर दिखाएँ"
+
+msgid "Off: only the tray icon turns orange."
+msgstr "बंद होने पर: सिर्फ़ ट्रे आइकन नारंगी होता है।"
+
+msgid "CUSTOM SPOT"
+msgstr "अपनी जगह"
+
+msgid "TOP"
+msgstr "ऊपर"
+
+msgid "BOTTOM"
+msgstr "नीचे"
+
+msgid "LEFT"
+msgstr "बाएँ"
+
+msgid "RIGHT"
+msgstr "दाएँ"
+
+msgid "Reset"
+msgstr "रीसेट"
+
+msgid "Reset the paused tag position"
+msgstr "रोक संकेतक की जगह रीसेट करें"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes."
+msgstr "कोई किनारा चुनें, या संकेतक को कहीं भी खींचें। Keyless याद रखता है कि आपने उसे कहाँ छोड़ा। सिर्फ़ इसका “फिर शुरू करें” बटन ही कीबोर्ड फिर शुरू करता है।"
+
+msgid "Resume"
+msgstr "फिर शुरू करें"
+
+msgid "Pause to try it"
+msgstr "आज़माने के लिए रोकें"
+
+msgid "Pause your keyboard. Keep your mouse."
+msgstr "कीबोर्ड रोकें। माउस चालू रखें।"
+
+msgid "VERSION {} · MIT LICENSE"
+msgstr "संस्करण {} · MIT लाइसेंस"
+
+msgid "PRIVACY"
+msgstr "गोपनीयता"
+
+msgid "Keyless looks at each key only to decide whether to block it. Nothing is recorded, stored or sent. No network, no telemetry."
+msgstr "Keyless हर कुंजी को सिर्फ़ यह तय करने के लिए देखता है कि उसे रोकना है या नहीं। कुछ भी रिकॉर्ड, सहेजा या भेजा नहीं जाता। कोई नेटवर्क नहीं, कोई टेलीमेट्री नहीं।"
+
+msgid "GOOD TO KNOW"
+msgstr "जानने योग्य"
+
+msgid "Control Alt Delete always works."
+msgstr "Ctrl Alt Delete हमेशा काम करता है।"
+
+msgid "always works."
+msgstr "हमेशा काम करता है।"
+
+msgid "On-screen keyboards and voice typing keep working while paused."
+msgstr "रुके होने पर भी ऑन-स्क्रीन कीबोर्ड और वॉइस टाइपिंग काम करते रहते हैं।"
+
+msgid "Source code"
+msgstr "सोर्स कोड"
+
+msgid "Report a problem"
+msgstr "समस्या बताएँ"
+
+msgid "Third-party licenses"
+msgstr "तृतीय-पक्ष लाइसेंस"
+
+msgid "PAUSED"
+msgstr "रुका हुआ"
+
+msgid "ON"
+msgstr "चालू"
+
+msgid "Control"
+msgstr "नियंत्रण"
+
+msgid "Pause and resume"
+msgstr "रोकें और फिर शुरू करें"
+
+msgid "Display, language"
+msgstr "डिस्प्ले, भाषा"
+
+msgid "About"
+msgstr "परिचय"
+
+msgid "Version, privacy"
+msgstr "संस्करण, गोपनीयता"
+
+msgid "VERSION {}"
+msgstr "संस्करण {}"
+
+msgid "Back on in {}"
+msgstr "{} में फिर चालू"
+
+msgid "Until you resume"
+msgstr "जब तक आप फिर शुरू न करें"
+
+msgid "Mouse always works"
+msgstr "माउस हमेशा काम करता है"
+
+msgid "Open Keyless"
+msgstr "Keyless खोलें"
+
+msgid "Resume automatically"
+msgstr "अपने आप फिर शुरू करें"
+
+msgid "No shortcut"
+msgstr "कोई शॉर्टकट नहीं"
+
+msgid "Quit"
+msgstr "बंद करें"
+
+msgid "Quit Keyless"
+msgstr "Keyless बंद करें"
+
+msgid "Keyless: keyboard paused"
+msgstr "Keyless: कीबोर्ड रुका हुआ है"
+
+msgid "KEYS ASLEEP"
+msgstr "कुंजियाँ सो रही हैं"
+
+msgid "BACK IN {}"
+msgstr "{} में वापस"
+
+msgid "MOUSE AWAKE"
+msgstr "माउस जाग रहा है"
+
+msgid "RESUME"
+msgstr "फिर शुरू"
+
+msgid "Resume keyboard"
+msgstr "कीबोर्ड फिर शुरू करें"
+
+msgid "Keyless: keyboard on"
+msgstr "Keyless: कीबोर्ड चालू है"
+
+msgid "Pause keyboard"
+msgstr "कीबोर्ड रोकें"
+
+msgid "About Keyless"
+msgstr "Keyless के बारे में"
+
+msgid "PAUSE"
+msgstr "रोकें"
+
+msgid "Resume automatically: {}"
+msgstr "अपने आप फिर शुरू करें: {}"
+
+msgid "{}: {}"
+msgstr "{}: {}"
+
+msgid "Beta version"
+msgstr "बीटा संस्करण"
+
+msgid "BETA"
+msgstr "बीटा"
+
+msgid "Keyless (beta)"
+msgstr "Keyless (बीटा)"

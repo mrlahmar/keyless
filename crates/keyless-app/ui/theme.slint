@@ -1,0 +1,84 @@
+// Design tokens. Every color, size and font used by the UI comes from here.
+//
+// The look is "instrument": quiet greys, black hardware controls, green for on and signal
+// orange for paused. Space Grotesk sets the text; JetBrains Mono (bold) is used only for
+// hardware labels, shortcuts and keys. Both fonts are embedded (SIL Open Font License).
+// Light or dark follows the system unless the user picks one in settings.
+
+import "../../../assets/fonts/SpaceGrotesk-Regular.ttf";
+import "../../../assets/fonts/SpaceGrotesk-Medium.ttf";
+import "../../../assets/fonts/SpaceGrotesk-Bold.ttf";
+import "../../../assets/fonts/JetBrainsMono-Bold.ttf";
+import { Palette } from "std-widgets.slint";
+
+export global Theme {
+    // 0 = follow the system, 1 = light, 2 = dark. Set from Rust.
+    in-out property <int> appearance;
+    // Windows' "Show animations" setting. Off keeps the face still.
+    in-out property <bool> animations: true;
+    // Right-to-left language (Arabic): rows run right to left and text starts on the right.
+    in-out property <bool> rtl;
+    // 1 for scripts that take extra letter spacing (Latin, Cyrillic), 0 for scripts it
+    // would break, such as Arabic's joined letters or Devanagari.
+    in-out property <float> tracking: 1;
+    out property <TextHorizontalAlignment> start-align: rtl ? TextHorizontalAlignment.right : TextHorizontalAlignment.left;
+    out property <bool> dark: appearance == 2 || (appearance == 0 && Palette.color-scheme == ColorScheme.dark);
+
+    // Set from Rust for languages the embedded fonts don't cover well (Chinese).
+    in-out property <string> script-font;
+    out property <string> font: script-font != "" ? script-font : "Space Grotesk";
+    out property <string> mono: script-font != "" ? script-font : "JetBrains Mono";
+
+    // Surfaces
+    out property <color> window: dark ? #17181a : #eff0f1;
+    out property <color> raised: dark ? #202124 : #f7f7f8;
+    out property <color> inset: dark ? #101113 : #dcdee1;
+    out property <color> strip: dark ? #1d1e21 : #e4e6e8;
+    out property <color> line: dark ? #2d2f33 : #d6d8db;
+    out property <color> line-strong: dark ? #44474d : #b9bcc1;
+
+    // Text
+    out property <color> text: dark ? #eceef0 : #121212;
+    out property <color> text-muted: dark ? #c3c6cb : #3d4046;
+    out property <color> text-faint: dark ? #9fa3a9 : #5d6066;
+
+    // Inverted (selected tab, primary button)
+    out property <color> invert: dark ? #eceef0 : #121212;
+    out property <color> on-invert: dark ? #121212 : #eff0f1;
+
+    // Hardware controls look the same in both themes.
+    out property <color> hardware: #0e0f10;
+    out property <color> hardware-off: #2b2d31;
+    out property <color> hardware-off-text: #8a8d92;
+    out property <color> go: #18a058;
+    out property <color> on-go: #08130d;
+    out property <color> signal: #ff4f12;
+    out property <color> on-signal: #121212;
+    // Orange for text: darker on light backgrounds so it stays readable (4.5:1).
+    out property <color> signal-text: dark ? #ff7340 : #b83a08;
+    out property <color> face: #f7f7f8;
+    out property <color> face-ink: #121212;
+
+    // Keys
+    out property <color> keycap: dark ? #2a2c30 : #f7f7f8;
+    out property <color> keycap-mod: dark ? #383b40 : #c9ccd0;
+    out property <color> keycap-edge: dark ? #4a4d53 : #b4b7bc;
+    out property <color> keycap-text: dark ? #d7dade : #2b2d31;
+    out property <color> keycap-dim: dark ? #6c7076 : #9a9da2;
+
+    out property <color> focus: dark ? #ffffff : #121212;
+
+    // Type
+    out property <length> label: 11px;
+    out property <length> small: 12px;
+    out property <length> caption: 13px;
+    out property <length> body: 15px;
+    out property <length> heading: 28px;
+    out property <length> label-spacing: 1.5px;
+
+    // Shape
+    out property <length> radius-tag: 4px;
+    out property <length> radius-small: 8px;
+    out property <length> radius: 12px;
+    out property <length> radius-large: 16px;
+}

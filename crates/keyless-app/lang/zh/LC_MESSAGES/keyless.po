@@ -1,0 +1,358 @@
+# Keyless, Chinese (Simplified) translation.
+# Edit the msgstr lines. Keep {} placeholders; key names (Ctrl, Alt, Shift, Win) stay as they are.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keyless\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "OFF"
+msgstr "关"
+
+msgid "never"
+msgstr "从不"
+
+msgid "after 5 minutes"
+msgstr "5 分钟后"
+
+msgid "after 15 minutes"
+msgstr "15 分钟后"
+
+msgid "after 30 minutes"
+msgstr "30 分钟后"
+
+msgid "after 60 minutes"
+msgstr "60 分钟后"
+
+msgid "AFTER 5 MIN"
+msgstr "5 分钟后"
+
+msgid "AFTER 15 MIN"
+msgstr "15 分钟后"
+
+msgid "AFTER 30 MIN"
+msgstr "30 分钟后"
+
+msgid "AFTER 60 MIN"
+msgstr "60 分钟后"
+
+msgid "Same as Windows"
+msgstr "跟随 Windows"
+
+msgid "Keyboard paused"
+msgstr "键盘已暂停"
+
+msgid "Keyboard on"
+msgstr "键盘已开启"
+
+msgid "Rest anything on it. Your mouse still works."
+msgstr "上面放什么都行。鼠标照常可用。"
+
+msgid "Flip the switch or press {}."
+msgstr "拨动开关或按 {}。"
+
+msgid "Flip the switch to pause."
+msgstr "拨动开关即可暂停。"
+
+msgid "AUTO-RESUME"
+msgstr "自动恢复"
+
+msgid "BACK ON IN {}"
+msgstr "{} 后恢复"
+
+msgid "UNTIL YOU RESUME"
+msgstr "直到你恢复"
+
+msgid "NEVER"
+msgstr "从不"
+
+msgid "Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."
+msgstr "鼠标始终可用。锁屏、注销或睡眠时，键盘会自动恢复。"
+
+msgid "Click your new shortcut"
+msgstr "点选新的快捷键"
+
+msgid "Shortcut"
+msgstr "快捷键"
+
+msgid "Modifiers first, then one key."
+msgstr "先选修饰键，再选一个键。"
+
+msgid "Press the new combination now."
+msgstr "现在按下新的组合键。"
+
+msgid "Pauses and resumes from any app."
+msgstr "在任何应用中都能暂停和恢复。"
+
+msgid "Listening… press keys"
+msgstr "正在等待… 请按键"
+
+msgid "Not set"
+msgstr "未设置"
+
+msgid "Type it"
+msgstr "键入"
+
+msgid "Change shortcut by typing it"
+msgstr "通过键入更改快捷键"
+
+msgid "Click keys"
+msgstr "点选按键"
+
+msgid "Change shortcut by clicking keys"
+msgstr "通过点选按键更改快捷键"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cancel shortcut change"
+msgstr "取消更改快捷键"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save shortcut {}"
+msgstr "保存快捷键 {}"
+
+msgid "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, number or F-key."
+msgstr "无法使用该组合。请将 Ctrl、Alt、Shift 或 Win 与字母、数字或 F 键搭配使用。"
+
+msgid "{} is used by another app. Choose a different shortcut."
+msgstr "{} 已被其他应用占用。请选择其他快捷键。"
+
+msgid "The shortcut could not be set."
+msgstr "无法设置快捷键。"
+
+msgid "Shortcut can resume"
+msgstr "快捷键也能恢复"
+
+msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
+msgstr "关闭后：手搁在键盘上只会暂停，不会恢复。请用鼠标恢复。"
+
+msgid "Appearance: {}"
+msgstr "外观：{}"
+
+msgid "Show the paused tag at the top"
+msgstr "在顶部显示暂停标签"
+
+msgid "Show the paused tag at the bottom"
+msgstr "在底部显示暂停标签"
+
+msgid "Show the paused tag on the left"
+msgstr "在左侧显示暂停标签"
+
+msgid "Show the paused tag on the right"
+msgstr "在右侧显示暂停标签"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Startup, display, language and the paused tag."
+msgstr "启动、显示、语言和暂停标签。"
+
+msgid "STARTUP"
+msgstr "启动"
+
+msgid "Start at sign-in"
+msgstr "登录时启动"
+
+msgid "Always starts with keys on."
+msgstr "启动时键盘总是开启的。"
+
+msgid "DISPLAY"
+msgstr "显示"
+
+msgid "AUTO"
+msgstr "自动"
+
+msgid "follow Windows"
+msgstr "跟随 Windows"
+
+msgid "LIGHT"
+msgstr "浅色"
+
+msgid "light"
+msgstr "浅色"
+
+msgid "DARK"
+msgstr "深色"
+
+msgid "dark"
+msgstr "深色"
+
+msgid "LANGUAGE"
+msgstr "语言"
+
+msgid "Follows Windows unless you pick one."
+msgstr "默认跟随 Windows，也可自行选择。"
+
+msgid "PAUSED TAG"
+msgstr "暂停标签"
+
+msgid "Show while paused"
+msgstr "暂停时显示"
+
+msgid "Off: only the tray icon turns orange."
+msgstr "关闭后：只有托盘图标会变成橙色。"
+
+msgid "CUSTOM SPOT"
+msgstr "自定义位置"
+
+msgid "TOP"
+msgstr "顶部"
+
+msgid "BOTTOM"
+msgstr "底部"
+
+msgid "LEFT"
+msgstr "左侧"
+
+msgid "RIGHT"
+msgstr "右侧"
+
+msgid "Reset"
+msgstr "重置"
+
+msgid "Reset the paused tag position"
+msgstr "重置暂停标签的位置"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes."
+msgstr "选择一条边，或拖动标签到任意位置。Keyless 会记住它的位置。只有标签上的“恢复”按钮才能恢复。"
+
+msgid "Resume"
+msgstr "恢复"
+
+msgid "Pause to try it"
+msgstr "暂停试试"
+
+msgid "Pause your keyboard. Keep your mouse."
+msgstr "暂停键盘，鼠标照用。"
+
+msgid "VERSION {} · MIT LICENSE"
+msgstr "版本 {} · MIT 许可证"
+
+msgid "PRIVACY"
+msgstr "隐私"
+
+msgid "Keyless looks at each key only to decide whether to block it. Nothing is recorded, stored or sent. No network, no telemetry."
+msgstr "Keyless 查看每个按键，只为决定是否拦截它。不记录、不保存、不发送任何内容。不联网，无遥测。"
+
+msgid "GOOD TO KNOW"
+msgstr "小贴士"
+
+msgid "Control Alt Delete always works."
+msgstr "Ctrl Alt Delete 始终有效。"
+
+msgid "always works."
+msgstr "始终有效。"
+
+msgid "On-screen keyboards and voice typing keep working while paused."
+msgstr "暂停时，屏幕键盘和语音输入仍可使用。"
+
+msgid "Source code"
+msgstr "源代码"
+
+msgid "Report a problem"
+msgstr "报告问题"
+
+msgid "Third-party licenses"
+msgstr "第三方许可"
+
+msgid "PAUSED"
+msgstr "已暂停"
+
+msgid "ON"
+msgstr "开"
+
+msgid "Control"
+msgstr "控制"
+
+msgid "Pause and resume"
+msgstr "暂停与恢复"
+
+msgid "Display, language"
+msgstr "显示、语言"
+
+msgid "About"
+msgstr "关于"
+
+msgid "Version, privacy"
+msgstr "版本、隐私"
+
+msgid "VERSION {}"
+msgstr "版本 {}"
+
+msgid "Back on in {}"
+msgstr "{} 后恢复"
+
+msgid "Until you resume"
+msgstr "直到你恢复"
+
+msgid "Mouse always works"
+msgstr "鼠标始终可用"
+
+msgid "Open Keyless"
+msgstr "打开 Keyless"
+
+msgid "Resume automatically"
+msgstr "自动恢复"
+
+msgid "No shortcut"
+msgstr "无快捷键"
+
+msgid "Quit"
+msgstr "退出"
+
+msgid "Quit Keyless"
+msgstr "退出 Keyless"
+
+msgid "Keyless: keyboard paused"
+msgstr "Keyless：键盘已暂停"
+
+msgid "KEYS ASLEEP"
+msgstr "按键休眠中"
+
+msgid "BACK IN {}"
+msgstr "{} 后恢复"
+
+msgid "MOUSE AWAKE"
+msgstr "鼠标醒着"
+
+msgid "RESUME"
+msgstr "恢复"
+
+msgid "Resume keyboard"
+msgstr "恢复键盘"
+
+msgid "Keyless: keyboard on"
+msgstr "Keyless：键盘已开启"
+
+msgid "Pause keyboard"
+msgstr "暂停键盘"
+
+msgid "About Keyless"
+msgstr "关于 Keyless"
+
+msgid "PAUSE"
+msgstr "暂停"
+
+msgid "Resume automatically: {}"
+msgstr "自动恢复：{}"
+
+msgid "{}: {}"
+msgstr "{}：{}"
+
+msgid "Beta version"
+msgstr "测试版"
+
+msgid "BETA"
+msgstr "测试版"
+
+msgid "Keyless (beta)"
+msgstr "Keyless（测试版）"

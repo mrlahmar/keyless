@@ -1,0 +1,15 @@
+target/
+dist/
+.DS_Store
+
+# Editors and OS files
+.vscode/
+.idea/
+Thumbs.db
+
+# Local secrets and logs
+.env
+.env.*
+*.log
+*.pfx
+*.p12

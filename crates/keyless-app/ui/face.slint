@@ -1,0 +1,208 @@
+// The keyboard face and the app mark.
+//
+// Animation costs CPU only while it runs: blinking and the floating "z" need `alive`,
+// which Rust sets only while the window showing them is open, and they stop entirely
+// when Windows' "Show animations" setting is off.
+
+import { Theme } from "theme.slint";
+
+// Awake: open eyes that blink every few seconds. Asleep: orange, closed eyes, floating z.
+// Drawn on a 220 x 150 grid and scaled to `width`.
+export component Face {
+    in property <bool> asleep;
+    in property <bool> alive;
+    in property <bool> details: true;
+    // Line weight multiplier, for small sizes.
+    in property <float> weight: 1;
+    in property <color> outline: Theme.face-ink;
+
+    property <float> s: self.width / 220px;
+    property <bool> moving: alive && Theme.animations;
+    property <bool> blink;
+    property <bool> drift;
+
+    height: self.width * 150 / 220;
+
+    Timer {
+        interval: 4600ms;
+        running: root.moving && !root.asleep;
+        triggered => { root.blink = true; }
+    }
+    Timer {
+        interval: 140ms;
+        running: root.blink;
+        triggered => { root.blink = false; }
+    }
+    Timer {
+        interval: 1400ms;
+        running: root.moving && root.asleep && root.details;
+        triggered => { root.drift = !root.drift; }
+    }
+
+    // Body. Slint draws borders inside the rectangle, so it is grown by half the outline.
+    Rectangle {
+        x: (10 - 2.5 * root.weight) * 1px * root.s;
+        y: (34 - 2.5 * root.weight) * 1px * root.s;
+        width: (200 + 5 * root.weight) * 1px * root.s;
+        height: (106 + 5 * root.weight) * 1px * root.s;
+        border-radius: (20 + 2.5 * root.weight) * 1px * root.s;
+        border-width: 5px * root.weight * root.s;
+        border-color: root.outline;
+        background: root.asleep ? Theme.signal : Theme.face;
+        animate background { duration: 300ms; }
+    }
+
+    // Awake eyes.
+    for cx in [80, 140]: Rectangle {
+        property <length> d: 22px * root.s;
+        property <length> h: root.blink ? 3px * root.s : self.d;
+        x: (cx - 11) * 1px * root.s;
+        y: 82px * root.s - self.h / 2;
+        width: self.d;
+        height: self.h;
+        border-radius: min(self.width, self.height) / 2;
+        background: Theme.face-ink;
+        opacity: root.asleep ? 0 : 1;
+        animate height, y { duration: 70ms; }
+    }
+    if root.details && !root.asleep && !root.blink: Rectangle {
+        x: 80.5px * root.s;
+        y: 74.5px * root.s;
+        width: 7px * root.s;
+        height: self.width;
+        border-radius: self.width / 2;
+        background: #ffffff;
+    }
+    if root.details && !root.asleep && !root.blink: Rectangle {
+        x: 140.5px * root.s;
+        y: 74.5px * root.s;
+        width: 7px * root.s;
+        height: self.width;
+        border-radius: self.width / 2;
+        background: #ffffff;
+    }
+    if root.details && !root.asleep: Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 220;
+        viewbox-height: 150;
+        stroke: Theme.face-ink;
+        stroke-width: 5px * root.s;
+        stroke-line-cap: round;
+        fill: transparent;
+        commands: "M98 108 q12 10 24 0";
+    }
+
+    // Asleep: closed eyes, a flat mouth and two drifting z's.
+    if root.asleep: Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 220;
+        viewbox-height: 150;
+        stroke: Theme.face-ink;
+        stroke-width: 6px * root.weight * root.s;
+        stroke-line-cap: round;
+        fill: transparent;
+        commands: "M66 84 q14 12 28 0 M126 84 q14 12 28 0";
+    }
+    if root.details && root.asleep: Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 220;
+        viewbox-height: 150;
+        stroke: Theme.face-ink;
+        stroke-width: 5px * root.s;
+        stroke-line-cap: round;
+        fill: transparent;
+        commands: "M100 112 h20";
+    }
+    if root.details && root.asleep: Text {
+        x: 172px * root.s;
+        y: (root.drift ? 0px : 10px) * root.s;
+        text: "z";
+        font-family: Theme.mono;
+        font-weight: 700;
+        font-size: 24px * root.s;
+        color: Theme.text;
+        opacity: root.drift ? 0.35 : 1;
+        animate y, opacity { duration: 1400ms; easing: ease-in-out; }
+    }
+    if root.details && root.asleep: Text {
+        x: 194px * root.s;
+        y: (root.drift ? 8px : -4px) * root.s;
+        text: "z";
+        font-family: Theme.mono;
+        font-weight: 700;
+        font-size: 16px * root.s;
+        color: Theme.text;
+        opacity: root.drift ? 1 : 0.35;
+        animate y, opacity { duration: 1400ms; easing: ease-in-out; }
+    }
+}
+
+// The app icon: half awake, half asleep. The open eye blinks while `alive`.
+// Drawn on a 256 x 256 grid (the same shapes as assets/keyless.svg).
+export component AppMark {
+    in property <bool> alive;
+    property <float> s: self.width / 256px;
+    property <bool> blink;
+    height: self.width;
+
+    Timer {
+        interval: 3800ms;
+        running: root.alive && Theme.animations;
+        triggered => { root.blink = true; }
+    }
+    Timer {
+        interval: 140ms;
+        running: root.blink;
+        triggered => { root.blink = false; }
+    }
+
+    Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 256;
+        viewbox-height: 256;
+        fill: Theme.face;
+        commands: "M52 58 H128 V206 H52 A36 36 0 0 1 16 170 V94 A36 36 0 0 1 52 58 Z";
+    }
+    Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 256;
+        viewbox-height: 256;
+        fill: Theme.signal;
+        commands: "M128 58 H204 A36 36 0 0 1 240 94 V170 A36 36 0 0 1 204 206 H128 Z";
+    }
+    Rectangle {
+        x: 9px * root.s;
+        y: 51px * root.s;
+        width: 238px * root.s;
+        height: 162px * root.s;
+        border-radius: 43px * root.s;
+        border-width: 14px * root.s;
+        border-color: Theme.face-ink;
+    }
+    Rectangle {
+        property <length> h: root.blink ? 5px * root.s : 34px * root.s;
+        x: 71px * root.s;
+        y: 126px * root.s - self.h / 2;
+        width: 34px * root.s;
+        height: self.h;
+        border-radius: min(self.width, self.height) / 2;
+        background: Theme.face-ink;
+        animate height, y { duration: 70ms; }
+    }
+    Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 256;
+        viewbox-height: 256;
+        stroke: Theme.face-ink;
+        stroke-width: 16px * root.s;
+        stroke-line-cap: round;
+        fill: transparent;
+        commands: "M144 128 q25 22 50 0";
+    }
+}

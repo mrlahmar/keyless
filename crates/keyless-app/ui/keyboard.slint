@@ -1,0 +1,188 @@
+// A drawn keyboard. It shows the current shortcut lit in orange, and in "click" mode it
+// lets people set a shortcut with the mouse alone: click modifiers, then one key.
+
+import { Theme } from "theme.slint";
+
+// kind: 0 = not usable in a shortcut, 1 = modifier, 2 = key that can end a shortcut.
+// slot: 1-based index into the layout's key caps for keys that change with the keyboard
+// layout (LAYOUT_KEYS in keyless-core), 0 for keys that never change. label and kind are
+// the US layout, shown when the OS gives no caps.
+struct KeyDef {
+    label: string,
+    units: float,
+    kind: int,
+    slot: int,
+}
+
+// What one key does under the active keyboard layout. Rust fills these.
+export struct KeyCap {
+    label: string,
+    usable: bool,
+}
+
+struct KeyRow {
+    height: length,
+    keys: [KeyDef],
+}
+
+component KeyButton inherits Rectangle {
+    in property <KeyDef> def;
+    in property <[KeyCap]> caps;
+    in property <length> unit;
+    in property <length> gap;
+    in property <bool> lit;
+    in property <bool> interactive;
+    callback clicked;
+
+    property <bool> from-layout: def.slot > 0 && def.slot <= caps.length;
+    out property <string> label: from-layout && caps[def.slot - 1].label != "" ? caps[def.slot - 1].label : def.label;
+    out property <int> kind: from-layout ? (caps[def.slot - 1].usable ? 2 : 0) : def.kind;
+    property <bool> usable: interactive && kind != 0;
+    width: def.units * unit + (def.units - 1) * gap;
+    border-radius: 6px;
+    background: lit ? Theme.face-ink : Theme.keycap-edge;
+
+    accessible-role: button;
+    accessible-label: label;
+    accessible-checkable: kind != 0;
+    accessible-checked: lit;
+    accessible-action-default => { if (root.usable) { root.clicked(); } }
+    forward-focus: focus;
+
+    focus := FocusScope {
+        width: 0px;
+        height: 0px;
+        enabled: root.usable;
+        key-pressed(event) => {
+            if (event.text == " " || event.text == Key.Return) {
+                root.clicked();
+                return accept;
+            }
+            reject
+        }
+    }
+
+    Rectangle {
+        x: 1px;
+        y: 1px;
+        width: parent.width - 2px;
+        height: parent.height - 4px;
+        border-radius: 5px;
+        background: root.lit ? Theme.signal
+            : root.kind == 1 ? Theme.keycap-mod
+            : touch.has-hover && root.usable ? Theme.raised
+            : Theme.keycap;
+        animate background { duration: 120ms; }
+    }
+    Text {
+        x: 6px;
+        y: parent.height - self.height - 6px;
+        text: root.label;
+        font-family: Theme.mono;
+        font-size: 10px;
+        font-weight: 700;
+        color: root.lit ? Theme.on-signal : root.interactive && !root.usable ? Theme.keycap-dim : Theme.keycap-text;
+    }
+    Rectangle {
+        x: -3px;
+        y: -3px;
+        width: parent.width + 6px;
+        height: parent.height + 6px;
+        border-radius: 9px;
+        border-width: focus.has-focus ? 2px : 0px;
+        border-color: Theme.focus;
+    }
+    touch := TouchArea {
+        enabled: root.usable;
+        mouse-cursor: root.usable ? pointer : default;
+        clicked => { root.clicked(); }
+    }
+}
+
+export component KeyboardView inherits Rectangle {
+    in property <bool> interactive;
+    in property <bool> ctrl;
+    in property <bool> alt;
+    in property <bool> shift;
+    in property <bool> win;
+    in property <string> key;
+    // The active layout's keys, in LAYOUT_KEYS order. Empty: show the US layout.
+    in property <[KeyCap]> caps;
+    // label and kind of the clicked key.
+    callback key-clicked(string, int);
+
+    property <length> unit: 34px;
+    property <length> gap: 5px;
+    property <[KeyRow]> rows: [
+        { height: 26px, keys: [
+            { label: "Esc", units: 1, kind: 0 },
+            { label: "F1", units: 1, kind: 2 }, { label: "F2", units: 1, kind: 2 }, { label: "F3", units: 1, kind: 2 },
+            { label: "F4", units: 1, kind: 2 }, { label: "F5", units: 1, kind: 2 }, { label: "F6", units: 1, kind: 2 },
+            { label: "F7", units: 1, kind: 2 }, { label: "F8", units: 1, kind: 2 }, { label: "F9", units: 1, kind: 2 },
+            { label: "F10", units: 1, kind: 2 }, { label: "F11", units: 1, kind: 2 }, { label: "F12", units: 1, kind: 2 },
+        ] },
+        { height: 34px, keys: [
+            { label: "`", units: 1, kind: 0, slot: 1 },
+            { label: "1", units: 1, kind: 2, slot: 2 }, { label: "2", units: 1, kind: 2, slot: 3 }, { label: "3", units: 1, kind: 2, slot: 4 },
+            { label: "4", units: 1, kind: 2, slot: 5 }, { label: "5", units: 1, kind: 2, slot: 6 }, { label: "6", units: 1, kind: 2, slot: 7 },
+            { label: "7", units: 1, kind: 2, slot: 8 }, { label: "8", units: 1, kind: 2, slot: 9 }, { label: "9", units: 1, kind: 2, slot: 10 },
+            { label: "0", units: 1, kind: 2, slot: 11 }, { label: "-", units: 1, kind: 0, slot: 12 }, { label: "=", units: 1, kind: 0, slot: 13 },
+            { label: "Back", units: 2, kind: 0 },
+        ] },
+        { height: 34px, keys: [
+            { label: "Tab", units: 1.5, kind: 0 },
+            { label: "Q", units: 1, kind: 2, slot: 14 }, { label: "W", units: 1, kind: 2, slot: 15 }, { label: "E", units: 1, kind: 2, slot: 16 },
+            { label: "R", units: 1, kind: 2, slot: 17 }, { label: "T", units: 1, kind: 2, slot: 18 }, { label: "Y", units: 1, kind: 2, slot: 19 },
+            { label: "U", units: 1, kind: 2, slot: 20 }, { label: "I", units: 1, kind: 2, slot: 21 }, { label: "O", units: 1, kind: 2, slot: 22 },
+            { label: "P", units: 1, kind: 2, slot: 23 }, { label: "[", units: 1, kind: 0, slot: 24 }, { label: "]", units: 1, kind: 0, slot: 25 },
+            { label: "\\", units: 1.5, kind: 0, slot: 26 },
+        ] },
+        { height: 34px, keys: [
+            { label: "Caps", units: 1.75, kind: 0 },
+            { label: "A", units: 1, kind: 2, slot: 27 }, { label: "S", units: 1, kind: 2, slot: 28 }, { label: "D", units: 1, kind: 2, slot: 29 },
+            { label: "F", units: 1, kind: 2, slot: 30 }, { label: "G", units: 1, kind: 2, slot: 31 }, { label: "H", units: 1, kind: 2, slot: 32 },
+            { label: "J", units: 1, kind: 2, slot: 33 }, { label: "K", units: 1, kind: 2, slot: 34 }, { label: "L", units: 1, kind: 2, slot: 35 },
+            { label: ";", units: 1, kind: 0, slot: 36 }, { label: "'", units: 1, kind: 0, slot: 37 },
+            { label: "Enter", units: 2.25, kind: 0 },
+        ] },
+        { height: 34px, keys: [
+            { label: "Shift", units: 2.25, kind: 1 },
+            { label: "Z", units: 1, kind: 2, slot: 38 }, { label: "X", units: 1, kind: 2, slot: 39 }, { label: "C", units: 1, kind: 2, slot: 40 },
+            { label: "V", units: 1, kind: 2, slot: 41 }, { label: "B", units: 1, kind: 2, slot: 42 }, { label: "N", units: 1, kind: 2, slot: 43 },
+            { label: "M", units: 1, kind: 2, slot: 44 }, { label: ",", units: 1, kind: 0, slot: 45 }, { label: ".", units: 1, kind: 0, slot: 46 },
+            { label: "/", units: 1, kind: 0, slot: 47 },
+            { label: "Shift", units: 2.75, kind: 1 },
+        ] },
+        { height: 34px, keys: [
+            { label: "Ctrl", units: 1.25, kind: 1 }, { label: "Win", units: 1.25, kind: 1 }, { label: "Alt", units: 1.25, kind: 1 },
+            { label: "Space", units: 6.25, kind: 0 },
+            { label: "Alt", units: 1.25, kind: 1 }, { label: "Fn", units: 1.25, kind: 0 }, { label: "Menu", units: 1.25, kind: 0 },
+            { label: "Ctrl", units: 1.25, kind: 1 },
+        ] },
+    ];
+
+    background: Theme.inset;
+    border-radius: 14px;
+
+    VerticalLayout {
+        padding: 12px;
+        spacing: root.gap;
+        for row in root.rows: HorizontalLayout {
+            spacing: root.gap;
+            alignment: start;
+            height: row.height;
+            for def in row.keys: KeyButton {
+                def: def;
+                caps: root.caps;
+                unit: root.unit;
+                gap: root.gap;
+                interactive: root.interactive;
+                lit: self.kind == 2 ? self.label == root.key
+                    : self.kind == 1 ? ((self.label == "Ctrl" && root.ctrl) || (self.label == "Alt" && root.alt)
+                        || (self.label == "Shift" && root.shift) || (self.label == "Win" && root.win))
+                    : false;
+                clicked => { root.key-clicked(self.label, self.kind); }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+# Licenses allowed in release binaries, in order of preference. Generates
+# THIRD_PARTY_LICENSES.html (see scripts/package.ps1). Slint is used under its
+# Royalty-free License 2.0 (attribution: AboutSlint on the About page).
+accepted = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSL-1.0",
+    "ISC",
+    "Unicode-3.0",
+    "Unlicense",
+    "Zlib",
+    "MPL-2.0",
+    "LicenseRef-Slint-Royalty-free-2.0",
+]
+targets = ["x86_64-pc-windows-msvc"]
+ignore-build-dependencies = true
+ignore-dev-dependencies = true

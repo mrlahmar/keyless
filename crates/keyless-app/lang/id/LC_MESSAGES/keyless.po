@@ -1,0 +1,358 @@
+# Keyless, Indonesian translation.
+# Edit the msgstr lines. Keep {} placeholders; key names (Ctrl, Alt, Shift, Win) stay as they are.
+msgid ""
+msgstr ""
+"Project-Id-Version: Keyless\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "OFF"
+msgstr "MATI"
+
+msgid "never"
+msgstr "tidak pernah"
+
+msgid "after 5 minutes"
+msgstr "setelah 5 menit"
+
+msgid "after 15 minutes"
+msgstr "setelah 15 menit"
+
+msgid "after 30 minutes"
+msgstr "setelah 30 menit"
+
+msgid "after 60 minutes"
+msgstr "setelah 60 menit"
+
+msgid "AFTER 5 MIN"
+msgstr "SETELAH 5 MNT"
+
+msgid "AFTER 15 MIN"
+msgstr "SETELAH 15 MNT"
+
+msgid "AFTER 30 MIN"
+msgstr "SETELAH 30 MNT"
+
+msgid "AFTER 60 MIN"
+msgstr "SETELAH 60 MNT"
+
+msgid "Same as Windows"
+msgstr "Sama dengan Windows"
+
+msgid "Keyboard paused"
+msgstr "Keyboard dijeda"
+
+msgid "Keyboard on"
+msgstr "Keyboard aktif"
+
+msgid "Rest anything on it. Your mouse still works."
+msgstr "Taruh apa saja di atasnya. Mouse tetap berfungsi."
+
+msgid "Flip the switch or press {}."
+msgstr "Geser sakelar atau tekan {}."
+
+msgid "Flip the switch to pause."
+msgstr "Geser sakelar untuk menjeda."
+
+msgid "AUTO-RESUME"
+msgstr "LANJUT OTOMATIS"
+
+msgid "BACK ON IN {}"
+msgstr "AKTIF LAGI DALAM {}"
+
+msgid "UNTIL YOU RESUME"
+msgstr "SAMPAI ANDA LANJUTKAN"
+
+msgid "NEVER"
+msgstr "TIDAK PERNAH"
+
+msgid "Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."
+msgstr "Mouse selalu berfungsi. Mengunci layar, keluar, atau tidur akan melanjutkan keyboard."
+
+msgid "Click your new shortcut"
+msgstr "Klik pintasan baru Anda"
+
+msgid "Shortcut"
+msgstr "Pintasan"
+
+msgid "Modifiers first, then one key."
+msgstr "Tombol pengubah dulu, lalu satu tombol."
+
+msgid "Press the new combination now."
+msgstr "Tekan kombinasi baru sekarang."
+
+msgid "Pauses and resumes from any app."
+msgstr "Menjeda dan melanjutkan dari aplikasi apa pun."
+
+msgid "Listening… press keys"
+msgstr "Mendengarkan… tekan tombol"
+
+msgid "Not set"
+msgstr "Belum diatur"
+
+msgid "Type it"
+msgstr "Ketik"
+
+msgid "Change shortcut by typing it"
+msgstr "Ubah pintasan dengan mengetiknya"
+
+msgid "Click keys"
+msgstr "Klik tombol"
+
+msgid "Change shortcut by clicking keys"
+msgstr "Ubah pintasan dengan mengeklik tombol"
+
+msgid "Cancel"
+msgstr "Batal"
+
+msgid "Cancel shortcut change"
+msgstr "Batalkan perubahan pintasan"
+
+msgid "Save"
+msgstr "Simpan"
+
+msgid "Save shortcut {}"
+msgstr "Simpan pintasan {}"
+
+msgid "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, number or F-key."
+msgstr "Kombinasi itu tidak bisa dipakai. Gunakan Ctrl, Alt, Shift, atau Win dengan huruf, angka, atau tombol F."
+
+msgid "{} is used by another app. Choose a different shortcut."
+msgstr "{} dipakai aplikasi lain. Pilih pintasan lain."
+
+msgid "The shortcut could not be set."
+msgstr "Pintasan tidak dapat diatur."
+
+msgid "Shortcut can resume"
+msgstr "Pintasan bisa melanjutkan"
+
+msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
+msgstr "Mati: tangan yang bertumpu hanya bisa menjeda, tidak melanjutkan. Lanjutkan dengan mouse."
+
+msgid "Appearance: {}"
+msgstr "Tampilan: {}"
+
+msgid "Show the paused tag at the top"
+msgstr "Tampilkan penanda jeda di atas"
+
+msgid "Show the paused tag at the bottom"
+msgstr "Tampilkan penanda jeda di bawah"
+
+msgid "Show the paused tag on the left"
+msgstr "Tampilkan penanda jeda di kiri"
+
+msgid "Show the paused tag on the right"
+msgstr "Tampilkan penanda jeda di kanan"
+
+msgid "Language"
+msgstr "Bahasa"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Startup, display, language and the paused tag."
+msgstr "Mulai, tampilan, bahasa, dan penanda jeda."
+
+msgid "STARTUP"
+msgstr "MULAI"
+
+msgid "Start at sign-in"
+msgstr "Mulai saat masuk"
+
+msgid "Always starts with keys on."
+msgstr "Selalu mulai dengan keyboard aktif."
+
+msgid "DISPLAY"
+msgstr "TAMPILAN"
+
+msgid "AUTO"
+msgstr "OTOMATIS"
+
+msgid "follow Windows"
+msgstr "ikuti Windows"
+
+msgid "LIGHT"
+msgstr "TERANG"
+
+msgid "light"
+msgstr "terang"
+
+msgid "DARK"
+msgstr "GELAP"
+
+msgid "dark"
+msgstr "gelap"
+
+msgid "LANGUAGE"
+msgstr "BAHASA"
+
+msgid "Follows Windows unless you pick one."
+msgstr "Mengikuti Windows kecuali Anda memilih."
+
+msgid "PAUSED TAG"
+msgstr "PENANDA JEDA"
+
+msgid "Show while paused"
+msgstr "Tampilkan saat dijeda"
+
+msgid "Off: only the tray icon turns orange."
+msgstr "Mati: hanya ikon baki yang berubah oranye."
+
+msgid "CUSTOM SPOT"
+msgstr "POSISI KUSTOM"
+
+msgid "TOP"
+msgstr "ATAS"
+
+msgid "BOTTOM"
+msgstr "BAWAH"
+
+msgid "LEFT"
+msgstr "KIRI"
+
+msgid "RIGHT"
+msgstr "KANAN"
+
+msgid "Reset"
+msgstr "Atur ulang"
+
+msgid "Reset the paused tag position"
+msgstr "Atur ulang posisi penanda jeda"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes."
+msgstr "Pilih tepi, atau seret penanda ke mana saja. Keyless mengingat tempat Anda meletakkannya. Hanya tombol Lanjutkan miliknya yang melanjutkan."
+
+msgid "Resume"
+msgstr "Lanjutkan"
+
+msgid "Pause to try it"
+msgstr "Jeda untuk mencoba"
+
+msgid "Pause your keyboard. Keep your mouse."
+msgstr "Jeda keyboard. Mouse tetap jalan."
+
+msgid "VERSION {} · MIT LICENSE"
+msgstr "VERSI {} · LISENSI MIT"
+
+msgid "PRIVACY"
+msgstr "PRIVASI"
+
+msgid "Keyless looks at each key only to decide whether to block it. Nothing is recorded, stored or sent. No network, no telemetry."
+msgstr "Keyless melihat setiap tombol hanya untuk memutuskan apakah akan memblokirnya. Tidak ada yang direkam, disimpan, atau dikirim. Tanpa jaringan, tanpa telemetri."
+
+msgid "GOOD TO KNOW"
+msgstr "PERLU DIKETAHUI"
+
+msgid "Control Alt Delete always works."
+msgstr "Ctrl Alt Delete selalu berfungsi."
+
+msgid "always works."
+msgstr "selalu berfungsi."
+
+msgid "On-screen keyboards and voice typing keep working while paused."
+msgstr "Keyboard layar dan pengetikan suara tetap berfungsi saat dijeda."
+
+msgid "Source code"
+msgstr "Kode sumber"
+
+msgid "Report a problem"
+msgstr "Laporkan masalah"
+
+msgid "Third-party licenses"
+msgstr "Lisensi pihak ketiga"
+
+msgid "PAUSED"
+msgstr "DIJEDA"
+
+msgid "ON"
+msgstr "AKTIF"
+
+msgid "Control"
+msgstr "Kontrol"
+
+msgid "Pause and resume"
+msgstr "Jeda dan lanjutkan"
+
+msgid "Display, language"
+msgstr "Tampilan, bahasa"
+
+msgid "About"
+msgstr "Tentang"
+
+msgid "Version, privacy"
+msgstr "Versi, privasi"
+
+msgid "VERSION {}"
+msgstr "VERSI {}"
+
+msgid "Back on in {}"
+msgstr "Aktif lagi dalam {}"
+
+msgid "Until you resume"
+msgstr "Sampai Anda lanjutkan"
+
+msgid "Mouse always works"
+msgstr "Mouse selalu berfungsi"
+
+msgid "Open Keyless"
+msgstr "Buka Keyless"
+
+msgid "Resume automatically"
+msgstr "Lanjutkan otomatis"
+
+msgid "No shortcut"
+msgstr "Tanpa pintasan"
+
+msgid "Quit"
+msgstr "Keluar"
+
+msgid "Quit Keyless"
+msgstr "Keluar dari Keyless"
+
+msgid "Keyless: keyboard paused"
+msgstr "Keyless: keyboard dijeda"
+
+msgid "KEYS ASLEEP"
+msgstr "TOMBOL TIDUR"
+
+msgid "BACK IN {}"
+msgstr "KEMBALI DALAM {}"
+
+msgid "MOUSE AWAKE"
+msgstr "MOUSE TERJAGA"
+
+msgid "RESUME"
+msgstr "LANJUTKAN"
+
+msgid "Resume keyboard"
+msgstr "Lanjutkan keyboard"
+
+msgid "Keyless: keyboard on"
+msgstr "Keyless: keyboard aktif"
+
+msgid "Pause keyboard"
+msgstr "Jeda keyboard"
+
+msgid "About Keyless"
+msgstr "Tentang Keyless"
+
+msgid "PAUSE"
+msgstr "JEDA"
+
+msgid "Resume automatically: {}"
+msgstr "Lanjutkan otomatis: {}"
+
+msgid "{}: {}"
+msgstr "{}: {}"
+
+msgid "Beta version"
+msgstr "Versi beta"
+
+msgid "BETA"
+msgstr "BETA"
+
+msgid "Keyless (beta)"
+msgstr "Keyless (beta)"
