@@ -45,7 +45,7 @@ jobs:
           $body = if ($end) { $lines[$start..($start + $end - 2)] } else { $lines[$start..($lines.Length - 1)] }
           $body | Where-Object { $_ -notmatch '^\[.*\]: ' } | Set-Content release-notes.md
 
-      - uses: actions/attest-build-provenance@v2
+      - uses: actions/attest-build-provenance@v4
         with:
           subject-path: dist/*
 
