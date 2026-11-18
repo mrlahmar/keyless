@@ -16,6 +16,8 @@ I have a physical disability. To reach something on the far side of my desk, I o
 have to rest my hand or arm on the keyboard, and it types whatever is under it. Keyless
 lets me lean on the keyboard and keep using the mouse.
 
+▶ [Watch why I built it](https://youtu.be/XZFvoE2tSNA) (YouTube)
+
 It also helps when:
 
 - You want to wipe the keyboard without unplugging it or locking the PC.
