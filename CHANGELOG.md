@@ -7,8 +7,6 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [0.1.0] - 2026-11-18
 
-First release of the Rust rewrite.
-
 ### Added
 
 - Pause and resume the physical keyboard from the tray panel, the main window, a
