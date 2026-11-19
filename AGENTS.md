@@ -15,6 +15,8 @@ Linux come later, so keep OS code out of the core and UI.
   windows, tray and blocker. Runs on the UI thread only.
 - `packaging/windows/keyless.iss`: Inno Setup installer. `scripts/package.ps1` builds
   everything that ships into `dist/`.
+- `site/index.html`: the project website, one page, no framework. `.github/workflows/pages.yml`
+  publishes it to GitHub Pages with the fonts, icon and demo GIFs copied in from the repo.
 
 See `docs/ARCHITECTURE.md` for how blocking works.
 

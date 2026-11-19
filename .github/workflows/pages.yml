@@ -1,0 +1,46 @@
+name: Pages
+
+# Publishes site/ to GitHub Pages, together with the fonts, icon and demo GIFs it uses
+# from the rest of the repo, so they are not kept twice.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "assets/fonts/**"
+      - "assets/keyless.svg"
+      - "docs/demo-*.gif"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/fonts
+          cp -r site/. _site/
+          cp assets/fonts/*.ttf assets/fonts/OFL-*.txt _site/fonts/
+          cp assets/keyless.svg docs/demo-light.gif docs/demo-dark.gif _site/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

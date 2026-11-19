@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyless: pause your keyboard, keep your mouse</title>
+<meta name="description" content="Keyless pauses your keyboard while the mouse keeps working, so you can rest your hands, lean on it or clean it without typing. Free and open source.">
+<meta property="og:title" content="Keyless">
+<meta property="og:description" content="Pause your keyboard. Keep your mouse. Free and open source.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#eff0f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17181a" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="keyless.svg" type="image/svg+xml">
+<style>
+@font-face { font-family: "Space Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/SpaceGrotesk-Regular.ttf"); }
+@font-face { font-family: "Space Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/SpaceGrotesk-Medium.ttf"); }
+@font-face { font-family: "Space Grotesk"; font-weight: 700; font-display: swap; src: url("fonts/SpaceGrotesk-Bold.ttf"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 700; font-display: swap; src: url("fonts/JetBrainsMono-Bold.ttf"); }
+
+/* Colors match crates/keyless-app/ui/theme.slint. */
+:root {
+  --window: #eff0f1; --raised: #f7f7f8; --inset: #dcdee1;
+  --line: #d6d8db; --line-strong: #b9bcc1;
+  --text: #121212; --muted: #3d4046; --faint: #5d6066;
+  --invert: #121212; --on-invert: #eff0f1;
+  --signal: #ff4f12; --signal-text: #b83a08; --go: #18a058;
+  --cap: #f7f7f8; --cap-mod: #c9ccd0; --cap-edge: #b4b7bc; --cap-text: #2b2d31;
+  --sans: "Space Grotesk", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --window: #17181a; --raised: #202124; --inset: #101113;
+    --line: #2d2f33; --line-strong: #44474d;
+    --text: #eceef0; --muted: #c3c6cb; --faint: #9fa3a9;
+    --invert: #eceef0; --on-invert: #121212; --signal-text: #ff7340;
+    --cap: #2a2c30; --cap-mod: #383b40; --cap-edge: #4a4d53; --cap-text: #d7dade;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--window); color: var(--text); font-family: var(--sans); line-height: 1.5; }
+a { color: inherit; }
+img, iframe { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+.mono { font-family: var(--mono); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; border: 1px solid var(--line-strong); }
+.btn.primary { background: var(--invert); color: var(--on-invert); border-color: var(--invert); }
+.skip { position: absolute; left: -999px; } .skip:focus { left: 16px; top: 12px; background: var(--raised); padding: 8px 12px; border-radius: 8px; z-index: 1; }
+
+header .wrap { display: flex; align-items: center; gap: 10px; height: 68px; }
+header img { width: 30px; }
+header .brand { font-size: 13px; letter-spacing: .18em; text-decoration: none; }
+header nav { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 15px; }
+header nav a:not(.btn) { color: var(--muted); text-decoration: none; }
+header nav a:not(.btn):hover { color: var(--text); }
+header .btn { padding: 9px 16px; font-size: 14px; }
+
+.hero { text-align: center; padding: 48px 0 8px; }
+.hero h1 { font-size: clamp(40px, 7vw, 80px); line-height: 1; letter-spacing: -.03em; margin: 0 0 20px; }
+.hero h1 em { font-style: normal; color: var(--signal-text); }
+.hero p { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); max-width: 32em; margin: 0 auto; }
+
+.demo { width: min(860px, 100%); margin: 36px auto 0; }
+.scenes { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.scenes .mono { font-size: 11px; color: var(--faint); margin-right: 4px; }
+.scene { all: unset; cursor: pointer; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line-strong); font-size: 14px; color: var(--muted); }
+.scene[aria-pressed="true"] { background: var(--invert); border-color: var(--invert); color: var(--on-invert); }
+.scene:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.board { padding: 16px; border-radius: 22px; background: var(--inset); border: 2px solid var(--line); transition: border-color .25s; }
+.paused .board { border-color: var(--signal); }
+.row { display: flex; gap: 8px; margin-bottom: 8px; } .row:last-child { margin: 0; }
+.key { flex: 1 1 0; min-width: 0; height: 54px; border-radius: 9px; background: var(--cap); border: 1px solid var(--cap-edge); border-bottom-width: 4px; display: grid; place-items: center; font: 700 13px var(--mono); color: var(--cap-text); user-select: none; transition: transform .06s, background .15s, color .15s; }
+.key.mod { background: var(--cap-mod); }
+.w15 { flex-grow: 1.5; } .w2 { flex-grow: 2.1; } .w6 { flex-grow: 6; }
+.key.down { transform: translateY(2px); border-bottom-width: 2px; background: var(--go); color: #08130d; }
+.paused .key.down { background: var(--cap-edge); color: var(--cap-text); }
+.under { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.screen { flex: 1; min-width: 220px; padding: 12px 16px; border-radius: 12px; background: var(--raised); border: 1px solid var(--line); font: 700 15px var(--mono); min-height: 48px; display: flex; align-items: center; justify-content: flex-end; overflow: hidden; white-space: pre; }
+.screen::after { content: ""; flex: none; width: 2px; height: 1.2em; background: var(--text); margin-left: 2px; animation: blink 1s steps(1) infinite; }
+.paused .screen::after { background: var(--signal); }
+@keyframes blink { 50% { opacity: 0; } }
+.toggle { all: unset; cursor: pointer; padding: 0 22px; min-height: 48px; border-radius: 12px; font: 700 13px var(--mono); letter-spacing: .14em; text-transform: uppercase; background: var(--signal); color: #121212; display: inline-flex; align-items: center; gap: 10px; }
+.toggle::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #121212; }
+.paused .toggle { background: var(--go); color: #08130d; }
+.toggle:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.note { text-align: center; font-size: 15px; color: var(--muted); margin: 14px 0 0; min-height: 1.5em; }
+.note b { color: var(--text); }
+.cta { text-align: center; margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.meta { text-align: center; font-size: 12px; color: var(--faint); margin-top: 14px; }
+
+section { padding: 88px 0 0; }
+h2 { font-size: clamp(28px, 3.6vw, 36px); line-height: 1.15; margin: 0 0 16px; letter-spacing: -.02em; }
+.label { font-size: 11px; color: var(--faint); margin-bottom: 12px; display: block; }
+.why { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+.why p { font-size: 18px; color: var(--muted); margin: 0 0 14px; }
+.video { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #000; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tile { padding: 24px; border-radius: 18px; background: var(--raised); border: 1px solid var(--line); }
+.tile .cap { display: inline-grid; place-items: center; min-width: 36px; height: 32px; padding: 0 9px; border-radius: 8px; background: var(--cap); border: 1px solid var(--cap-edge); border-bottom-width: 3px; font: 700 12px var(--mono); color: var(--cap-text); }
+.tile h3 { font-size: 20px; margin: 16px 0 6px; } .tile p { margin: 0; color: var(--muted); }
+.feat { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
+.feat img { border-radius: 16px; border: 1px solid var(--line); width: 100%; height: auto; }
+.feat ul { list-style: none; padding: 0; margin: 0; }
+.feat li { padding: 13px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.feat li:first-child { border-top: 1px solid var(--line); }
+.feat li b { color: var(--text); font-weight: 500; }
+.privacy { margin-top: 88px; padding: 32px; border-radius: 20px; background: var(--raised); border: 1px solid var(--line); display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; }
+.privacy img { width: 64px; }
+.privacy p { margin: 4px 0 0; color: var(--muted); }
+footer { padding: 48px 0 56px; font-size: 14px; color: var(--faint); }
+footer .wrap { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+
+@media (max-width: 820px) {
+  header nav a:not(.btn) { display: none; }
+  .why, .feat { grid-template-columns: 1fr; gap: 28px; }
+  .grid { grid-template-columns: 1fr; }
+  .board { padding: 8px; border-radius: 14px; } .row { gap: 4px; margin-bottom: 4px; }
+  .key { height: 40px; font-size: 10px; border-radius: 6px; border-bottom-width: 3px; }
+  .privacy { grid-template-columns: 1fr; text-align: center; } .privacy img { margin: 0 auto; }
+}
+@media (max-width: 600px) { .toggle { flex: 1 1 100%; justify-content: center; } .cta .btn { flex: 1 1 100%; justify-content: center; } }
+@media (max-width: 480px) { .key { height: 34px; font-size: 8px; } .row { gap: 3px; } }
+@media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header><div class="wrap">
+  <img src="keyless.svg" alt="">
+  <a class="brand mono" href="./">Keyless</a>
+  <nav aria-label="Main">
+    <a href="#why">Why</a>
+    <a href="#features">Features</a>
+    <a href="https://github.com/mrlahmar/keyless">GitHub</a>
+    <a class="btn primary" href="https://github.com/mrlahmar/keyless/releases/latest">Download</a>
+  </nav>
+</div></header>
+
+<main id="main" class="wrap">
+  <div class="hero">
+    <h1>Lean on it.<br><em>Nothing types.</em></h1>
+    <p>Something is resting on this keyboard, and it keeps typing. Press Pause: the keys still go down, but nothing types.</p>
+  </div>
+
+  <div class="demo" id="demo">
+    <div class="scenes" role="group" aria-label="What is on the keyboard">
+      <span class="mono">On the keys:</span>
+      <button class="scene" data-scene="hand" aria-pressed="true">A resting hand</button>
+      <button class="scene" data-scene="cloth" aria-pressed="false">A cleaning cloth</button>
+      <button class="scene" data-scene="cat" aria-pressed="false">A cat</button>
+    </div>
+    <div class="board" id="board" aria-hidden="true"></div>
+    <div class="under">
+      <div class="screen" id="screen" aria-hidden="true"><span id="typed"></span></div>
+      <button class="toggle" id="toggle" aria-pressed="false">Pause keyboard</button>
+    </div>
+    <p class="note" id="note" aria-live="polite"></p>
+  </div>
+
+  <div class="cta">
+    <a class="btn primary" href="https://github.com/mrlahmar/keyless/releases/latest">Download for Windows</a>
+    <a class="btn" href="https://github.com/mrlahmar/keyless">Source code</a>
+  </div>
+  <p class="meta mono">Free · Open source · Windows 10 and 11</p>
+
+  <section id="why" class="why">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/XZFvoE2tSNA" title="Why I built Keyless" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+    <div>
+      <span class="label mono">Why it exists</span>
+      <h2>Built to rest a hand on the keys</h2>
+      <p>I have a physical disability. To reach something on the far side of my desk, I often have to rest my hand or arm on the keyboard, and it types whatever is under it.</p>
+      <p>Keyless lets me lean on the keyboard and keep using the mouse.</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="label mono">Also handy when</span>
+    <div class="grid">
+      <div class="tile"><span class="cap">Esc</span><h3>Cleaning the keys</h3><p>Wipe the keyboard without unplugging it or locking the PC.</p></div>
+      <div class="tile"><span class="cap">A</span><h3>Little hands</h3><p>A small child keeps hitting keys while a cartoon plays or during a call.</p></div>
+      <div class="tile"><span class="cap">Z</span><h3>A cat on the desk</h3><p>It walks across the keyboard, or decides to sleep on it.</p></div>
+    </div>
+  </section>
+
+  <section id="features" class="feat">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="demo-dark.gif">
+      <img src="demo-light.gif" alt="The Keyless window and tray panel, pausing and resuming the keyboard" width="960" height="682" loading="lazy">
+    </picture>
+    <div>
+      <span class="label mono">How it works</span>
+      <h2>Small, and stays out of the way</h2>
+      <ul>
+        <li><b>Ctrl + Alt + K</b> anywhere, or the switch in the tray</li>
+        <li><b>A small tag</b> shows while paused; click Resume to turn keys back on</li>
+        <li><b>Auto-resume</b> after 5, 15, 30 or 60 minutes</li>
+        <li><b>Resumes by itself</b> when you lock the screen, sign out or sleep</li>
+        <li><b>10 languages</b>, light and dark</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="privacy">
+    <img src="keyless.svg" alt="">
+    <div>
+      <h2 style="margin:0;font-size:22px">Nothing leaves your PC</h2>
+      <p>Keyless never records, stores or sends keystrokes, and it makes no network connections. The code is open, so you can check.</p>
+    </div>
+    <a class="btn" href="https://github.com/mrlahmar/keyless/blob/main/SECURITY.md">Privacy and security</a>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <span>Keyless is free and open source under the MIT license.</span>
+  <a href="https://github.com/mrlahmar/keyless">GitHub</a>
+  <a href="https://github.com/mrlahmar/keyless/releases">Releases</a>
+  <a href="https://github.com/mrlahmar/keyless/issues">Report a problem</a>
+</div></footer>
+
+<script>
+// Demo: something rests on the drawn keyboard and presses keys. While "paused", the keys
+// still go down but nothing gets typed. It runs only while the demo is on screen.
+const rows = [
+  ['Esc', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Bksp:w2'],
+  ['Tab:w15', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '\\:w15'],
+  ['Caps:w2', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Enter:w2'],
+  ['Shift:w2', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', 'Shift:w2'],
+  ['Ctrl:w15', 'Win', 'Alt:w15', 'Space:w6', 'Alt:w15', 'Ctrl:w15'],
+];
+// Each step lists the keys pressed at the same moment.
+const scenes = {
+  hand: ['jkl', 'hjkm', 'jkl', 'uijk', 'jkln', 'hjk', 'kl.', 'jkm,', 'jk', 'hjkl'],
+  cloth: ['qwe', 'wer', 'ert', 'rty', 'tyu', 'yui', 'uio', 'iop', 'kl', 'jkl', 'hjk', 'ghj', 'fgh', 'dfg', 'sdf', 'asd', 'zxc', 'xcv', 'cvb', 'vbn', 'bnm', 'nm,'],
+  cat: ['z', 'sx', 'd', 'e', 'fr', 't', 'g', 'hy', 'u', 'j', 'ki', ' ', 'o', 'l', '.', ' ', ' '],
+};
+const demo = document.getElementById('demo');
+const board = document.getElementById('board');
+const typedEl = document.getElementById('typed');
+const note = document.getElementById('note');
+const toggle = document.getElementById('toggle');
+const keys = {};
+
+for (const r of rows) {
+  const row = document.createElement('div');
+  row.className = 'row';
+  for (const k of r) {
+    const [label, w] = k.split(':');
+    const el = document.createElement('div');
+    el.className = 'key' + (w ? ' ' + w : '') + (label.length > 1 ? ' mod' : '');
+    el.textContent = label === 'Space' ? '' : label;
+    keys[label === 'Space' ? ' ' : label.toLowerCase()] = el;
+    row.append(el);
+  }
+  board.append(row);
+}
+
+let scene = 'hand', step = 0, paused = false, typed = '', ignored = 0;
+let timer = null, visible = false, down = [];
+const slow = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function tick() {
+  down.forEach(k => k.classList.remove('down'));
+  const chars = [...scenes[scene][step++ % scenes[scene].length]];
+  down = chars.map(c => keys[c]).filter(Boolean);
+  down.forEach(k => k.classList.add('down'));
+  if (paused) ignored += chars.length;
+  else typed = (typed + chars.join('')).slice(-60);
+  render();
+}
+function render() {
+  typedEl.textContent = typed;
+  note.innerHTML = paused
+    ? `Keyboard paused. <b>${ignored}</b> key presses ignored, nothing typed. The mouse still works.`
+    : 'Keyboard on: everything resting on it gets typed.';
+}
+function run() {
+  const go = visible && !document.hidden;
+  if (go && !timer) timer = setInterval(tick, slow ? 600 : 220);
+  if (!go && timer) { clearInterval(timer); timer = null; }
+}
+toggle.addEventListener('click', () => {
+  paused = !paused;
+  if (paused) ignored = 0;
+  demo.classList.toggle('paused', paused);
+  toggle.textContent = paused ? 'Resume keyboard' : 'Pause keyboard';
+  toggle.setAttribute('aria-pressed', paused);
+  render();
+});
+for (const b of document.querySelectorAll('.scene')) {
+  b.addEventListener('click', () => {
+    scene = b.dataset.scene;
+    step = 0;
+    for (const o of document.querySelectorAll('.scene')) o.setAttribute('aria-pressed', o === b);
+  });
+}
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; run(); }).observe(board);
+document.addEventListener('visibilitychange', run);
+render();
+</script>
+</body>
+</html>
