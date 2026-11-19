@@ -356,3 +356,111 @@ msgstr "تجريبي"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (تجريبي)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "لا يستأنف إلا {} أثناء إيقاف الماوس. قفل الشاشة أو تسجيل الخروج أو السكون يستأنف الاثنين."
+
+msgid "Always on while the mouse pauses too."
+msgstr "مفعّل دائمًا عند إيقاف الماوس أيضًا."
+
+msgid "Mouse pauses too"
+msgstr "يتوقف الماوس أيضًا"
+
+msgid "Press {} to resume"
+msgstr "اضغط {} للاستئناف"
+
+msgid "Mouse"
+msgstr "الماوس"
+
+msgid "Lock both"
+msgstr "قفل الاثنين"
+
+msgid "Clicks paused"
+msgstr "النقرات متوقفة"
+
+msgid "Frozen while paused"
+msgstr "مجمّد عند الإيقاف"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "أوقفه مع لوحة المفاتيح، فلا يُنقر أي شيء."
+
+msgid "Keeps working"
+msgstr "يبقى يعمل"
+
+msgid "Only the keyboard pauses."
+msgstr "تتوقف لوحة المفاتيح فقط."
+
+msgid "Block clicks"
+msgstr "منع النقر"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "يتوقف النقر والتمرير. يبقى المؤشر يتحرك."
+
+msgid "Freeze it"
+msgstr "تجميده"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "يتوقف النقر والتمرير والمؤشر."
+
+msgid "RESUME WITH"
+msgstr "الاستئناف بـ"
+
+msgid "No shortcut set"
+msgstr "لا يوجد اختصار"
+
+msgid "Set a shortcut"
+msgstr "عيّن اختصارًا"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "اختر منع النقر أو تجميده لإيقاف الماوس أيضًا. عندها لا يستأنف إلا الاختصار، لذا يستأنف دائمًا."
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "يبقى الماوس يعمل حتى تعيين اختصار، لأن الاختصار وحده يستطيع استئنافه."
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "قفل الشاشة أو تسجيل الخروج أو السكون يستأنف الاثنين. Ctrl + Alt + Delete يعمل دائمًا."
+
+msgid "The mouse keeps working while paused"
+msgstr "يبقى الماوس يعمل أثناء الإيقاف"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "النقر والتمرير ممنوعان أثناء الإيقاف؛ يبقى المؤشر يتحرك"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "النقر والتمرير والمؤشر ممنوعة أثناء الإيقاف"
+
+msgid "Hide the paused tag?"
+msgstr "إخفاء شارة الإيقاف؟"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "إيقاف الماوس والشارة مخفية؟"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "ستتوقف لوحة المفاتيح والماوس معًا، ولن يظهر على الشاشة ما يدل على طريقة الاستئناف. لا يستأنف إلا {}."
+
+msgid "Hide it"
+msgstr "إخفاؤها"
+
+msgid "Pause the mouse"
+msgstr "إيقاف الماوس"
+
+msgid "Keep it"
+msgstr "إبقاؤها"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "اختر حافة، أو اسحب الشارة من جسمها إلى أي مكان. يتذكر Keyless أين تركتها. أثناء إيقاف الماوس، تعرض الاختصار بدل زر الاستئناف."
+
+msgid "Both paused"
+msgstr "كلاهما متوقف"
+
+msgid "Press {} to resume."
+msgstr "اضغط {} للاستئناف."
+
+msgid "BOTH ASLEEP"
+msgstr "كلاهما نائم"
+
+msgid "Pauses keyboard and mouse"
+msgstr "يوقف لوحة المفاتيح والماوس"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: لوحة المفاتيح والماوس متوقفان"

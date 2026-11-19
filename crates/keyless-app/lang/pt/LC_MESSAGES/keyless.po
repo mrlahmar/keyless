@@ -356,3 +356,111 @@ msgstr "BETA"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (beta)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "Só {} retoma enquanto o mouse está pausado. Bloquear a tela, sair ou suspender retoma os dois."
+
+msgid "Always on while the mouse pauses too."
+msgstr "Sempre ativo quando o mouse também pausa."
+
+msgid "Mouse pauses too"
+msgstr "O mouse também pausa"
+
+msgid "Press {} to resume"
+msgstr "Pressione {} para retomar"
+
+msgid "Mouse"
+msgstr "Mouse"
+
+msgid "Lock both"
+msgstr "Bloquear ambos"
+
+msgid "Clicks paused"
+msgstr "Cliques pausados"
+
+msgid "Frozen while paused"
+msgstr "Congelado na pausa"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "Pause o mouse com o teclado, para nada ser clicado."
+
+msgid "Keeps working"
+msgstr "Continua funcionando"
+
+msgid "Only the keyboard pauses."
+msgstr "Só o teclado pausa."
+
+msgid "Block clicks"
+msgstr "Bloquear cliques"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "Cliques e rolagem param. O ponteiro ainda se move."
+
+msgid "Freeze it"
+msgstr "Congelar"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "Cliques, rolagem e o ponteiro param."
+
+msgid "RESUME WITH"
+msgstr "RETOMAR COM"
+
+msgid "No shortcut set"
+msgstr "Nenhum atalho"
+
+msgid "Set a shortcut"
+msgstr "Definir um atalho"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "Escolha Bloquear cliques ou Congelar para pausar o mouse também. Então só o atalho retoma, por isso ele sempre retoma."
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "O mouse continua funcionando até haver um atalho, porque só o atalho pode retomá-lo."
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "Bloquear a tela, sair ou suspender retoma os dois. Ctrl + Alt + Delete sempre funciona."
+
+msgid "The mouse keeps working while paused"
+msgstr "O mouse continua funcionando na pausa"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "Cliques e rolagem ficam bloqueados na pausa; o ponteiro ainda se move"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "Cliques, rolagem e o ponteiro ficam bloqueados na pausa"
+
+msgid "Hide the paused tag?"
+msgstr "Ocultar a etiqueta de pausa?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "Pausar o mouse com a etiqueta oculta?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "Teclado e mouse vão pausar, e nada na tela vai dizer como retomar. Só {} retoma."
+
+msgid "Hide it"
+msgstr "Ocultar"
+
+msgid "Pause the mouse"
+msgstr "Pausar o mouse"
+
+msgid "Keep it"
+msgstr "Manter"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "Escolha uma borda ou arraste a etiqueta para qualquer lugar pelo corpo. O Keyless lembra onde você a deixa. Com o mouse pausado, ela mostra o atalho em vez de um botão Retomar."
+
+msgid "Both paused"
+msgstr "Ambos pausados"
+
+msgid "Press {} to resume."
+msgstr "Pressione {} para retomar."
+
+msgid "BOTH ASLEEP"
+msgstr "AMBOS DORMINDO"
+
+msgid "Pauses keyboard and mouse"
+msgstr "Pausa teclado e mouse"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: teclado e mouse pausados"

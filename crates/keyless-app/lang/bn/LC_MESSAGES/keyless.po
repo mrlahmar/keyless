@@ -356,3 +356,111 @@ msgstr "বেটা"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (বেটা)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "মাউস থেমে থাকলে শুধু {} দিয়ে আবার চালু হয়। স্ক্রিন লক, সাইন আউট বা স্লিপ দুটোই চালু করে।"
+
+msgid "Always on while the mouse pauses too."
+msgstr "মাউসও থামলে সবসময় চালু।"
+
+msgid "Mouse pauses too"
+msgstr "মাউসও থামবে"
+
+msgid "Press {} to resume"
+msgstr "আবার চালু করতে {} চাপুন"
+
+msgid "Mouse"
+msgstr "মাউস"
+
+msgid "Lock both"
+msgstr "দুটোই লক"
+
+msgid "Clicks paused"
+msgstr "ক্লিক থেমে আছে"
+
+msgid "Frozen while paused"
+msgstr "থামলে স্থির"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "কিবোর্ডের সঙ্গে এটিও থামান, যাতে কিছু ক্লিক না হয়।"
+
+msgid "Keeps working"
+msgstr "কাজ করতে থাকবে"
+
+msgid "Only the keyboard pauses."
+msgstr "শুধু কিবোর্ড থামে।"
+
+msgid "Block clicks"
+msgstr "ক্লিক আটকান"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "ক্লিক ও স্ক্রল থামে। পয়েন্টার নড়তে থাকে।"
+
+msgid "Freeze it"
+msgstr "স্থির করুন"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "ক্লিক, স্ক্রল ও পয়েন্টার থামে।"
+
+msgid "RESUME WITH"
+msgstr "আবার চালু করুন"
+
+msgid "No shortcut set"
+msgstr "কোনো শর্টকাট নেই"
+
+msgid "Set a shortcut"
+msgstr "শর্টকাট সেট করুন"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "মাউসও থামাতে ক্লিক আটকান বা স্থির করুন বেছে নিন। তখন শুধু শর্টকাট দিয়ে আবার চালু হয়, তাই শর্টকাট সবসময় কাজ করে।"
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "শর্টকাট সেট না হওয়া পর্যন্ত মাউস কাজ করে, কারণ শুধু শর্টকাটই এটি আবার চালু করতে পারে।"
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "স্ক্রিন লক, সাইন আউট বা স্লিপ দুটোই আবার চালু করে। Ctrl + Alt + Delete সবসময় কাজ করে।"
+
+msgid "The mouse keeps working while paused"
+msgstr "থামলেও মাউস কাজ করে"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "থামলে ক্লিক ও স্ক্রল বন্ধ থাকে; পয়েন্টার নড়ে"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "থামলে ক্লিক, স্ক্রল ও পয়েন্টার বন্ধ থাকে"
+
+msgid "Hide the paused tag?"
+msgstr "থামার ট্যাগ লুকাবেন?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "ট্যাগ লুকানো অবস্থায় মাউসও থামাবেন?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "কিবোর্ড ও মাউস দুটোই থামবে, আর স্ক্রিনে কিছুই বলবে না কীভাবে আবার চালু করবেন। শুধু {} দিয়ে চালু হবে।"
+
+msgid "Hide it"
+msgstr "লুকান"
+
+msgid "Pause the mouse"
+msgstr "মাউস থামান"
+
+msgid "Keep it"
+msgstr "রাখুন"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "একটি প্রান্ত বেছে নিন, অথবা ট্যাগটি তার মূল অংশ ধরে যেকোনো জায়গায় টেনে নিন। Keyless মনে রাখে আপনি কোথায় রেখেছেন। মাউস থামলে, এতে আবার চালু করার বোতামের বদলে শর্টকাট দেখায়।"
+
+msgid "Both paused"
+msgstr "দুটোই থেমে আছে"
+
+msgid "Press {} to resume."
+msgstr "আবার চালু করতে {} চাপুন।"
+
+msgid "BOTH ASLEEP"
+msgstr "দুটোই ঘুমিয়ে"
+
+msgid "Pauses keyboard and mouse"
+msgstr "কিবোর্ড ও মাউস থামায়"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: কিবোর্ড ও মাউস থেমে আছে"

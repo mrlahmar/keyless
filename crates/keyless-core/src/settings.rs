@@ -6,6 +6,7 @@ use std::{fs, io};
 
 use serde::{Deserialize, Serialize};
 
+use crate::mouse::MouseBlock;
 use crate::shortcut::Shortcut;
 
 /// Auto-resume choices offered in the UI, in minutes. `0` means never.
@@ -48,7 +49,10 @@ impl Edge {
 pub struct Settings {
     pub shortcut: Shortcut,
     /// The shortcut also resumes the keyboard. When off, only the mouse can resume it.
+    /// Ignored while the mouse pauses too: see [`Settings::shortcut_resumes`].
     pub shortcut_unlocks: bool,
+    /// How much of the mouse pauses with the keyboard.
+    pub mouse_block: MouseBlock,
     /// Show a small "Keyboard paused" tag on screen while paused.
     pub show_indicator: bool,
     /// Where the tag appears.
@@ -68,6 +72,7 @@ impl Default for Settings {
         Self {
             shortcut: Shortcut::default(),
             shortcut_unlocks: true,
+            mouse_block: MouseBlock::Off,
             show_indicator: true,
             indicator_edge: Edge::Top,
             indicator_spot: None,
@@ -84,6 +89,7 @@ impl Default for Settings {
 struct File {
     shortcut: Option<String>,
     shortcut_unlocks: Option<bool>,
+    mouse_block: Option<toml::Value>,
     show_indicator: Option<bool>,
     indicator_edge: Option<toml::Value>,
     indicator_spot: Option<[i32; 2]>,
@@ -99,6 +105,7 @@ impl Settings {
         Self {
             shortcut: file.shortcut.and_then(|s| s.parse().ok()).unwrap_or(d.shortcut),
             shortcut_unlocks: file.shortcut_unlocks.unwrap_or(d.shortcut_unlocks),
+            mouse_block: file.mouse_block.and_then(|v| v.try_into().ok()).unwrap_or(d.mouse_block),
             show_indicator: file.show_indicator.unwrap_or(d.show_indicator),
             indicator_edge: file.indicator_edge.and_then(|v| v.try_into().ok()).unwrap_or(d.indicator_edge),
             indicator_spot: file.indicator_spot.map(|[x, y]| (x, y)),
@@ -115,6 +122,7 @@ impl Settings {
         let file = File {
             shortcut: Some(self.shortcut.to_string()),
             shortcut_unlocks: Some(self.shortcut_unlocks),
+            mouse_block: toml::Value::try_from(self.mouse_block).ok(),
             show_indicator: Some(self.show_indicator),
             indicator_edge: toml::Value::try_from(self.indicator_edge).ok(),
             indicator_spot: self.indicator_spot.map(|(x, y)| [x, y]),
@@ -123,6 +131,12 @@ impl Settings {
             language: self.language.clone(),
         };
         toml::to_string(&file).expect("settings always serialize")
+    }
+
+    /// Whether the shortcut resumes. Always true while the mouse pauses too, because the
+    /// shortcut is then the only way back.
+    pub fn shortcut_resumes(&self) -> bool {
+        self.shortcut_unlocks || self.mouse_block != MouseBlock::Off
     }
 
     /// Missing or unreadable files give defaults.
@@ -155,6 +169,7 @@ mod tests {
         let settings = Settings {
             shortcut: "Ctrl+Shift+F9".parse().unwrap(),
             shortcut_unlocks: false,
+            mouse_block: MouseBlock::Cursor,
             show_indicator: false,
             indicator_edge: Edge::Left,
             indicator_spot: Some((-1200, 340)),
@@ -174,6 +189,16 @@ mod tests {
         assert_eq!(s.appearance, Appearance::System);
         assert_eq!(Settings::from_toml("language = \"../x\"").language, None);
         assert_eq!(Settings::from_toml("not toml ["), Settings::default());
+        assert_eq!(Settings::from_toml("mouse-block = \"all\"").mouse_block, MouseBlock::Off);
+        assert_eq!(Settings::from_toml("mouse-block = \"clicks\"").mouse_block, MouseBlock::Clicks);
+    }
+
+    #[test]
+    fn shortcut_always_resumes_while_the_mouse_pauses() {
+        let mut s = Settings { shortcut_unlocks: false, ..Settings::default() };
+        assert!(!s.shortcut_resumes());
+        s.mouse_block = MouseBlock::Clicks;
+        assert!(s.shortcut_resumes());
     }
 
     #[test]

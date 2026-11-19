@@ -1,0 +1,206 @@
+// The drawn mouse. `MouseBody` is the mouse alone (also shown small on the Control page);
+// `MouseView` adds a pointer and acts out the chosen mode on the Mouse page: the pointer
+// wanders and clicks, blocked parts turn orange and fall asleep, a frozen pointer stays put.
+//
+// Like the face, it animates only while `alive` (the main window is open) and stops
+// entirely when Windows' "Show animations" setting is off.
+
+import { Theme } from "theme.slint";
+
+// The mouse with its face. Awake: white, open eyes. Clicks blocked: orange buttons,
+// closed eyes. Frozen: all orange. Drawn on a 150 x 162 grid and scaled to `width`.
+export component MouseBody {
+    // 0 awake, 1 clicks asleep, 2 all asleep.
+    in property <int> mode;
+    in property <bool> alive;
+    // The left button is being pressed.
+    in property <bool> pressed;
+    // The floating z's while asleep.
+    in property <bool> details: true;
+    in property <color> outline: Theme.face-ink;
+
+    property <float> s: self.width / 150px;
+    property <bool> asleep: mode != 0;
+    property <bool> drift;
+
+    height: self.width * 162 / 150;
+
+    Timer {
+        interval: 1400ms;
+        running: root.alive && Theme.animations && root.asleep && root.details;
+        triggered => { root.drift = !root.drift; }
+    }
+
+    // Body: orange when everything sleeps.
+    Rectangle {
+        x: 10px * root.s;
+        y: 8px * root.s;
+        width: 96px * root.s;
+        height: 150px * root.s;
+        border-radius: 48px * root.s;
+        background: root.mode == 2 ? Theme.signal : Theme.face;
+        animate background { duration: 300ms; }
+    }
+    // Buttons: orange when clicks sleep, grey for a moment when pressed.
+    Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 150;
+        viewbox-height: 162;
+        fill: root.asleep ? Theme.signal : root.pressed ? Theme.keycap-dim : Theme.face;
+        commands: "M10 72 V56 A48 48 0 0 1 58 8 V72 Z";
+        animate fill { duration: 120ms; }
+    }
+    Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 150;
+        viewbox-height: 162;
+        fill: root.asleep ? Theme.signal : Theme.face;
+        commands: "M58 8 A48 48 0 0 1 106 56 V72 H58 Z";
+        animate fill { duration: 120ms; }
+    }
+    // Outline, button split and wheel.
+    Rectangle {
+        x: 7.5px * root.s;
+        y: 5.5px * root.s;
+        width: 101px * root.s;
+        height: 155px * root.s;
+        border-radius: 50.5px * root.s;
+        border-width: 5px * root.s;
+        border-color: root.outline;
+    }
+    Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 150;
+        viewbox-height: 162;
+        stroke: root.outline;
+        stroke-width: 5px * root.s;
+        fill: transparent;
+        commands: "M58 8 V72 M10 72 H106";
+    }
+    Rectangle {
+        x: 51px * root.s;
+        y: 26px * root.s;
+        width: 14px * root.s;
+        height: 28px * root.s;
+        border-radius: 7px * root.s;
+        background: Theme.face-ink;
+    }
+    // Eyes: closed while asleep.
+    if root.asleep: Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 150;
+        viewbox-height: 162;
+        stroke: Theme.face-ink;
+        stroke-width: 5px * root.s;
+        stroke-line-cap: round;
+        fill: transparent;
+        commands: "M30 106 q8 7 16 0 M70 106 q8 7 16 0";
+    }
+    if !root.asleep: Rectangle {
+        x: 34px * root.s;
+        y: 98px * root.s;
+        width: 10px * root.s;
+        height: self.width;
+        border-radius: self.width / 2;
+        background: Theme.face-ink;
+    }
+    if !root.asleep: Rectangle {
+        x: 72px * root.s;
+        y: 98px * root.s;
+        width: 10px * root.s;
+        height: self.width;
+        border-radius: self.width / 2;
+        background: Theme.face-ink;
+    }
+    if root.asleep && root.details: Text {
+        x: 116px * root.s;
+        y: (root.drift ? 0px : 10px) * root.s;
+        text: "z";
+        font-family: Theme.mono;
+        font-weight: 700;
+        font-size: 22px * root.s;
+        color: Theme.text;
+        opacity: root.drift ? 0.35 : 1;
+        animate y, opacity { duration: 1400ms; easing: ease-in-out; }
+    }
+    if root.asleep && root.details: Text {
+        x: 134px * root.s;
+        y: (root.drift ? 8px : -4px) * root.s;
+        text: "z";
+        font-family: Theme.mono;
+        font-weight: 700;
+        font-size: 15px * root.s;
+        color: Theme.text;
+        opacity: root.drift ? 1 : 0.35;
+        animate y, opacity { duration: 1400ms; easing: ease-in-out; }
+    }
+}
+
+// The mouse and a pointer, on a 340 x 170 grid scaled to `width`.
+export component MouseView {
+    // 0 keeps working, 1 clicks and scroll blocked, 2 cursor frozen too.
+    in property <int> mode;
+    in property <bool> alive;
+
+    property <float> s: self.width / 340px;
+    property <bool> moving: alive && Theme.animations;
+    // Demo clock: the pointer visits four spots and clicks at each one.
+    property <int> tick;
+    property <int> spot: mod(floor(tick / 4), 4);
+    property <bool> clicking: moving && mode != 2 && mod(tick, 4) == 3;
+    property <bool> frozen: mode == 2;
+    property <[{x: float, y: float}]> spots: [{ x: 212, y: 44 }, { x: 282, y: 70 }, { x: 236, y: 112 }, { x: 292, y: 126 }];
+    property <{x: float, y: float}> at: frozen || !moving ? { x: 246, y: 76 } : spots[spot];
+
+    height: self.width * 170 / 340;
+
+    accessible-role: image;
+    accessible-label: mode == 0 ? @tr("The mouse keeps working while paused")
+        : mode == 1 ? @tr("Clicks and scrolling are blocked while paused; the pointer still moves")
+        : @tr("Clicks, scrolling and the pointer are blocked while paused");
+
+    Timer {
+        interval: 300ms;
+        running: root.moving && !root.frozen;
+        triggered => { root.tick = mod(root.tick + 1, 16); }
+    }
+
+    MouseBody {
+        x: 50px * root.s;
+        y: 4px * root.s;
+        width: 150px * root.s;
+        mode: root.mode;
+        alive: root.alive;
+        pressed: root.clicking;
+    }
+
+    // A click that gets through leaves a ring under the pointer.
+    if root.clicking && root.mode == 0: Rectangle {
+        x: (root.at.x - 13) * 1px * root.s;
+        y: (root.at.y - 13) * 1px * root.s;
+        width: 26px * root.s;
+        height: self.width;
+        border-radius: self.width / 2;
+        border-width: 3px * root.s;
+        border-color: Theme.go;
+    }
+    // Pointer: orange when frozen.
+    Path {
+        x: root.at.x * 1px * root.s;
+        y: root.at.y * 1px * root.s;
+        width: 26px * root.s;
+        height: 36px * root.s;
+        viewbox-width: 26;
+        viewbox-height: 36;
+        fill: root.frozen ? Theme.signal : Theme.face;
+        stroke: Theme.face-ink;
+        stroke-width: 3px * root.s;
+        stroke-line-join: round;
+        commands: "M2 2 L2 28 L9 21.5 L13.5 32 L18.5 30 L14 19.5 L23 19.5 Z";
+        animate x, y { duration: 600ms; easing: ease-in-out; }
+    }
+}

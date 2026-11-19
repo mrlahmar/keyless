@@ -1,12 +1,13 @@
-// Keyless UI: the main window (Control, Shortcut, Settings, About), the tray panel, the
+// Keyless UI: the main window (Control, Shortcut, Mouse, Settings, About), the tray panel, the
 // paused tag and the tray icon. State and actions are shared through the AppState
 // global; Rust keeps every window in sync.
 
 import { AboutSlint } from "std-widgets.slint";
 import { Theme } from "theme.slint";
-import { BetaTag, Button, Card, ChoiceChips, Detents, Divider, Icon, IconButton, Keycap, NavItem, Note, PageHeader, Rocker, Row, SectionLabel, ToggleRow } from "controls.slint";
+import { BetaTag, Button, Card, ChoiceCard, ChoiceChips, Detents, Divider, Icon, IconButton, Keycap, NavItem, Note, PageHeader, Rocker, Row, SectionLabel, ToggleRow } from "controls.slint";
 import { AppMark, Face } from "face.slint";
 import { KeyCap, KeyboardView } from "keyboard.slint";
+import { MouseBody, MouseView } from "mouse.slint";
 
 export { KeyCap, Theme }
 
@@ -29,6 +30,10 @@ export global AppState {
     // The shortcut named in error 2.
     in-out property <string> shortcut-error-name;
     in-out property <bool> shortcut-unlocks: true;
+    // Mouse while paused: 0 keeps working, 1 clicks and scroll blocked, 2 cursor frozen too.
+    in-out property <int> mouse-block;
+    // Mouse pausing is in force: chosen, and a shortcut works to resume.
+    in-out property <bool> mouse-blocks;
     in-out property <int> auto-resume-index;
     // "14:32" while an auto-resume countdown runs, otherwise empty.
     in-out property <string> countdown;
@@ -47,8 +52,13 @@ export global AppState {
     in-out property <bool> beta;
     // Debug build: named "Keyless Dev" so it can't be mistaken for the installed app.
     in-out property <bool> dev;
-    // Main window tab: 0 Control, 1 Shortcut, 2 Settings, 3 About.
+    // Main window tab: 0 Control, 1 Shortcut, 2 Settings, 3 About, 4 Mouse (shown after
+    // Shortcut; numbered last so the tray menu's page numbers stay the same).
     in-out property <int> page;
+    // Open "Are you sure?" dialog in the main window: 0 none, 1 hide the paused tag while
+    // the mouse pauses, 2 pause the mouse while the tag is hidden (to `confirm-mouse-block`).
+    in-out property <int> confirm;
+    in-out property <int> confirm-mouse-block;
     // The main window is open: its animations may run.
     in-out property <bool> window-open;
 
@@ -64,6 +74,7 @@ export global AppState {
     // "Ctrl+Alt+K", set by clicking keys on the drawn keyboard.
     callback save-shortcut(string);
     callback shortcut-unlocks-changed(bool);
+    callback mouse-block-changed(int);
     callback auto-resume-changed(int);
     callback show-indicator-changed(bool);
     callback indicator-edge-changed(int);
@@ -91,8 +102,10 @@ component ControlPage inherits VerticalLayout {
     alignment: start;
 
     PageHeader {
-        title: AppState.paused ? @tr("Keyboard paused") : @tr("Keyboard on");
-        subtitle: AppState.paused ? @tr("Rest anything on it. Your mouse still works.")
+        title: AppState.paused && AppState.mouse-blocks ? @tr("Both paused")
+            : AppState.paused ? @tr("Keyboard paused") : @tr("Keyboard on");
+        subtitle: AppState.paused && AppState.mouse-blocks ? @tr("Press {} to resume.", AppState.shortcut-text)
+            : AppState.paused ? @tr("Rest anything on it. Your mouse still works.")
             : AppState.shortcut-available ? @tr("Flip the switch or press {}.", AppState.shortcut-text)
             : @tr("Flip the switch to pause.");
     }
@@ -115,6 +128,20 @@ component ControlPage inherits VerticalLayout {
                 y: (parent.height - self.height) / 2;
                 asleep: AppState.paused;
                 alive: AppState.window-open;
+            }
+            // A quiet hint that the mouse pauses too: it sleeps along with the face.
+            if AppState.mouse-blocks: Rectangle {
+                width: 48px;
+                height: 52px;
+                x: Theme.rtl ? 16px : parent.width - self.width - 16px;
+                y: parent.height - self.height - 14px;
+                accessible-role: image;
+                accessible-label: @tr("Mouse pauses too");
+                MouseBody {
+                    width: parent.width;
+                    mode: AppState.paused ? AppState.mouse-block : 0;
+                    details: false;
+                }
             }
         }
     }
@@ -147,7 +174,11 @@ component ControlPage inherits VerticalLayout {
         }
     }
 
-    Note { text: @tr("Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard."); }
+    Note {
+        text: AppState.mouse-blocks
+            ? @tr("Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both.", AppState.shortcut-text)
+            : @tr("Your mouse always works. Locking the screen, signing out or sleep resumes the keyboard.");
+    }
 }
 
 // ---------- Shortcut ----------
@@ -270,9 +301,121 @@ component ShortcutPage inherits VerticalLayout {
 
     ToggleRow {
         title: @tr("Shortcut can resume");
-        description: @tr("Off: resting hands can only pause, never resume. Resume with the mouse.");
-        checked: AppState.shortcut-unlocks;
+        description: AppState.mouse-blocks ? @tr("Always on while the mouse pauses too.")
+            : @tr("Off: resting hands can only pause, never resume. Resume with the mouse.");
+        checked: AppState.shortcut-unlocks || AppState.mouse-blocks;
+        enabled: !AppState.mouse-blocks;
         toggled(value) => { AppState.shortcut-unlocks-changed(value); }
+    }
+}
+
+// ---------- Mouse ----------
+
+component MousePage inherits VerticalLayout {
+    spacing: 20px;
+    alignment: start;
+
+    // Picks a mode, asking first when the paused tag is hidden.
+    function pick(index: int) {
+        if (index != 0 && AppState.mouse-block == 0 && !AppState.show-indicator) {
+            AppState.confirm-mouse-block = index;
+            AppState.confirm = 2;
+        } else {
+            AppState.mouse-block-changed(index);
+        }
+    }
+
+    PageHeader {
+        title: @tr("Mouse");
+        subtitle: @tr("Pause it with the keyboard, so nothing gets clicked.");
+    }
+
+    Rectangle {
+        height: 190px;
+        background: Theme.inset;
+        border-radius: Theme.radius-large;
+        MouseView {
+            width: 340px;
+            x: (parent.width - self.width) / 2;
+            y: (parent.height - self.height) / 2;
+            mode: AppState.mouse-block;
+            alive: AppState.window-open;
+        }
+    }
+
+    // The page is 619px wide: three cards and two gaps.
+    GridLayout {
+        spacing-horizontal: 10px;
+        ChoiceCard {
+            row: 0;
+            col: Theme.rtl ? 2 : 0;
+            width: 199px;
+            title: @tr("Keeps working");
+            description: @tr("Only the keyboard pauses.");
+            selected: AppState.mouse-block == 0;
+            clicked => { root.pick(0); }
+        }
+        ChoiceCard {
+            row: 0;
+            col: 1;
+            width: 199px;
+            title: @tr("Block clicks");
+            description: @tr("Clicks and scrolling stop. The pointer still moves.");
+            selected: AppState.mouse-block == 1;
+            clicked => { root.pick(1); }
+        }
+        ChoiceCard {
+            row: 0;
+            col: Theme.rtl ? 0 : 2;
+            width: 199px;
+            title: @tr("Freeze it");
+            description: @tr("Clicks, scrolling and the pointer stop.");
+            selected: AppState.mouse-block == 2;
+            clicked => { root.pick(2); }
+        }
+    }
+
+    Rectangle {
+        background: Theme.strip;
+        border-radius: Theme.radius;
+        Row {
+            padding: 10px;
+            padding-left: 16px;
+            spacing: 12px;
+            SectionLabel {
+                text: @tr("RESUME WITH");
+                vertical-alignment: center;
+            }
+            if AppState.shortcut-available: VerticalLayout {
+                alignment: center;
+                Keycap { label: AppState.shortcut-text; }
+            }
+            if !AppState.shortcut-available: Text {
+                horizontal-alignment: Theme.start-align;
+                text: @tr("No shortcut set");
+                font-size: 14px;
+                color: Theme.signal-text;
+                vertical-alignment: center;
+            }
+            Rectangle { horizontal-stretch: 1; }
+            if !AppState.shortcut-available: Button {
+                text: @tr("Set a shortcut");
+                button-height: 32px;
+                clicked => { AppState.page = 1; }
+            }
+            if AppState.shortcut-available && !AppState.paused: Button {
+                text: @tr("Pause to try it");
+                kind: "primary";
+                button-height: 32px;
+                clicked => { AppState.toggle(); }
+            }
+        }
+    }
+
+    Note {
+        text: AppState.mouse-block == 0 ? @tr("Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes.")
+            : !AppState.shortcut-available ? @tr("The mouse keeps working until a shortcut is set, because only the shortcut can resume it.")
+            : @tr("Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works.");
     }
 }
 
@@ -657,7 +800,13 @@ component SettingsPage inherits VerticalLayout {
                         title: @tr("Show while paused");
                         description: @tr("Off: only the tray icon turns orange.");
                         checked: AppState.show-indicator;
-                        toggled(value) => { AppState.show-indicator-changed(value); }
+                        toggled(value) => {
+                            if (!value && AppState.mouse-blocks) {
+                                AppState.confirm = 1;
+                            } else {
+                                AppState.show-indicator-changed(value);
+                            }
+                        }
                     }
                     Row {
                         spacing: 8px;
@@ -684,7 +833,9 @@ component SettingsPage inherits VerticalLayout {
                     }
                     Text {
                         horizontal-alignment: Theme.start-align;
-                        text: @tr("Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes.");
+                        text: AppState.mouse-blocks
+                            ? @tr("Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button.")
+                            : @tr("Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. Only its Resume button resumes.");
                         font-size: Theme.caption;
                         color: Theme.text-faint;
                         wrap: word-wrap;
@@ -840,6 +991,88 @@ component AboutPage inherits VerticalLayout {
     }
 }
 
+// ---------- Confirm ----------
+
+// Asks before a setup with nothing on screen saying how to resume: the mouse paused and
+// the paused tag hidden. The safe choice has focus; Esc picks it.
+component ConfirmDialog inherits Rectangle {
+    background: Theme.scrim;
+    accessible-role: groupbox;
+    accessible-label: card-title.text;
+
+    function close() { AppState.confirm = 0; }
+
+    init => { safe.focus(); }
+
+    // Swallows clicks outside the card.
+    TouchArea { }
+
+    FocusScope {
+        key-pressed(event) => {
+            if (event.text == Key.Escape) {
+                root.close();
+                return accept;
+            }
+            reject
+        }
+
+        Rectangle {
+            x: (parent.width - self.width) / 2;
+            y: (parent.height - self.height) / 2;
+            width: 420px;
+            height: card.preferred-height;
+            background: Theme.raised;
+            border-radius: Theme.radius-large;
+            border-width: 1px;
+            border-color: Theme.line-strong;
+            drop-shadow-blur: 24px;
+            drop-shadow-offset-y: 8px;
+            drop-shadow-color: #00000050;
+
+            card := VerticalLayout {
+                padding: 22px;
+                spacing: 12px;
+                card-title := Text {
+                    horizontal-alignment: Theme.start-align;
+                    text: AppState.confirm == 1 ? @tr("Hide the paused tag?") : @tr("Pause the mouse with the tag hidden?");
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: Theme.text;
+                    wrap: word-wrap;
+                }
+                Text {
+                    horizontal-alignment: Theme.start-align;
+                    text: @tr("Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes.", AppState.shortcut-text);
+                    font-size: 14px;
+                    color: Theme.text-muted;
+                    wrap: word-wrap;
+                }
+                Row {
+                    padding-top: 6px;
+                    spacing: 8px;
+                    alignment: end;
+                    Button {
+                        text: AppState.confirm == 1 ? @tr("Hide it") : @tr("Pause the mouse");
+                        clicked => {
+                            if (AppState.confirm == 1) {
+                                AppState.show-indicator-changed(false);
+                            } else {
+                                AppState.mouse-block-changed(AppState.confirm-mouse-block);
+                            }
+                            root.close();
+                        }
+                    }
+                    safe := Button {
+                        text: AppState.confirm == 1 ? @tr("Keep it") : @tr("Cancel");
+                        kind: "primary";
+                        clicked => { root.close(); }
+                    }
+                }
+            }
+        }
+    }
+}
+
 // ---------- Windows ----------
 
 export component MainWindow inherits Window {
@@ -920,6 +1153,13 @@ export component MainWindow inherits Window {
                     clicked => { AppState.page = 1; }
                 }
                 NavItem {
+                    icon: "mouse";
+                    label: @tr("Mouse");
+                    hint: AppState.mouse-block == 0 ? @tr("Lock both") : AppState.mouse-block == 1 ? @tr("Clicks paused") : @tr("Frozen while paused");
+                    selected: AppState.page == 4;
+                    clicked => { AppState.page = 4; }
+                }
+                NavItem {
                     icon: "settings";
                     label: @tr("Settings");
                     hint: @tr("Display, language");
@@ -965,8 +1205,14 @@ export component MainWindow inherits Window {
                 if AppState.page == 1: ShortcutPage { }
                 if AppState.page == 2: SettingsPage { }
                 if AppState.page == 3: AboutPage { }
+                if AppState.page == 4: MousePage { }
             }
         }
+    }
+
+    if AppState.confirm != 0: ConfirmDialog {
+        width: root.width;
+        height: root.height;
     }
 }
 
@@ -1014,14 +1260,16 @@ export component Panel inherits Window {
                     horizontal-stretch: 1;
                     Text {
                         horizontal-alignment: Theme.start-align;
-                        text: AppState.paused ? @tr("Keyboard paused") : @tr("Keyboard on");
+                        text: AppState.paused && AppState.mouse-blocks ? @tr("Both paused")
+                            : AppState.paused ? @tr("Keyboard paused") : @tr("Keyboard on");
                         font-size: 16px;
                         font-weight: 700;
                         color: Theme.text;
                     }
                     Text {
                         horizontal-alignment: Theme.start-align;
-                        text: AppState.paused ? (AppState.countdown != "" ? @tr("Back on in {}", AppState.countdown) : @tr("Until you resume")) : @tr("Mouse always works");
+                        text: AppState.paused ? (AppState.countdown != "" ? @tr("Back on in {}", AppState.countdown) : @tr("Until you resume"))
+                            : AppState.mouse-blocks ? @tr("Pauses keyboard and mouse") : @tr("Mouse always works");
                         font-size: Theme.small;
                         color: Theme.text-faint;
                     }
@@ -1085,7 +1333,8 @@ export component Panel inherits Window {
 }
 
 // Shown while paused. Never takes focus. Drag it by its body to move it; only its
-// Resume button resumes, so a stray click does nothing.
+// Resume button resumes, so a stray click does nothing. While the mouse is paused too, it
+// shows the shortcut instead of the button.
 export component Indicator inherits Window {
     // Read from Rust to place the tag: it grows with longer translations.
     out property <length> content-width: max(340px, content.preferred-width);
@@ -1131,9 +1380,18 @@ export component Indicator inherits Window {
                 outline: Theme.dark ? #eff0f1 : Theme.face-ink;
             }
         }
+        if AppState.mouse-blocks: VerticalLayout {
+            alignment: center;
+            MouseBody {
+                width: 22px;
+                mode: AppState.mouse-block;
+                details: false;
+                outline: Theme.dark ? #eff0f1 : Theme.face-ink;
+            }
+        }
         Text {
             horizontal-alignment: Theme.start-align;
-            text: @tr("KEYS ASLEEP");
+            text: AppState.mouse-blocks ? @tr("BOTH ASLEEP") : @tr("KEYS ASLEEP");
             font-family: Theme.mono;
             font-size: Theme.small;
             font-weight: 700;
@@ -1143,7 +1401,8 @@ export component Indicator inherits Window {
         }
         Text {
             horizontal-alignment: Theme.start-align;
-            text: AppState.countdown != "" ? @tr("BACK IN {}", AppState.countdown) : @tr("MOUSE AWAKE");
+            text: AppState.countdown != "" ? @tr("BACK IN {}", AppState.countdown)
+                : AppState.mouse-blocks ? "" : @tr("MOUSE AWAKE");
             font-family: Theme.mono;
             font-size: Theme.small;
             font-weight: 700;
@@ -1151,7 +1410,18 @@ export component Indicator inherits Window {
             vertical-alignment: center;
             horizontal-stretch: 1;
         }
-        VerticalLayout {
+        // The mouse can't click while it is paused: show the way back instead.
+        if AppState.mouse-blocks: VerticalLayout {
+            alignment: center;
+            padding-right: 3px;
+            Keycap {
+                lit: true;
+                label: AppState.shortcut-text;
+                accessible-role: text;
+                accessible-label: @tr("Press {} to resume", AppState.shortcut-text);
+            }
+        }
+        if !AppState.mouse-blocks: VerticalLayout {
             alignment: center;
             Button {
                 kind: "signal";
@@ -1166,6 +1436,8 @@ export component Indicator inherits Window {
 
 export component Tray inherits SystemTrayIcon {
     in property <bool> paused;
+    // The mouse pauses with the keyboard.
+    in property <bool> mouse;
     in property <image> icon-on;
     in property <image> icon-paused;
     // Debug build: say "Keyless Dev" so it can't be mistaken for the installed app.
@@ -1177,7 +1449,8 @@ export component Tray inherits SystemTrayIcon {
 
     icon: paused ? icon-paused : icon-on;
     // The dev texts are only ever seen in debug builds, so they are not translated.
-    tooltip: dev ? (paused ? "Keyless Dev: keyboard paused" : "Keyless Dev: keyboard on")
+    tooltip: dev ? (paused && mouse ? "Keyless Dev: keyboard and mouse paused" : paused ? "Keyless Dev: keyboard paused" : "Keyless Dev: keyboard on")
+        : paused && mouse ? @tr("Keyless: keyboard and mouse paused")
         : paused ? @tr("Keyless: keyboard paused") : @tr("Keyless: keyboard on");
     title: dev ? "Keyless Dev" : "Keyless";
     clicked => { open-panel(); }

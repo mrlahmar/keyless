@@ -1,4 +1,5 @@
-//! Keyboard blocking with a low-level keyboard hook (`WH_KEYBOARD_LL`).
+//! Keyboard blocking with a low-level keyboard hook (`WH_KEYBOARD_LL`), and optional mouse
+//! blocking with a low-level mouse hook (`WH_MOUSE_LL`).
 //!
 //! The hook and all keyboard state live on one dedicated thread with its own message loop,
 //! so a busy UI can never delay key events. The hook does bounded in-memory work only.
@@ -7,6 +8,10 @@
 //!
 //! Synthetic input (`LLKHF_INJECTED`, e.g. on-screen keyboards, voice typing or automation
 //! tools) is passed through untouched: Keyless pauses the physical keyboard only.
+//!
+//! The mouse hook exists only while the mouse is paused (and until blocked buttons are
+//! released), so the mouse pays nothing the rest of the time. Injected mouse input passes
+//! through too.
 
 use std::cell::RefCell;
 use std::sync::Arc;
@@ -14,7 +19,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::mpsc::{self, Receiver, Sender};
 use std::thread::{self, JoinHandle};
 
-use keyless_core::{Key, KeyEvent, Keyboard, Modifiers, Shortcut};
+use keyless_core::{Key, KeyEvent, Keyboard, Modifiers, Mouse, MouseBlock, MouseEvent, Shortcut};
 use windows::Win32::Foundation::{HINSTANCE, HWND, LPARAM, LRESULT, WPARAM};
 use windows::Win32::System::LibraryLoader::GetModuleHandleW;
 use windows::Win32::System::RemoteDesktop::{
@@ -26,10 +31,12 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 };
 use windows::Win32::UI::WindowsAndMessaging::{
     CallNextHookEx, CreateWindowExW, DefWindowProcW, DestroyWindow, DispatchMessageW, GetMessageW, HC_ACTION,
-    HHOOK, KBDLLHOOKSTRUCT, LLKHF_INJECTED, MSG, PM_NOREMOVE, PeekMessageW, PostThreadMessageW,
-    RegisterClassW, SetWindowsHookExW, TranslateMessage, UnhookWindowsHookEx, WH_KEYBOARD_LL,
-    WINDOW_EX_STYLE, WINDOW_STYLE, WM_APP, WM_KEYDOWN, WM_POWERBROADCAST, WM_QUIT, WM_SYSKEYDOWN,
-    WM_WTSSESSION_CHANGE, WNDCLASSW,
+    HHOOK, KBDLLHOOKSTRUCT, LLKHF_INJECTED, LLMHF_INJECTED, MSG, MSLLHOOKSTRUCT, PM_NOREMOVE, PeekMessageW,
+    PostThreadMessageW, RegisterClassW, SetWindowsHookExW, TranslateMessage, UnhookWindowsHookEx,
+    WH_KEYBOARD_LL, WH_MOUSE_LL, WINDOW_EX_STYLE, WINDOW_STYLE, WM_APP, WM_KEYDOWN, WM_LBUTTONDOWN,
+    WM_LBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_MOUSEHWHEEL, WM_MOUSEMOVE, WM_MOUSEWHEEL,
+    WM_POWERBROADCAST, WM_QUIT, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_SYSKEYDOWN, WM_WTSSESSION_CHANGE,
+    WM_XBUTTONDOWN, WM_XBUTTONUP, WNDCLASSW,
 };
 use windows::core::w;
 
@@ -46,6 +53,7 @@ enum Command {
     Shortcut(Option<Shortcut>, Sender<Result<(), Error>>),
     ShortcutUnlocks(bool),
     Recording(bool),
+    MouseBlock(MouseBlock),
 }
 
 pub struct Blocker {
@@ -105,6 +113,11 @@ impl Blocker {
         self.send(Command::Recording(recording));
     }
 
+    /// How much of the mouse pauses with the keyboard. Applies at once, also while paused.
+    pub fn set_mouse_block(&self, block: MouseBlock) {
+        self.send(Command::MouseBlock(block));
+    }
+
     fn send(&self, command: Command) {
         if self.commands.send(command).is_ok() {
             // SAFETY: plain Win32 call with a thread id we own.
@@ -125,18 +138,43 @@ impl Drop for Blocker {
 
 struct State {
     keyboard: Keyboard,
+    mouse: Mouse,
     on_event: Box<dyn Fn(BlockerEvent) + Send>,
     locked: Arc<AtomicBool>,
+    instance: HINSTANCE,
     window: HWND,
     hotkey_id: Option<i32>,
+    mouse_hook: Option<HHOOK>,
 }
 
 impl State {
-    fn publish_lock(&self) {
+    fn publish_lock(&mut self) {
         let locked = self.keyboard.locked();
+        self.update_mouse_hook();
         if self.locked.swap(locked, Ordering::AcqRel) != locked {
             (self.on_event)(BlockerEvent::LockChanged(locked));
         }
+    }
+
+    /// Installs the mouse hook only while it has work to do, and removes it right after.
+    fn update_mouse_hook(&mut self) {
+        let needed = self.mouse.watching(self.keyboard.locked());
+        if needed && self.mouse_hook.is_none() {
+            // SAFETY: installed and removed on this thread, which runs a message loop.
+            self.mouse_hook =
+                unsafe { SetWindowsHookExW(WH_MOUSE_LL, Some(mouse_hook), Some(self.instance), 0) }.ok();
+        } else if !needed && let Some(hook) = self.mouse_hook.take() {
+            // SAFETY: a hook this thread installed.
+            let _ = unsafe { UnhookWindowsHookEx(hook) };
+        }
+    }
+
+    fn mouse(&mut self, event: MouseEvent) -> bool {
+        let consume = self.mouse.event(self.keyboard.locked(), event);
+        if !self.mouse.watching(self.keyboard.locked()) {
+            self.update_mouse_hook();
+        }
+        consume
     }
 
     fn key(&mut self, info: &KBDLLHOOKSTRUCT, down: bool) -> bool {
@@ -163,6 +201,10 @@ impl State {
             }
             Command::ShortcutUnlocks(unlocks) => self.keyboard.set_shortcut_unlocks(unlocks),
             Command::Recording(recording) => self.keyboard.set_recording(recording),
+            Command::MouseBlock(block) => {
+                self.mouse.set_block(block);
+                self.update_mouse_hook();
+            }
         }
     }
 
@@ -191,6 +233,7 @@ impl State {
     fn system_interrupt(&mut self) {
         self.keyboard.set_recording(false);
         self.keyboard.reset_physical_state();
+        self.mouse.reset_physical_state();
         self.keyboard.set_locked(false);
         self.publish_lock();
     }
@@ -246,7 +289,16 @@ fn run(
         keyboard.set_shortcut(options.shortcut);
         keyboard.set_shortcut_unlocks(options.shortcut_unlocks);
         STATE.with(|cell| {
-            *cell.borrow_mut() = Some(State { keyboard, on_event, locked, window, hotkey_id: None });
+            *cell.borrow_mut() = Some(State {
+                keyboard,
+                mouse: Mouse::new(),
+                on_event,
+                locked,
+                instance,
+                window,
+                hotkey_id: None,
+                mouse_hook: None,
+            });
         });
         match SetWindowsHookExW(WH_KEYBOARD_LL, Some(hook), Some(instance), 0) {
             Ok(hook) => Ok((window, hook)),
@@ -286,6 +338,9 @@ fn run(
     unsafe {
         let _ = UnhookWindowsHookEx(hook);
         with_state(|s| {
+            if let Some(mouse_hook) = s.mouse_hook.take() {
+                let _ = UnhookWindowsHookEx(mouse_hook);
+            }
             if let Some(id) = s.hotkey_id.take() {
                 let _ = UnregisterHotKey(Some(window), id);
             }
@@ -311,6 +366,40 @@ unsafe extern "system" fn hook(code: i32, wparam: WPARAM, lparam: LPARAM) -> LRE
     }
     // SAFETY: forwarding the unchanged arguments to the next hook.
     unsafe { CallNextHookEx(None, code, wparam, lparam) }
+}
+
+unsafe extern "system" fn mouse_hook(code: i32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+    if code == HC_ACTION as i32 {
+        // SAFETY: for HC_ACTION, lparam points to an MSLLHOOKSTRUCT owned by the system.
+        let info = unsafe { &*(lparam.0 as *const MSLLHOOKSTRUCT) };
+        if info.flags & LLMHF_INJECTED == 0
+            && let Some(event) = mouse_event(wparam.0 as u32, info.mouseData)
+            && with_state(|s| s.mouse(event)).unwrap_or(false)
+        {
+            return LRESULT(1);
+        }
+    }
+    // SAFETY: forwarding the unchanged arguments to the next hook.
+    unsafe { CallNextHookEx(None, code, wparam, lparam) }
+}
+
+fn mouse_event(message: u32, data: u32) -> Option<MouseEvent> {
+    let button = |button, down| Some(MouseEvent::Button { button, down });
+    // The high word of `data` says which side button: 1 or 2.
+    let side = 2 + (data >> 16).clamp(1, 2) as u8;
+    match message {
+        WM_MOUSEMOVE => Some(MouseEvent::Move),
+        WM_MOUSEWHEEL | WM_MOUSEHWHEEL => Some(MouseEvent::Wheel),
+        WM_LBUTTONDOWN => button(0, true),
+        WM_LBUTTONUP => button(0, false),
+        WM_RBUTTONDOWN => button(1, true),
+        WM_RBUTTONUP => button(1, false),
+        WM_MBUTTONDOWN => button(2, true),
+        WM_MBUTTONUP => button(2, false),
+        WM_XBUTTONDOWN => button(side, true),
+        WM_XBUTTONUP => button(side, false),
+        _ => None,
+    }
 }
 
 unsafe extern "system" fn window_proc(window: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {

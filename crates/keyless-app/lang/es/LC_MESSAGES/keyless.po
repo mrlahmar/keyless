@@ -356,3 +356,111 @@ msgstr "BETA"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (beta)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "Solo {} reanuda mientras el ratón está en pausa. Bloquear la pantalla, cerrar sesión o suspender reanuda ambos."
+
+msgid "Always on while the mouse pauses too."
+msgstr "Siempre activo cuando el ratón también se pausa."
+
+msgid "Mouse pauses too"
+msgstr "El ratón también se pausa"
+
+msgid "Press {} to resume"
+msgstr "Pulsa {} para reanudar"
+
+msgid "Mouse"
+msgstr "Ratón"
+
+msgid "Lock both"
+msgstr "Bloquear ambos"
+
+msgid "Clicks paused"
+msgstr "Clics en pausa"
+
+msgid "Frozen while paused"
+msgstr "Congelado en pausa"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "Pausa el ratón con el teclado para que nada se pulse."
+
+msgid "Keeps working"
+msgstr "Sigue funcionando"
+
+msgid "Only the keyboard pauses."
+msgstr "Solo se pausa el teclado."
+
+msgid "Block clicks"
+msgstr "Bloquear clics"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "Los clics y el desplazamiento se detienen. El puntero sigue moviéndose."
+
+msgid "Freeze it"
+msgstr "Congelarlo"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "Los clics, el desplazamiento y el puntero se detienen."
+
+msgid "RESUME WITH"
+msgstr "REANUDAR CON"
+
+msgid "No shortcut set"
+msgstr "Sin atajo"
+
+msgid "Set a shortcut"
+msgstr "Definir un atajo"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "Elige Bloquear clics o Congelarlo para pausar también el ratón. Entonces solo el atajo reanuda, así que siempre reanuda."
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "El ratón sigue funcionando hasta que haya un atajo, porque solo el atajo puede reanudarlo."
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "Bloquear la pantalla, cerrar sesión o suspender reanuda ambos. Ctrl + Alt + Supr siempre funciona."
+
+msgid "The mouse keeps working while paused"
+msgstr "El ratón sigue funcionando en pausa"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "Los clics y el desplazamiento se bloquean en pausa; el puntero sigue moviéndose"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "Los clics, el desplazamiento y el puntero se bloquean en pausa"
+
+msgid "Hide the paused tag?"
+msgstr "¿Ocultar la etiqueta de pausa?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "¿Pausar el ratón con la etiqueta oculta?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "El teclado y el ratón quedarán en pausa y nada en pantalla dirá cómo reanudar. Solo {} reanuda."
+
+msgid "Hide it"
+msgstr "Ocultarla"
+
+msgid "Pause the mouse"
+msgstr "Pausar el ratón"
+
+msgid "Keep it"
+msgstr "Mantenerla"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "Elige un borde o arrastra la etiqueta a cualquier lugar por su cuerpo. Keyless recuerda dónde la dejas. Con el ratón en pausa, muestra el atajo en lugar de un botón Reanudar."
+
+msgid "Both paused"
+msgstr "Ambos en pausa"
+
+msgid "Press {} to resume."
+msgstr "Pulsa {} para reanudar."
+
+msgid "BOTH ASLEEP"
+msgstr "AMBOS DORMIDOS"
+
+msgid "Pauses keyboard and mouse"
+msgstr "Pausa teclado y ratón"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: teclado y ratón en pausa"

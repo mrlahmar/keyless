@@ -356,3 +356,111 @@ msgstr "BÊTA"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (bêta)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "Seul {} reprend quand la souris est en pause. Verrouiller l'écran, se déconnecter ou la mise en veille reprend les deux."
+
+msgid "Always on while the mouse pauses too."
+msgstr "Toujours actif quand la souris est aussi en pause."
+
+msgid "Mouse pauses too"
+msgstr "La souris aussi en pause"
+
+msgid "Press {} to resume"
+msgstr "Appuyez sur {} pour reprendre"
+
+msgid "Mouse"
+msgstr "Souris"
+
+msgid "Lock both"
+msgstr "Tout verrouiller"
+
+msgid "Clicks paused"
+msgstr "Clics en pause"
+
+msgid "Frozen while paused"
+msgstr "Figée en pause"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "Mettez-la en pause avec le clavier, pour que rien ne soit cliqué."
+
+msgid "Keeps working"
+msgstr "Fonctionne"
+
+msgid "Only the keyboard pauses."
+msgstr "Seul le clavier se met en pause."
+
+msgid "Block clicks"
+msgstr "Bloquer les clics"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "Les clics et le défilement s'arrêtent. Le pointeur bouge encore."
+
+msgid "Freeze it"
+msgstr "La figer"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "Les clics, le défilement et le pointeur s'arrêtent."
+
+msgid "RESUME WITH"
+msgstr "REPRENDRE AVEC"
+
+msgid "No shortcut set"
+msgstr "Aucun raccourci"
+
+msgid "Set a shortcut"
+msgstr "Définir un raccourci"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "Choisissez Bloquer les clics ou La figer pour mettre aussi la souris en pause. Seul le raccourci reprend alors, il reprend donc toujours."
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "La souris fonctionne tant qu'aucun raccourci n'est défini, car seul le raccourci peut la reprendre."
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "Verrouiller l'écran, se déconnecter ou la mise en veille reprend les deux. Ctrl + Alt + Suppr fonctionne toujours."
+
+msgid "The mouse keeps working while paused"
+msgstr "La souris fonctionne pendant la pause"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "Les clics et le défilement sont bloqués pendant la pause ; le pointeur bouge encore"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "Les clics, le défilement et le pointeur sont bloqués pendant la pause"
+
+msgid "Hide the paused tag?"
+msgstr "Masquer l'étiquette de pause ?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "Mettre la souris en pause avec l'étiquette masquée ?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "Le clavier et la souris seront en pause, et rien à l'écran n'indiquera comment reprendre. Seul {} reprend."
+
+msgid "Hide it"
+msgstr "La masquer"
+
+msgid "Pause the mouse"
+msgstr "Mettre la souris en pause"
+
+msgid "Keep it"
+msgstr "La garder"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "Choisissez un bord ou faites glisser l'étiquette n'importe où par son corps. Keyless retient où vous la laissez. Quand la souris est en pause, elle affiche le raccourci au lieu d'un bouton Reprendre."
+
+msgid "Both paused"
+msgstr "Tout en pause"
+
+msgid "Press {} to resume."
+msgstr "Appuyez sur {} pour reprendre."
+
+msgid "BOTH ASLEEP"
+msgstr "TOUT DORT"
+
+msgid "Pauses keyboard and mouse"
+msgstr "Met en pause clavier et souris"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless : clavier et souris en pause"

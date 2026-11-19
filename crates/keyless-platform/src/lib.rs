@@ -3,8 +3,8 @@
 //! Each OS lives in its own module and provides the same items:
 //!
 //! - [`Blocker`]: suppresses physical keyboard input on a dedicated thread, using
-//!   [`keyless_core::Keyboard`] for every decision. It also resumes the keyboard on
-//!   screen lock, logoff and sleep.
+//!   [`keyless_core::Keyboard`] for every decision. Optionally pauses the mouse too
+//!   ([`keyless_core::Mouse`]). It resumes both on screen lock, logoff and sleep.
 //! - [`autostart`]: start at sign-in.
 //! - [`instance`]: single instance, with "activate the running copy".
 //! - [`layout`]: what each drawn key does under the active keyboard layout.

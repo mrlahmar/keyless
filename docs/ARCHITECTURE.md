@@ -22,6 +22,13 @@ A hidden window on the same thread receives screen-lock, sign-out and sleep noti
 (the keyboard resumes) and registers the shortcut with `RegisterHotKey` only to detect
 conflicts with other apps. Synthetic input (`LLKHF_INJECTED`) is never blocked.
 
+Pausing the mouse too is optional. Only then, and only while paused, the same thread adds
+a `WH_MOUSE_LL` hook; `keyless_core::Mouse` decides per event (clicks and wheel, plus
+movement to freeze the cursor) and pairs every blocked button press with its release.
+The hook is removed on resume, so the mouse costs nothing otherwise. Mouse pausing needs
+a working shortcut, because the shortcut is then the only way back, and the shortcut
+always resumes while it is on.
+
 The pause state is never saved, so Keyless always starts with the keyboard on. If the
 process ends, Windows removes the hook, so the keyboard can't stay paused.
 
@@ -48,8 +55,9 @@ The UI thread talks to the input thread through a channel; events come back thro
   Windows sends no notice when the layout changes in the taskbar, with Win+Space or in
   another app, so while the main window is open `app.rs` checks the active layout every
   250 ms and redraws only when it changed.
-- `app.slint`: main window (Control, Shortcut, Settings, About), tray panel, paused tag
-  and tray menu.
+- `mouse.slint`: the drawn mouse on the Mouse tab, acting out the chosen mode.
+- `app.slint`: main window (Control, Shortcut, Mouse, Settings, About), the "Are you
+  sure?" dialog, tray panel, paused tag and tray menu.
 
 Nothing polls. Timers run only while paused with auto-resume on (the countdown), while
 recording a shortcut, or while the main window is open (the face blinks, the drawn

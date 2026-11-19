@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-11-18 16:10+0000\n"
+"POT-Creation-Date: 2026-11-19 19:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,475 +12,639 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ui\app.slint:78
+#: crates\keyless-app\ui\app.slint:91
 msgid "OFF"
 msgstr ""
 
-#: ui\app.slint:79
+#: crates\keyless-app\ui\app.slint:92
 msgid "never"
 msgstr ""
 
-#: ui\app.slint:79
+#: crates\keyless-app\ui\app.slint:92
 msgid "after 5 minutes"
 msgstr ""
 
-#: ui\app.slint:79
+#: crates\keyless-app\ui\app.slint:92
 msgid "after 15 minutes"
 msgstr ""
 
-#: ui\app.slint:79
+#: crates\keyless-app\ui\app.slint:92
 msgid "after 30 minutes"
 msgstr ""
 
-#: ui\app.slint:79
+#: crates\keyless-app\ui\app.slint:92
 msgid "after 60 minutes"
 msgstr ""
 
-#: ui\app.slint:80
+#: crates\keyless-app\ui\app.slint:93
 msgid "AFTER 5 MIN"
 msgstr ""
 
-#: ui\app.slint:80
+#: crates\keyless-app\ui\app.slint:93
 msgid "AFTER 15 MIN"
 msgstr ""
 
-#: ui\app.slint:80
+#: crates\keyless-app\ui\app.slint:93
 msgid "AFTER 30 MIN"
 msgstr ""
 
-#: ui\app.slint:80
+#: crates\keyless-app\ui\app.slint:93
 msgid "AFTER 60 MIN"
 msgstr ""
 
 #. Each language in its own name; the order matches LANGUAGES in app.rs.
-#: ui\app.slint:82
+#: crates\keyless-app\ui\app.slint:95
 msgid "Same as Windows"
 msgstr ""
 
-#: ui\app.slint:92 ui\app.slint:1014
+#: crates\keyless-app\ui\app.slint:105 crates\keyless-app\ui\app.slint:1263
+msgid "Both paused"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:106 crates\keyless-app\ui\app.slint:1264
 msgid "Keyboard paused"
 msgstr ""
 
-#: ui\app.slint:92 ui\app.slint:1014
+#: crates\keyless-app\ui\app.slint:106 crates\keyless-app\ui\app.slint:1264
 msgid "Keyboard on"
 msgstr ""
 
-#: ui\app.slint:93
+#: crates\keyless-app\ui\app.slint:107
+msgid "Press {} to resume."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:108
 msgid "Rest anything on it. Your mouse still works."
 msgstr ""
 
-#: ui\app.slint:94
+#: crates\keyless-app\ui\app.slint:109
 msgid "Flip the switch or press {}."
 msgstr ""
 
-#: ui\app.slint:95
+#: crates\keyless-app\ui\app.slint:110
 msgid "Flip the switch to pause."
 msgstr ""
 
-#: ui\app.slint:124 ui\app.slint:1046
+#: crates\keyless-app\ui\app.slint:139
+msgid "Mouse pauses too"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:153 crates\keyless-app\ui\app.slint:1297
 msgid "AUTO-RESUME"
 msgstr ""
 
-#: ui\app.slint:131
+#: crates\keyless-app\ui\app.slint:160
 msgid "BACK ON IN {}"
 msgstr ""
 
-#: ui\app.slint:131
+#: crates\keyless-app\ui\app.slint:160
 msgid "UNTIL YOU RESUME"
 msgstr ""
 
-#: ui\app.slint:132
+#: crates\keyless-app\ui\app.slint:161
 msgid "NEVER"
 msgstr ""
 
-#: ui\app.slint:148
+#: crates\keyless-app\ui\app.slint:179
+msgid ""
+"Only {} resumes while the mouse is paused. Locking the screen, signing out "
+"or sleep resumes both."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:180
 msgid ""
 "Your mouse always works. Locking the screen, signing out or sleep resumes "
 "the keyboard."
 msgstr ""
 
-#: ui\app.slint:169
+#: crates\keyless-app\ui\app.slint:202
 msgid "Click your new shortcut"
 msgstr ""
 
-#: ui\app.slint:169 ui\app.slint:914
+#: crates\keyless-app\ui\app.slint:202 crates\keyless-app\ui\app.slint:1150
 msgid "Shortcut"
 msgstr ""
 
-#: ui\app.slint:170
+#: crates\keyless-app\ui\app.slint:203
 msgid "Modifiers first, then one key."
 msgstr ""
 
-#: ui\app.slint:171
+#: crates\keyless-app\ui\app.slint:204
 msgid "Press the new combination now."
 msgstr ""
 
-#: ui\app.slint:172
+#: crates\keyless-app\ui\app.slint:205
 msgid "Pauses and resumes from any app."
 msgstr ""
 
-#: ui\app.slint:208
+#: crates\keyless-app\ui\app.slint:241
 msgid "Listening… press keys"
 msgstr ""
 
-#: ui\app.slint:209 ui\app.slint:915
+#: crates\keyless-app\ui\app.slint:242 crates\keyless-app\ui\app.slint:1151
 msgid "Not set"
 msgstr ""
 
-#: ui\app.slint:218
+#: crates\keyless-app\ui\app.slint:251
 msgid "Type it"
 msgstr ""
 
-#: ui\app.slint:219
+#: crates\keyless-app\ui\app.slint:252
 msgid "Change shortcut by typing it"
 msgstr ""
 
-#: ui\app.slint:223
+#: crates\keyless-app\ui\app.slint:256
 msgid "Click keys"
 msgstr ""
 
-#: ui\app.slint:225
+#: crates\keyless-app\ui\app.slint:258
 msgid "Change shortcut by clicking keys"
 msgstr ""
 
-#: ui\app.slint:236 ui\app.slint:241
+#: crates\keyless-app\ui\app.slint:269 crates\keyless-app\ui\app.slint:274
+#: crates\keyless-app\ui\app.slint:269 crates\keyless-app\ui\app.slint:274
 msgid "Cancel"
 msgstr ""
 
-#: ui\app.slint:237
+#: crates\keyless-app\ui\app.slint:270
 msgid "Cancel shortcut change"
 msgstr ""
 
-#: ui\app.slint:245
+#: crates\keyless-app\ui\app.slint:278
 msgid "Save"
 msgstr ""
 
-#: ui\app.slint:248
+#: crates\keyless-app\ui\app.slint:281
 msgid "Save shortcut {}"
 msgstr ""
 
-#: ui\app.slint:261
+#: crates\keyless-app\ui\app.slint:294
 msgid ""
 "That combination can't be used. Use Ctrl, Alt, Shift or Win with a letter, "
 "number or F-key."
 msgstr ""
 
-#: ui\app.slint:262
+#: crates\keyless-app\ui\app.slint:295
 msgid "{} is used by another app. Choose a different shortcut."
 msgstr ""
 
-#: ui\app.slint:263
+#: crates\keyless-app\ui\app.slint:296
 msgid "The shortcut could not be set."
 msgstr ""
 
-#: ui\app.slint:270
+#: crates\keyless-app\ui\app.slint:303
 msgid "Shortcut can resume"
 msgstr ""
 
-#: ui\app.slint:271
+#: crates\keyless-app\ui\app.slint:304
+msgid "Always on while the mouse pauses too."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:305
 msgid "Off: resting hands can only pause, never resume. Resume with the mouse."
 msgstr ""
 
-#: ui\app.slint:295
+#: crates\keyless-app\ui\app.slint:329 crates\keyless-app\ui\app.slint:1157
+msgid "Mouse"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:330
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:353
+msgid "Keeps working"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:354
+msgid "Only the keyboard pauses."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:362
+msgid "Block clicks"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:363
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:371
+msgid "Freeze it"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:372
+msgid "Clicks, scrolling and the pointer stop."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:386
+msgid "RESUME WITH"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:395
+msgid "No shortcut set"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:402
+msgid "Set a shortcut"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:407 crates\keyless-app\ui\app.slint:846
+msgid "Pause to try it"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:416
+msgid ""
+"Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut "
+"resumes then, so it always resumes."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:417
+msgid ""
+"The mouse keeps working until a shortcut is set, because only the shortcut "
+"can resume it."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:418
+msgid ""
+"Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete "
+"always works."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:440
 msgid "Appearance: {}"
 msgstr ""
 
-#: ui\app.slint:378
+#: crates\keyless-app\ui\app.slint:523
 msgid "Show the paused tag at the top"
 msgstr ""
 
-#: ui\app.slint:379
+#: crates\keyless-app\ui\app.slint:524
 msgid "Show the paused tag at the bottom"
 msgstr ""
 
-#: ui\app.slint:380
+#: crates\keyless-app\ui\app.slint:525
 msgid "Show the paused tag on the left"
 msgstr ""
 
-#: ui\app.slint:381
+#: crates\keyless-app\ui\app.slint:526
 msgid "Show the paused tag on the right"
 msgstr ""
 
-#: ui\app.slint:441 ui\app.slint:614
+#: crates\keyless-app\ui\app.slint:586 crates\keyless-app\ui\app.slint:759
 msgid "Language"
 msgstr ""
 
-#: ui\app.slint:546 ui\app.slint:921 ui\app.slint:1188
+#: crates\keyless-app\ui\app.slint:691 crates\keyless-app\ui\app.slint:1164
+#: crates\keyless-app\ui\app.slint:691 crates\keyless-app\ui\app.slint:1164
 msgid "Settings"
 msgstr ""
 
-#: ui\app.slint:547
+#: crates\keyless-app\ui\app.slint:692
 msgid "Startup, display, language and the paused tag."
 msgstr ""
 
-#: ui\app.slint:557
+#: crates\keyless-app\ui\app.slint:702
 msgid "STARTUP"
 msgstr ""
 
-#: ui\app.slint:560
+#: crates\keyless-app\ui\app.slint:705
 msgid "Start at sign-in"
 msgstr ""
 
-#: ui\app.slint:561
+#: crates\keyless-app\ui\app.slint:706
 msgid "Always starts with keys on."
 msgstr ""
 
-#: ui\app.slint:571
+#: crates\keyless-app\ui\app.slint:716
 msgid "DISPLAY"
 msgstr ""
 
-#: ui\app.slint:575
+#: crates\keyless-app\ui\app.slint:720
 msgid "AUTO"
 msgstr ""
 
-#: ui\app.slint:576
+#: crates\keyless-app\ui\app.slint:721
 msgid "follow Windows"
 msgstr ""
 
-#: ui\app.slint:582
+#: crates\keyless-app\ui\app.slint:727
 msgid "LIGHT"
 msgstr ""
 
-#: ui\app.slint:583
+#: crates\keyless-app\ui\app.slint:728
 msgid "light"
 msgstr ""
 
-#: ui\app.slint:589
+#: crates\keyless-app\ui\app.slint:734
 msgid "DARK"
 msgstr ""
 
-#: ui\app.slint:590
+#: crates\keyless-app\ui\app.slint:735
 msgid "dark"
 msgstr ""
 
-#: ui\app.slint:601
+#: crates\keyless-app\ui\app.slint:746
 msgid "LANGUAGE"
 msgstr ""
 
-#: ui\app.slint:621
+#: crates\keyless-app\ui\app.slint:766
 msgid "Follows Windows unless you pick one."
 msgstr ""
 
-#: ui\app.slint:638
+#: crates\keyless-app\ui\app.slint:783
 msgid "PAUSED TAG"
 msgstr ""
 
-#: ui\app.slint:655
+#: crates\keyless-app\ui\app.slint:800
 msgid "Show while paused"
 msgstr ""
 
-#: ui\app.slint:656
+#: crates\keyless-app\ui\app.slint:801
 msgid "Off: only the tray icon turns orange."
 msgstr ""
 
-#: ui\app.slint:665
+#: crates\keyless-app\ui\app.slint:816
 msgid "CUSTOM SPOT"
 msgstr ""
 
-#: ui\app.slint:666
+#: crates\keyless-app\ui\app.slint:817
 msgid "TOP"
 msgstr ""
 
-#: ui\app.slint:667
+#: crates\keyless-app\ui\app.slint:818
 msgid "BOTTOM"
 msgstr ""
 
-#: ui\app.slint:668
+#: crates\keyless-app\ui\app.slint:819
 msgid "LEFT"
 msgstr ""
 
-#: ui\app.slint:668
+#: crates\keyless-app\ui\app.slint:819
 msgid "RIGHT"
 msgstr ""
 
-#: ui\app.slint:677
+#: crates\keyless-app\ui\app.slint:828
 msgid "Reset"
 msgstr ""
 
-#: ui\app.slint:679
+#: crates\keyless-app\ui\app.slint:830
 msgid "Reset the paused tag position"
 msgstr ""
 
-#: ui\app.slint:685
+#: crates\keyless-app\ui\app.slint:837
+msgid ""
+"Pick an edge, or drag the tag anywhere by its body. Keyless remembers where "
+"you leave it. While the mouse pauses, it shows the shortcut instead of a "
+"Resume button."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:838
 msgid ""
 "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where "
 "you leave it. Only its Resume button resumes."
 msgstr ""
 
-#: ui\app.slint:693
+#: crates\keyless-app\ui\app.slint:846
 msgid "Resume"
 msgstr ""
 
-#: ui\app.slint:693
-msgid "Pause to try it"
-msgstr ""
-
-#: ui\app.slint:740
+#: crates\keyless-app\ui\app.slint:893
 msgid "Pause your keyboard. Keep your mouse."
 msgstr ""
 
-#: ui\app.slint:746
+#: crates\keyless-app\ui\app.slint:899
 msgid "VERSION {} · MIT LICENSE"
 msgstr ""
 
-#: ui\app.slint:765
+#: crates\keyless-app\ui\app.slint:918
 msgid "PRIVACY"
 msgstr ""
 
-#: ui\app.slint:768
+#: crates\keyless-app\ui\app.slint:921
 msgid ""
 "Keyless looks at each key only to decide whether to block it. Nothing is "
 "recorded, stored or sent. No network, no telemetry."
 msgstr ""
 
-#: ui\app.slint:783
+#: crates\keyless-app\ui\app.slint:936
 msgid "GOOD TO KNOW"
 msgstr ""
 
-#: ui\app.slint:791
+#: crates\keyless-app\ui\app.slint:944
 msgid "Control Alt Delete always works."
 msgstr ""
 
-#: ui\app.slint:797
+#: crates\keyless-app\ui\app.slint:950
 msgid "always works."
 msgstr ""
 
-#: ui\app.slint:805
+#: crates\keyless-app\ui\app.slint:958
 msgid "On-screen keyboards and voice typing keep working while paused."
 msgstr ""
 
-#: ui\app.slint:818
+#: crates\keyless-app\ui\app.slint:971
 msgid "Source code"
 msgstr ""
 
-#: ui\app.slint:823
+#: crates\keyless-app\ui\app.slint:976
 msgid "Report a problem"
 msgstr ""
 
-#: ui\app.slint:827
+#: crates\keyless-app\ui\app.slint:980
 msgid "Third-party licenses"
 msgstr ""
 
-#: ui\app.slint:844
+#: crates\keyless-app\ui\app.slint:1037
+msgid "Hide the paused tag?"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1037
+msgid "Pause the mouse with the tag hidden?"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1045
+msgid ""
+"Keyboard and mouse will both pause, and nothing on screen will say how to "
+"resume. Only {} resumes."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1055
+msgid "Hide it"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1055
+msgid "Pause the mouse"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1066
+msgid "Keep it"
+msgstr ""
+
+#. "Keyless Dev" is a name, like "Keyless", and only ever seen in debug builds.
+#: crates\keyless-app\ui\app.slint:1080
 msgid "Keyless (beta)"
 msgstr ""
 
-#: ui\app.slint:884
+#: crates\keyless-app\ui\app.slint:1120
 msgid "PAUSED"
 msgstr ""
 
-#: ui\app.slint:884 ui\controls.slint:300 ui\controls.slint:316
+#: crates\keyless-app\ui\app.slint:1120
+#: crates\keyless-app\ui\app.slint:1120
+#: crates\keyless-app\ui\app.slint:1120
 msgid "ON"
 msgstr ""
 
-#: ui\app.slint:907
+#: crates\keyless-app\ui\app.slint:1143
 msgid "Control"
 msgstr ""
 
-#: ui\app.slint:908
+#: crates\keyless-app\ui\app.slint:1144
 msgid "Pause and resume"
 msgstr ""
 
-#: ui\app.slint:922
+#: crates\keyless-app\ui\app.slint:1158
+msgid "Lock both"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1158
+msgid "Clicks paused"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1158
+msgid "Frozen while paused"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1165
 msgid "Display, language"
 msgstr ""
 
-#: ui\app.slint:928
+#: crates\keyless-app\ui\app.slint:1171
 msgid "About"
 msgstr ""
 
-#: ui\app.slint:929
+#: crates\keyless-app\ui\app.slint:1172
 msgid "Version, privacy"
 msgstr ""
 
-#: ui\app.slint:938
+#: crates\keyless-app\ui\app.slint:1181
 msgid "VERSION {}"
 msgstr ""
 
-#: ui\app.slint:1021
+#: crates\keyless-app\ui\app.slint:1271
 msgid "Back on in {}"
 msgstr ""
 
-#: ui\app.slint:1021
+#: crates\keyless-app\ui\app.slint:1271
 msgid "Until you resume"
 msgstr ""
 
-#: ui\app.slint:1021
+#: crates\keyless-app\ui\app.slint:1272
+msgid "Pauses keyboard and mouse"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1272
 msgid "Mouse always works"
 msgstr ""
 
-#: ui\app.slint:1030 ui\app.slint:1184
+#: crates\keyless-app\ui\app.slint:1281 crates\keyless-app\ui\app.slint:1464
 msgid "Open Keyless"
 msgstr ""
 
-#: ui\app.slint:1052
+#: crates\keyless-app\ui\app.slint:1303
 msgid "Resume automatically"
 msgstr ""
 
-#: ui\app.slint:1064
+#: crates\keyless-app\ui\app.slint:1315
 msgid "No shortcut"
 msgstr ""
 
-#: ui\app.slint:1073
+#: crates\keyless-app\ui\app.slint:1324
 msgid "Quit"
 msgstr ""
 
-#: ui\app.slint:1076 ui\app.slint:1197
+#: crates\keyless-app\ui\app.slint:1327 crates\keyless-app\ui\app.slint:1477
 msgid "Quit Keyless"
 msgstr ""
 
-#: ui\app.slint:1089 ui\app.slint:1174
+#: crates\keyless-app\ui\app.slint:1341 crates\keyless-app\ui\app.slint:1454
 msgid "Keyless: keyboard paused"
 msgstr ""
 
-#: ui\app.slint:1133
+#: crates\keyless-app\ui\app.slint:1394
+msgid "BOTH ASLEEP"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1394
 msgid "KEYS ASLEEP"
 msgstr ""
 
-#: ui\app.slint:1143
+#: crates\keyless-app\ui\app.slint:1404
 msgid "BACK IN {}"
 msgstr ""
 
-#: ui\app.slint:1143
+#: crates\keyless-app\ui\app.slint:1405
 msgid "MOUSE AWAKE"
 msgstr ""
 
-#: ui\app.slint:1155
+#: crates\keyless-app\ui\app.slint:1421
+msgid "Press {} to resume"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1428
 msgid "RESUME"
 msgstr ""
 
-#: ui\app.slint:1157 ui\app.slint:1180
+#: crates\keyless-app\ui\app.slint:1430 crates\keyless-app\ui\app.slint:1460
 msgid "Resume keyboard"
 msgstr ""
 
-#: ui\app.slint:1174
+#: crates\keyless-app\ui\app.slint:1453
+msgid "Keyless: keyboard and mouse paused"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint:1454
 msgid "Keyless: keyboard on"
 msgstr ""
 
-#: ui\app.slint:1180 ui\controls.slint:286
+#: crates\keyless-app\ui\app.slint:1460
+#: crates\keyless-app\ui\app.slint:1460
 msgid "Pause keyboard"
 msgstr ""
 
-#: ui\app.slint:1192
+#: crates\keyless-app\ui\app.slint:1472
 msgid "About Keyless"
 msgstr ""
 
-#: ui\controls.slint:28
+#: crates\keyless-app\ui\controls.slint:28
 msgid "Beta version"
 msgstr ""
 
-#: ui\controls.slint:35
+#: crates\keyless-app\ui\controls.slint:35
 msgid "BETA"
 msgstr ""
 
-#: ui\controls.slint:306 ui\controls.slint:323
+#: crates\keyless-app\ui\controls.slint:316
+#: crates\keyless-app\ui\controls.slint:316
 msgid "PAUSE"
 msgstr ""
 
-#: ui\controls.slint:473
+#: crates\keyless-app\ui\controls.slint:489
 msgid "Resume automatically: {}"
 msgstr ""
 
-#: ui\controls.slint:536
+#: crates\keyless-app\ui\controls.slint:552
 msgid "{}: {}"
+msgstr ""
+
+#: crates\keyless-app\ui\mouse.slint:162
+msgid "The mouse keeps working while paused"
+msgstr ""
+
+#: crates\keyless-app\ui\mouse.slint:163
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr ""
+
+#: crates\keyless-app\ui\mouse.slint:164
+msgid "Clicks, scrolling and the pointer are blocked while paused"
 msgstr ""

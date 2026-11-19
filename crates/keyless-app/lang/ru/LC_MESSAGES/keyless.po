@@ -356,3 +356,111 @@ msgstr "БЕТА"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (бета)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "Пока мышь на паузе, продолжить можно только с {}. Блокировка экрана, выход или сон включают обе."
+
+msgid "Always on while the mouse pauses too."
+msgstr "Всегда включено, когда мышь тоже на паузе."
+
+msgid "Mouse pauses too"
+msgstr "Мышь тоже на паузе"
+
+msgid "Press {} to resume"
+msgstr "Нажмите {}, чтобы продолжить"
+
+msgid "Mouse"
+msgstr "Мышь"
+
+msgid "Lock both"
+msgstr "Блокировать всё"
+
+msgid "Clicks paused"
+msgstr "Клики на паузе"
+
+msgid "Frozen while paused"
+msgstr "Заморожена на паузе"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "Ставьте её на паузу вместе с клавиатурой, чтобы ничего не нажималось."
+
+msgid "Keeps working"
+msgstr "Работает"
+
+msgid "Only the keyboard pauses."
+msgstr "На паузе только клавиатура."
+
+msgid "Block clicks"
+msgstr "Блокировать клики"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "Клики и прокрутка останавливаются. Указатель двигается."
+
+msgid "Freeze it"
+msgstr "Заморозить"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "Клики, прокрутка и указатель останавливаются."
+
+msgid "RESUME WITH"
+msgstr "ПРОДОЛЖИТЬ С"
+
+msgid "No shortcut set"
+msgstr "Сочетание не задано"
+
+msgid "Set a shortcut"
+msgstr "Задать сочетание"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "Выберите «Блокировать клики» или «Заморозить», чтобы ставить на паузу и мышь. Тогда продолжить можно только сочетанием, поэтому оно всегда продолжает."
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "Мышь работает, пока не задано сочетание, потому что только оно может её вернуть."
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "Блокировка экрана, выход или сон включают обе. Ctrl + Alt + Delete работает всегда."
+
+msgid "The mouse keeps working while paused"
+msgstr "Мышь работает во время паузы"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "Клики и прокрутка заблокированы во время паузы; указатель двигается"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "Клики, прокрутка и указатель заблокированы во время паузы"
+
+msgid "Hide the paused tag?"
+msgstr "Скрыть значок паузы?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "Ставить мышь на паузу при скрытом значке?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "Клавиатура и мышь будут на паузе, и на экране ничего не подскажет, как продолжить. Продолжает только {}."
+
+msgid "Hide it"
+msgstr "Скрыть"
+
+msgid "Pause the mouse"
+msgstr "Ставить мышь на паузу"
+
+msgid "Keep it"
+msgstr "Оставить"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "Выберите край или перетащите значок куда угодно за корпус. Keyless запомнит, где вы его оставили. Когда мышь на паузе, на нём показано сочетание вместо кнопки «Продолжить»."
+
+msgid "Both paused"
+msgstr "Всё на паузе"
+
+msgid "Press {} to resume."
+msgstr "Нажмите {}, чтобы продолжить."
+
+msgid "BOTH ASLEEP"
+msgstr "ВСЁ СПИТ"
+
+msgid "Pauses keyboard and mouse"
+msgstr "Ставит на паузу клавиатуру и мышь"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: клавиатура и мышь на паузе"

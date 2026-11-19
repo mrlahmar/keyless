@@ -1,13 +1,15 @@
 //! Platform-independent parts of Keyless: the keyboard state machine, the shortcut
-//! model, keyboard layout positions and settings. Nothing here touches the OS or the UI.
+//! model, mouse blocking, keyboard layout positions and settings. Nothing here touches the OS or the UI.
 
 pub mod keyboard;
 pub mod layout;
+pub mod mouse;
 pub mod settings;
 pub mod shortcut;
 
 pub use keyboard::{Capture, Decision, KeyEvent, Keyboard, MAX_KEY_CODE};
 pub use layout::{KeyCap, LAYOUT_KEYS};
+pub use mouse::{Mouse, MouseBlock, MouseEvent};
 pub use settings::{AUTO_RESUME_CHOICES, Appearance, Edge, Settings};
 pub use shortcut::{Key, Modifiers, Shortcut};
 

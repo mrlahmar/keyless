@@ -356,3 +356,111 @@ msgstr "BETA"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (beta)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "Hanya {} yang melanjutkan saat mouse dijeda. Mengunci layar, keluar, atau tidur melanjutkan keduanya."
+
+msgid "Always on while the mouse pauses too."
+msgstr "Selalu aktif saat mouse juga dijeda."
+
+msgid "Mouse pauses too"
+msgstr "Mouse juga dijeda"
+
+msgid "Press {} to resume"
+msgstr "Tekan {} untuk melanjutkan"
+
+msgid "Mouse"
+msgstr "Mouse"
+
+msgid "Lock both"
+msgstr "Kunci keduanya"
+
+msgid "Clicks paused"
+msgstr "Klik dijeda"
+
+msgid "Frozen while paused"
+msgstr "Beku saat dijeda"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "Jeda bersama keyboard, agar tidak ada yang terklik."
+
+msgid "Keeps working"
+msgstr "Tetap berfungsi"
+
+msgid "Only the keyboard pauses."
+msgstr "Hanya keyboard yang dijeda."
+
+msgid "Block clicks"
+msgstr "Blokir klik"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "Klik dan gulir berhenti. Penunjuk tetap bergerak."
+
+msgid "Freeze it"
+msgstr "Bekukan"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "Klik, gulir, dan penunjuk berhenti."
+
+msgid "RESUME WITH"
+msgstr "LANJUTKAN DENGAN"
+
+msgid "No shortcut set"
+msgstr "Belum ada pintasan"
+
+msgid "Set a shortcut"
+msgstr "Atur pintasan"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "Pilih Blokir klik atau Bekukan untuk menjeda mouse juga. Setelah itu hanya pintasan yang melanjutkan, jadi pintasan selalu melanjutkan."
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "Mouse tetap berfungsi sampai pintasan diatur, karena hanya pintasan yang dapat melanjutkannya."
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "Mengunci layar, keluar, atau tidur melanjutkan keduanya. Ctrl + Alt + Delete selalu berfungsi."
+
+msgid "The mouse keeps working while paused"
+msgstr "Mouse tetap berfungsi saat dijeda"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "Klik dan gulir diblokir saat dijeda; penunjuk tetap bergerak"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "Klik, gulir, dan penunjuk diblokir saat dijeda"
+
+msgid "Hide the paused tag?"
+msgstr "Sembunyikan tanda jeda?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "Jeda mouse dengan tanda tersembunyi?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "Keyboard dan mouse akan dijeda, dan tidak ada di layar yang menunjukkan cara melanjutkan. Hanya {} yang melanjutkan."
+
+msgid "Hide it"
+msgstr "Sembunyikan"
+
+msgid "Pause the mouse"
+msgstr "Jeda mouse"
+
+msgid "Keep it"
+msgstr "Tetap tampilkan"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "Pilih tepi, atau seret tanda ke mana saja lewat badannya. Keyless mengingat tempat Anda meninggalkannya. Saat mouse dijeda, tanda menampilkan pintasan, bukan tombol Lanjutkan."
+
+msgid "Both paused"
+msgstr "Keduanya dijeda"
+
+msgid "Press {} to resume."
+msgstr "Tekan {} untuk melanjutkan."
+
+msgid "BOTH ASLEEP"
+msgstr "KEDUANYA TIDUR"
+
+msgid "Pauses keyboard and mouse"
+msgstr "Menjeda keyboard dan mouse"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: keyboard dan mouse dijeda"

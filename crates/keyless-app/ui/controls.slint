@@ -127,6 +127,16 @@ export component Icon {
         fill: tint;
         commands: "M9.9 5.4 a0.9 0.9 0 1 1 -1.8 0 a0.9 0.9 0 1 1 1.8 0 z";
     }
+    if name == "mouse": Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 18;
+        viewbox-height: 18;
+        stroke: tint;
+        stroke-width: 1.6px;
+        fill: transparent;
+        commands: "M9 1.5 a4.5 4.5 0 0 1 4.5 4.5 v6 a4.5 4.5 0 0 1 -9 0 v-6 a4.5 4.5 0 0 1 4.5 -4.5 z M9 4.2 v2.6";
+    }
     if name == "grip": Path {
         width: 100%;
         height: 100%;
@@ -367,9 +377,12 @@ export component ToggleRow inherits Rectangle {
     in property <string> description;
     in property <bool> checked;
     in property <bool> boxed;
+    // Off: shown dimmed, can't be changed, and the description says why.
+    in property <bool> enabled: true;
     callback toggled(bool);
 
     border-radius: Theme.radius;
+    opacity: enabled ? 1 : 0.55;
     background: boxed ? Theme.raised : transparent;
     border-width: boxed ? 1px : 0px;
     border-color: Theme.line;
@@ -379,10 +392,12 @@ export component ToggleRow inherits Rectangle {
     accessible-description: description;
     accessible-checkable: true;
     accessible-checked: checked;
-    accessible-action-default => { root.toggled(!root.checked); }
+    accessible-enabled: enabled;
+    accessible-action-default => { if (root.enabled) { root.toggled(!root.checked); } }
     forward-focus: focus;
 
     focus := Activator {
+        enabled: root.enabled;
         activated => { root.toggled(!root.checked); }
     }
 
@@ -430,6 +445,7 @@ export component ToggleRow inherits Rectangle {
     }
 
     TouchArea {
+        enabled: root.enabled;
         mouse-cursor: pointer;
         clicked => { root.toggled(!root.checked); }
     }
@@ -567,6 +583,84 @@ export component ChoiceChips {
 }
 
 // One key cap, used to show shortcuts: [Ctrl] [Alt] [K].
+// One choice in a group of cards: a radio dot, a title and a wrapping description.
+export component ChoiceCard inherits Rectangle {
+    in property <string> title;
+    in property <string> description;
+    in property <bool> selected;
+    callback clicked;
+
+    border-radius: Theme.radius;
+    border-width: selected ? 2px : 1px;
+    border-color: selected ? Theme.text : Theme.line;
+    background: touch.has-hover && !selected ? Theme.window : Theme.raised;
+
+    accessible-role: button;
+    accessible-label: title;
+    accessible-description: description;
+    accessible-checkable: true;
+    accessible-checked: selected;
+    accessible-action-default => { root.clicked(); }
+    forward-focus: focus;
+
+    focus := Activator {
+        activated => { root.clicked(); }
+    }
+
+    VerticalLayout {
+        padding: 14px;
+        spacing: 6px;
+        alignment: start;
+        Row {
+            spacing: 8px;
+            Rectangle {
+                width: 16px;
+                height: 16px;
+                cross-axis-self-alignment: center;
+                border-radius: 8px;
+                border-width: 2px;
+                border-color: root.selected ? Theme.text : Theme.line-strong;
+                Rectangle {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 4px;
+                    background: root.selected ? Theme.signal : transparent;
+                }
+            }
+            Text {
+                text: root.title;
+                font-size: Theme.body;
+                font-weight: 500;
+                color: Theme.text;
+                vertical-alignment: center;
+                horizontal-stretch: 1;
+                horizontal-alignment: Theme.start-align;
+            }
+        }
+        Text {
+            horizontal-alignment: Theme.start-align;
+            text: root.description;
+            font-size: Theme.caption;
+            color: Theme.text-faint;
+            wrap: word-wrap;
+        }
+    }
+
+    FocusRing {
+        x: -3px;
+        y: -3px;
+        width: parent.width + 6px;
+        height: parent.height + 6px;
+        radius: Theme.radius;
+        visible-ring: focus.has-focus;
+    }
+
+    touch := TouchArea {
+        mouse-cursor: pointer;
+        clicked => { root.clicked(); }
+    }
+}
+
 export component Keycap inherits Rectangle {
     in property <string> label;
     in property <bool> lit;

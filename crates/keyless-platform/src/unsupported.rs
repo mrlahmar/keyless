@@ -1,7 +1,7 @@
 //! Fallback for operating systems without a backend yet. Everything compiles, and every
 //! call that would need the OS reports [`Error::Unsupported`] instead of pretending to work.
 
-use keyless_core::Shortcut;
+use keyless_core::{MouseBlock, Shortcut};
 use raw_window_handle::RawWindowHandle;
 
 use crate::{Anchor, BlockerEvent, BlockerOptions, Error, PopupKind};
@@ -24,6 +24,7 @@ impl Blocker {
     }
     pub fn set_shortcut_unlocks(&self, _unlocks: bool) {}
     pub fn set_recording(&self, _recording: bool) {}
+    pub fn set_mouse_block(&self, _block: MouseBlock) {}
 }
 
 pub mod autostart {

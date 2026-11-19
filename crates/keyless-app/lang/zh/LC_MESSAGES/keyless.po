@@ -356,3 +356,111 @@ msgstr "测试版"
 
 msgid "Keyless (beta)"
 msgstr "Keyless（测试版）"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "鼠标暂停时只有 {} 能恢复。锁屏、注销或睡眠会同时恢复两者。"
+
+msgid "Always on while the mouse pauses too."
+msgstr "鼠标也暂停时始终开启。"
+
+msgid "Mouse pauses too"
+msgstr "鼠标也会暂停"
+
+msgid "Press {} to resume"
+msgstr "按 {} 恢复"
+
+msgid "Mouse"
+msgstr "鼠标"
+
+msgid "Lock both"
+msgstr "一起锁定"
+
+msgid "Clicks paused"
+msgstr "点击已暂停"
+
+msgid "Frozen while paused"
+msgstr "暂停时冻结"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "随键盘一起暂停，避免误点。"
+
+msgid "Keeps working"
+msgstr "照常工作"
+
+msgid "Only the keyboard pauses."
+msgstr "只暂停键盘。"
+
+msgid "Block clicks"
+msgstr "阻止点击"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "点击和滚动停止，指针仍可移动。"
+
+msgid "Freeze it"
+msgstr "冻结鼠标"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "点击、滚动和指针都停止。"
+
+msgid "RESUME WITH"
+msgstr "恢复方式"
+
+msgid "No shortcut set"
+msgstr "未设置快捷键"
+
+msgid "Set a shortcut"
+msgstr "设置快捷键"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "选择“阻止点击”或“冻结鼠标”即可同时暂停鼠标。此时只有快捷键能恢复，所以快捷键始终可以恢复。"
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "设置快捷键之前鼠标照常工作，因为只有快捷键能恢复它。"
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "锁屏、注销或睡眠会同时恢复两者。Ctrl + Alt + Delete 始终有效。"
+
+msgid "The mouse keeps working while paused"
+msgstr "暂停时鼠标照常工作"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "暂停时阻止点击和滚动；指针仍可移动"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "暂停时阻止点击、滚动和指针"
+
+msgid "Hide the paused tag?"
+msgstr "隐藏暂停标签？"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "在标签隐藏时暂停鼠标？"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "键盘和鼠标都会暂停，屏幕上不会显示如何恢复。只有 {} 能恢复。"
+
+msgid "Hide it"
+msgstr "隐藏"
+
+msgid "Pause the mouse"
+msgstr "暂停鼠标"
+
+msgid "Keep it"
+msgstr "保留"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "选择一个边缘，或拖动标签主体把它放到任意位置。Keyless 会记住你放的位置。鼠标暂停时，标签显示快捷键而不是恢复按钮。"
+
+msgid "Both paused"
+msgstr "都已暂停"
+
+msgid "Press {} to resume."
+msgstr "按 {} 恢复。"
+
+msgid "BOTH ASLEEP"
+msgstr "都在休眠"
+
+msgid "Pauses keyboard and mouse"
+msgstr "暂停键盘和鼠标"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless：键盘和鼠标已暂停"

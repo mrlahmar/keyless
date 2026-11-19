@@ -10,6 +10,10 @@ and versions follow [Semantic Versioning](https://semver.org/).
 - Debug builds run as "Keyless Dev", with a tinted icon and their own settings,
   single-instance lock and start-at-sign-in entry, so they run next to an installed Keyless.
   Their default shortcut is Ctrl + Alt + J.
+- Mouse tab: optionally pause the mouse too, either clicks and scrolling or the pointer
+  as well. Only the shortcut resumes then, so it always resumes, and the paused tag shows
+  it instead of the Resume button. Keyless asks first before the paused tag is hidden
+  while the mouse pauses. Screen lock, sign-out, sleep and quitting free the mouse.
 
 ## [0.1.0] - 2026-11-18
 

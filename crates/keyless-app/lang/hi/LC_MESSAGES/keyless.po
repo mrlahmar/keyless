@@ -356,3 +356,111 @@ msgstr "बीटा"
 
 msgid "Keyless (beta)"
 msgstr "Keyless (बीटा)"
+
+msgid "Only {} resumes while the mouse is paused. Locking the screen, signing out or sleep resumes both."
+msgstr "माउस रुका होने पर सिर्फ़ {} से फिर चालू होता है। स्क्रीन लॉक, साइन आउट या स्लीप दोनों को चालू कर देते हैं।"
+
+msgid "Always on while the mouse pauses too."
+msgstr "माउस भी रुकने पर हमेशा चालू।"
+
+msgid "Mouse pauses too"
+msgstr "माउस भी रुकेगा"
+
+msgid "Press {} to resume"
+msgstr "फिर से चालू करने के लिए {} दबाएँ"
+
+msgid "Mouse"
+msgstr "माउस"
+
+msgid "Lock both"
+msgstr "दोनों लॉक करें"
+
+msgid "Clicks paused"
+msgstr "क्लिक रुके हैं"
+
+msgid "Frozen while paused"
+msgstr "रुकने पर जमा"
+
+msgid "Pause it with the keyboard, so nothing gets clicked."
+msgstr "इसे कीबोर्ड के साथ रोकें, ताकि कुछ भी क्लिक न हो।"
+
+msgid "Keeps working"
+msgstr "काम करता रहे"
+
+msgid "Only the keyboard pauses."
+msgstr "सिर्फ़ कीबोर्ड रुकता है।"
+
+msgid "Block clicks"
+msgstr "क्लिक रोकें"
+
+msgid "Clicks and scrolling stop. The pointer still moves."
+msgstr "क्लिक और स्क्रॉल रुकते हैं। पॉइंटर चलता रहता है।"
+
+msgid "Freeze it"
+msgstr "जमा दें"
+
+msgid "Clicks, scrolling and the pointer stop."
+msgstr "क्लिक, स्क्रॉल और पॉइंटर रुक जाते हैं।"
+
+msgid "RESUME WITH"
+msgstr "फिर चालू करें"
+
+msgid "No shortcut set"
+msgstr "कोई शॉर्टकट नहीं"
+
+msgid "Set a shortcut"
+msgstr "शॉर्टकट सेट करें"
+
+msgid "Pick Block clicks or Freeze it to pause the mouse too. Only the shortcut resumes then, so it always resumes."
+msgstr "माउस भी रोकने के लिए क्लिक रोकें या जमा दें चुनें। तब सिर्फ़ शॉर्टकट से फिर चालू होता है, इसलिए शॉर्टकट हमेशा काम करता है।"
+
+msgid "The mouse keeps working until a shortcut is set, because only the shortcut can resume it."
+msgstr "शॉर्टकट सेट होने तक माउस काम करता रहता है, क्योंकि सिर्फ़ शॉर्टकट ही उसे फिर चालू कर सकता है।"
+
+msgid "Locking the screen, signing out or sleep resumes both. Ctrl + Alt + Delete always works."
+msgstr "स्क्रीन लॉक, साइन आउट या स्लीप दोनों को फिर चालू कर देते हैं। Ctrl + Alt + Delete हमेशा काम करता है।"
+
+msgid "The mouse keeps working while paused"
+msgstr "रुकने पर भी माउस काम करता है"
+
+msgid "Clicks and scrolling are blocked while paused; the pointer still moves"
+msgstr "रुकने पर क्लिक और स्क्रॉल बंद रहते हैं; पॉइंटर चलता रहता है"
+
+msgid "Clicks, scrolling and the pointer are blocked while paused"
+msgstr "रुकने पर क्लिक, स्क्रॉल और पॉइंटर बंद रहते हैं"
+
+msgid "Hide the paused tag?"
+msgstr "रुका हुआ टैग छिपाएँ?"
+
+msgid "Pause the mouse with the tag hidden?"
+msgstr "टैग छिपा होने पर माउस भी रोकें?"
+
+msgid "Keyboard and mouse will both pause, and nothing on screen will say how to resume. Only {} resumes."
+msgstr "कीबोर्ड और माउस दोनों रुक जाएँगे, और स्क्रीन पर कुछ नहीं बताएगा कि फिर कैसे चालू करें। सिर्फ़ {} से चालू होगा।"
+
+msgid "Hide it"
+msgstr "छिपाएँ"
+
+msgid "Pause the mouse"
+msgstr "माउस रोकें"
+
+msgid "Keep it"
+msgstr "रहने दें"
+
+msgid "Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button."
+msgstr "कोई किनारा चुनें, या टैग को उसके हिस्से से पकड़कर कहीं भी खींचें। Keyless याद रखता है कि आपने उसे कहाँ छोड़ा। माउस रुका होने पर, उसमें फिर चालू करें बटन की जगह शॉर्टकट दिखता है।"
+
+msgid "Both paused"
+msgstr "दोनों रुके हैं"
+
+msgid "Press {} to resume."
+msgstr "फिर से चालू करने के लिए {} दबाएँ।"
+
+msgid "BOTH ASLEEP"
+msgstr "दोनों सो रहे हैं"
+
+msgid "Pauses keyboard and mouse"
+msgstr "कीबोर्ड और माउस रोकता है"
+
+msgid "Keyless: keyboard and mouse paused"
+msgstr "Keyless: कीबोर्ड और माउस रुके हैं"

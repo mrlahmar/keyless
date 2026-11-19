@@ -6,7 +6,9 @@ use std::path::PathBuf;
 use std::rc::Rc;
 use std::time::{Duration, Instant};
 
-use keyless_core::{AUTO_RESUME_CHOICES, Appearance, Capture, Edge, Modifiers, Settings, Shortcut};
+use keyless_core::{
+    AUTO_RESUME_CHOICES, Appearance, Capture, Edge, Modifiers, MouseBlock, Settings, Shortcut,
+};
 use keyless_platform::{
     Anchor, Blocker, BlockerEvent, BlockerOptions, Error, PopupKind, autostart, desktop, instance, layout,
 };
@@ -125,6 +127,7 @@ impl App {
             .map(|dirs| dirs.config_dir().join("settings.toml"));
         let settings = settings_path.as_deref().map(Settings::load).unwrap_or_default();
 
+        // The mouse stays free until the shortcut is reserved: see `apply_mouse_block`.
         let options = BlockerOptions { shortcut: None, shortcut_unlocks: settings.shortcut_unlocks };
         let blocker =
             Blocker::start(options, |event| post(move |app| app.on_blocker(event))).map_err(|e| {
@@ -155,6 +158,7 @@ impl App {
 
         let shortcut = app.settings.borrow().shortcut;
         app.reserve_shortcut(shortcut, false);
+        app.apply_mouse_block();
         app.apply_language();
         app.apply_appearance();
         app.wire();
@@ -218,6 +222,7 @@ impl App {
                 post(move |app| app.save_clicked_shortcut(&text));
             });
             state.on_shortcut_unlocks_changed(|value| post(move |app| app.set_shortcut_unlocks(value)));
+            state.on_mouse_block_changed(|index| post(move |app| app.set_mouse_block(index)));
             state.on_auto_resume_changed(|index| post(move |app| app.set_auto_resume(index)));
             state.on_show_indicator_changed(|value| post(move |app| app.set_show_indicator(value)));
             state.on_indicator_edge_changed(|index| post(move |app| app.set_indicator_edge(index)));
@@ -231,7 +236,10 @@ impl App {
 
         self.main.window().on_close_requested(|| {
             post(|app| {
-                app.main.global::<AppState>().set_window_open(false);
+                let state = app.main.global::<AppState>();
+                state.set_window_open(false);
+                // An open "Are you sure?" counts as cancelled.
+                state.set_confirm(0);
                 app.layout_timer.stop();
             });
             CloseRequestResponse::HideWindow
@@ -303,6 +311,8 @@ impl App {
             ShortcutError::Failed => (3, String::new()),
         };
         let start_at_login = autostart::is_enabled();
+        let mouse_index = MouseBlock::ALL.iter().position(|&b| b == settings.mouse_block).unwrap_or(0);
+        let mouse_blocks = self.mouse_block() != MouseBlock::Off;
         self.for_each_window(|_, state| {
             state.set_paused(paused);
             state.set_shortcut_text(parts.join(" + ").into());
@@ -317,6 +327,8 @@ impl App {
             state.set_shortcut_error(error);
             state.set_shortcut_error_name(error_name.as_str().into());
             state.set_shortcut_unlocks(settings.shortcut_unlocks);
+            state.set_mouse_block(mouse_index as i32);
+            state.set_mouse_blocks(mouse_blocks);
             state.set_auto_resume_index(auto_index as i32);
             state.set_show_indicator(settings.show_indicator);
             state.set_indicator_edge(edge_index as i32);
@@ -331,6 +343,7 @@ impl App {
         drop(settings);
         self.update_countdown();
         self.tray.set_paused(paused);
+        self.tray.set_mouse(mouse_blocks);
     }
 
     /// Labels the drawn keyboard for the active keyboard layout, if it changed.
@@ -502,6 +515,8 @@ impl App {
                 self.shortcut_error.set(ShortcutError::None);
                 if save {
                     self.save();
+                    // A first working shortcut can switch mouse pausing on.
+                    self.apply_mouse_block();
                 }
             }
             Err(Error::ShortcutTaken) => self.shortcut_error.set(ShortcutError::Taken(shortcut)),
@@ -540,9 +555,35 @@ impl App {
 
     fn set_shortcut_unlocks(&self, value: bool) {
         self.settings.borrow_mut().shortcut_unlocks = value;
-        self.blocker.set_shortcut_unlocks(value);
+        self.apply_mouse_block();
         self.save();
         self.sync();
+    }
+
+    /// The mouse blocking in force: the chosen one, but only while a shortcut works,
+    /// because the shortcut is then the only way to resume.
+    fn mouse_block(&self) -> MouseBlock {
+        if self.shortcut_available.get() { self.settings.borrow().mouse_block } else { MouseBlock::Off }
+    }
+
+    /// Hands the mouse blocking in force to the blocker, and lets the shortcut resume
+    /// whenever the mouse pauses too.
+    fn apply_mouse_block(&self) {
+        let block = self.mouse_block();
+        let unlocks = self.settings.borrow().shortcut_unlocks || block != MouseBlock::Off;
+        self.blocker.set_shortcut_unlocks(unlocks);
+        self.blocker.set_mouse_block(block);
+    }
+
+    fn set_mouse_block(&self, index: i32) {
+        let block =
+            usize::try_from(index).ok().and_then(|i| MouseBlock::ALL.get(i)).copied().unwrap_or_default();
+        self.settings.borrow_mut().mouse_block = block;
+        self.apply_mouse_block();
+        self.save();
+        self.sync();
+        // The tag's contents depend on it.
+        self.update_indicator();
     }
 
     fn set_show_indicator(&self, value: bool) {
