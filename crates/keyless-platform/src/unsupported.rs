@@ -72,7 +72,7 @@ pub mod desktop {
     }
     pub fn open_url(_url: &str) {}
     pub fn show_error(message: &str) {
-        eprintln!("Keyless: {message}");
+        eprintln!("{}: {message}", keyless_core::APP_NAME);
     }
     pub fn style_popup(_window: RawWindowHandle, _kind: PopupKind) {}
     pub fn set_visible_passive(_window: RawWindowHandle, _visible: bool) {}

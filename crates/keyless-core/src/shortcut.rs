@@ -83,9 +83,12 @@ pub struct Shortcut {
     pub key: Key,
 }
 
+/// Ctrl + Alt + K. Dev builds use Ctrl + Alt + J, so they don't clash with an installed
+/// Keyless running next to them.
 impl Default for Shortcut {
     fn default() -> Self {
-        Self { modifiers: Modifiers::CTRL | Modifiers::ALT, key: Key::Letter('K') }
+        let letter = if crate::DEV_BUILD { 'J' } else { 'K' };
+        Self { modifiers: Modifiers::CTRL | Modifiers::ALT, key: Key::Letter(letter) }
     }
 }
 

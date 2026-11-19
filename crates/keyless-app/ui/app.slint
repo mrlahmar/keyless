@@ -45,6 +45,8 @@ export global AppState {
     in-out property <string> version;
     // Version is 0.x or a pre-release: show the BETA tag and "(beta)" in the title.
     in-out property <bool> beta;
+    // Debug build: named "Keyless Dev" so it can't be mistaken for the installed app.
+    in-out property <bool> dev;
     // Main window tab: 0 Control, 1 Shortcut, 2 Settings, 3 About.
     in-out property <int> page;
     // The main window is open: its animations may run.
@@ -841,7 +843,8 @@ component AboutPage inherits VerticalLayout {
 // ---------- Windows ----------
 
 export component MainWindow inherits Window {
-    title: AppState.beta ? @tr("Keyless (beta)") : "Keyless";
+    // "Keyless Dev" is a name, like "Keyless", and only ever seen in debug builds.
+    title: AppState.dev ? "Keyless Dev" : AppState.beta ? @tr("Keyless (beta)") : "Keyless";
     width: 880px;
     height: 680px;
     background: Theme.window;
@@ -972,7 +975,7 @@ export component Panel inherits Window {
     callback dismiss();
     // Read from Rust to place the panel before it is shown.
     out property <length> content-height: layout.preferred-height;
-    title: "Keyless";
+    title: AppState.dev ? "Keyless Dev" : "Keyless";
     no-frame: true;
     always-on-top: true;
     width: 300px;
@@ -1165,14 +1168,18 @@ export component Tray inherits SystemTrayIcon {
     in property <bool> paused;
     in property <image> icon-on;
     in property <image> icon-paused;
+    // Debug build: say "Keyless Dev" so it can't be mistaken for the installed app.
+    in property <bool> dev;
     callback open-panel();
     callback toggle();
     callback open-page(int);
     callback quit();
 
     icon: paused ? icon-paused : icon-on;
-    tooltip: paused ? @tr("Keyless: keyboard paused") : @tr("Keyless: keyboard on");
-    title: "Keyless";
+    // The dev texts are only ever seen in debug builds, so they are not translated.
+    tooltip: dev ? (paused ? "Keyless Dev: keyboard paused" : "Keyless Dev: keyboard on")
+        : paused ? @tr("Keyless: keyboard paused") : @tr("Keyless: keyboard on");
+    title: dev ? "Keyless Dev" : "Keyless";
     clicked => { open-panel(); }
 
     Menu {

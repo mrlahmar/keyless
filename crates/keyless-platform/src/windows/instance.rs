@@ -1,10 +1,11 @@
 //! One Keyless per user session. Starting it again opens the running copy instead.
 
+use keyless_core::APP_NAME;
 use windows::Win32::Foundation::{CloseHandle, ERROR_ALREADY_EXISTS, GetLastError, HANDLE, WAIT_OBJECT_0};
 use windows::Win32::System::Threading::{
     CreateEventW, CreateMutexW, EVENT_MODIFY_STATE, INFINITE, OpenEventW, SetEvent, WaitForSingleObject,
 };
-use windows::core::w;
+use windows::core::HSTRING;
 
 use crate::Error;
 
@@ -24,18 +25,21 @@ impl Drop for Guard {
 /// Otherwise `on_activate` runs (on a background thread) whenever a later launch asks.
 pub fn acquire(on_activate: impl Fn() + Send + 'static) -> Result<Option<Guard>, Error> {
     let os = |e: windows::core::Error| Error::Os(e.message());
+    // Named after the app, so a dev build and the installed app don't see each other.
+    let mutex_name = HSTRING::from(format!("Local\\{APP_NAME}.Instance"));
+    let event_name = HSTRING::from(format!("Local\\{APP_NAME}.Activate"));
     // SAFETY: named kernel objects; handles are owned below.
     unsafe {
-        let mutex = CreateMutexW(None, false, w!("Local\\Keyless.Instance")).map_err(os)?;
+        let mutex = CreateMutexW(None, false, &mutex_name).map_err(os)?;
         if GetLastError() == ERROR_ALREADY_EXISTS {
             let _ = CloseHandle(mutex);
-            if let Ok(event) = OpenEventW(EVENT_MODIFY_STATE, false, w!("Local\\Keyless.Activate")) {
+            if let Ok(event) = OpenEventW(EVENT_MODIFY_STATE, false, &event_name) {
                 let _ = SetEvent(event);
                 let _ = CloseHandle(event);
             }
             return Ok(None);
         }
-        let event = CreateEventW(None, false, false, w!("Local\\Keyless.Activate")).map_err(os)?;
+        let event = CreateEventW(None, false, false, &event_name).map_err(os)?;
         let raw = event.0 as usize;
         std::thread::Builder::new()
             .name("keyless-instance".into())

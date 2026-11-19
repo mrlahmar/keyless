@@ -17,11 +17,13 @@ fn main() {
 fn windows_resources() {
     println!("cargo:rerun-if-changed=../../assets/keyless.ico");
     println!("cargo:rerun-if-changed=keyless.manifest");
+    // Debug builds call themselves "Keyless Dev" (as in Task Manager), like the app does.
+    let name = if std::env::var("PROFILE").as_deref() == Ok("release") { "Keyless" } else { "Keyless Dev" };
     let mut res = winresource::WindowsResource::new();
     res.set_icon("../../assets/keyless.ico")
         .set_manifest_file("keyless.manifest")
-        .set("ProductName", "Keyless")
-        .set("FileDescription", "Keyless")
+        .set("ProductName", name)
+        .set("FileDescription", name)
         .set("LegalCopyright", "MIT License");
     if let Err(error) = res.compile() {
         // Release builds in CI always have a resource compiler. Local GNU builds without one

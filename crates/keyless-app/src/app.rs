@@ -121,7 +121,7 @@ struct App {
 
 impl App {
     fn new() -> Result<Rc<Self>, String> {
-        let settings_path = directories::ProjectDirs::from("", "", "Keyless")
+        let settings_path = directories::ProjectDirs::from("", "", keyless_core::APP_NAME)
             .map(|dirs| dirs.config_dir().join("settings.toml"));
         let settings = settings_path.as_deref().map(Settings::load).unwrap_or_default();
 
@@ -245,6 +245,7 @@ impl App {
             EventResult::Propagate
         });
 
+        self.tray.set_dev(keyless_core::DEV_BUILD);
         self.tray.set_icon_on(tray_icons::on());
         self.tray.set_icon_paused(tray_icons::paused());
         self.tray.on_open_panel(|| post(App::toggle_panel));
@@ -325,6 +326,7 @@ impl App {
             state.set_language_index(language_index as i32);
             state.set_version(env!("CARGO_PKG_VERSION").into());
             state.set_beta(keyless_core::is_prerelease(env!("CARGO_PKG_VERSION")));
+            state.set_dev(keyless_core::DEV_BUILD);
         });
         drop(settings);
         self.update_countdown();
@@ -695,13 +697,23 @@ fn apply_native_theme(window: &slint::Window, appearance: Appearance) {
 }
 
 /// Uses the icon embedded in the executable for the title bar and taskbar.
-/// winit does not pick it up on its own.
+/// winit does not pick it up on its own. Dev builds show their tinted tray face instead.
 #[cfg(windows)]
 fn set_app_icon(window: &slint::Window) {
     use slint::winit_030::winit::dpi::PhysicalSize;
     use slint::winit_030::winit::platform::windows::{IconExtWindows, WindowExtWindows};
     use slint::winit_030::winit::window::Icon;
     const ICON_ID: u16 = 1; // winresource's default application icon id
+    if keyless_core::DEV_BUILD {
+        let icon = tray_icons::on()
+            .to_rgba8()
+            .and_then(|face| Icon::from_rgba(face.as_bytes().to_vec(), face.width(), face.height()).ok());
+        window.with_winit_window(|w| {
+            w.set_window_icon(icon.clone());
+            w.set_taskbar_icon(icon.clone());
+        });
+        return;
+    }
     window.with_winit_window(|w| {
         let small = (16.0 * w.scale_factor()).round() as u32;
         w.set_window_icon(Icon::from_resource(ICON_ID, Some(PhysicalSize::new(small, small))).ok());

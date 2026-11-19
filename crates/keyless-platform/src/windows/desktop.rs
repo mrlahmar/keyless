@@ -60,8 +60,9 @@ pub fn open_url(url: &str) {
 /// Blocking error dialog, for failures that happen before any window exists.
 pub fn show_error(message: &str) {
     let message = HSTRING::from(message);
+    let title = HSTRING::from(keyless_core::APP_NAME);
     // SAFETY: valid NUL-terminated strings for the duration of the call.
-    unsafe { MessageBoxW(None, &message, w!("Keyless"), MB_OK | MB_ICONERROR) };
+    unsafe { MessageBoxW(None, &message, &title, MB_OK | MB_ICONERROR) };
 }
 
 fn hwnd(window: RawWindowHandle) -> Option<HWND> {

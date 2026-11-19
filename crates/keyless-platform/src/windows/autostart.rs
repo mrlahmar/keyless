@@ -1,5 +1,6 @@
 //! Start at sign-in through the per-user `Run` registry key. No admin rights needed.
 
+use keyless_core::APP_NAME;
 use windows::Win32::Foundation::{ERROR_FILE_NOT_FOUND, ERROR_SUCCESS};
 use windows::Win32::System::Registry::{
     HKEY_CURRENT_USER, REG_SZ, RRF_RT_REG_SZ, RegDeleteKeyValueW, RegGetValueW, RegSetKeyValueW,
@@ -9,7 +10,11 @@ use windows::core::{HSTRING, w};
 use crate::Error;
 
 const RUN_KEY: windows::core::PCWSTR = w!("Software\\Microsoft\\Windows\\CurrentVersion\\Run");
-const VALUE: windows::core::PCWSTR = w!("Keyless");
+
+/// The entry is named after the app, so a dev build has its own.
+fn value() -> HSTRING {
+    HSTRING::from(APP_NAME)
+}
 
 /// True when the sign-in entry starts this executable (not an older copy elsewhere).
 pub fn is_enabled() -> bool {
@@ -21,7 +26,7 @@ pub fn is_enabled() -> bool {
         RegGetValueW(
             HKEY_CURRENT_USER,
             RUN_KEY,
-            VALUE,
+            &value(),
             RRF_RT_REG_SZ,
             None,
             Some(buffer.as_mut_ptr().cast()),
@@ -47,7 +52,7 @@ pub fn set_enabled(enabled: bool) -> Result<(), Error> {
             RegSetKeyValueW(
                 HKEY_CURRENT_USER,
                 RUN_KEY,
-                VALUE,
+                &value(),
                 REG_SZ.0,
                 Some(command.as_ptr().cast()),
                 bytes as u32,
@@ -55,7 +60,7 @@ pub fn set_enabled(enabled: bool) -> Result<(), Error> {
         }
     } else {
         // SAFETY: plain registry call.
-        match unsafe { RegDeleteKeyValueW(HKEY_CURRENT_USER, RUN_KEY, VALUE) } {
+        match unsafe { RegDeleteKeyValueW(HKEY_CURRENT_USER, RUN_KEY, &value()) } {
             ERROR_FILE_NOT_FOUND => ERROR_SUCCESS,
             other => other,
         }

@@ -208,7 +208,8 @@ mod tests {
 
     fn keyboard() -> Keyboard {
         let mut k = Keyboard::new();
-        k.set_shortcut(Some(Shortcut::default()));
+        // Spelled out: the default differs between dev and release builds.
+        k.set_shortcut(Some(Shortcut { modifiers: Modifiers::CTRL | Modifiers::ALT, key: Key::Letter('K') }));
         k
     }
 

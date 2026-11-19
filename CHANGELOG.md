@@ -5,6 +5,12 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Debug builds run as "Keyless Dev", with a tinted icon and their own settings,
+  single-instance lock and start-at-sign-in entry, so they run next to an installed Keyless.
+  Their default shortcut is Ctrl + Alt + J.
+
 ## [0.1.0] - 2026-11-18
 
 ### Added

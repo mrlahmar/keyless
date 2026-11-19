@@ -1,6 +1,8 @@
 //! Tray status icons, drawn in code so they stay crisp and need no asset files: the
 //! keyboard face, green with open eyes while the keyboard is on, orange and asleep while
 //! it is paused. Same shapes as the face in the app (`ui/face.slint`), on a 32 px grid.
+//! Dev builds tint both faces (violet on, pink paused) so they stand apart from the
+//! installed app.
 
 use slint::{Image, Rgba8Pixel, SharedPixelBuffer};
 
@@ -8,18 +10,28 @@ const SIZE: u32 = 32;
 const INK: [f32; 3] = [18.0, 18.0, 18.0];
 const GREEN: [f32; 3] = [60.0, 207.0, 127.0];
 const ORANGE: [f32; 3] = [255.0, 79.0, 18.0];
+const DEV_ON: [f32; 3] = [139.0, 108.0, 255.0];
+const DEV_PAUSED: [f32; 3] = [255.0, 70.0, 170.0];
+
+fn body_on() -> [f32; 3] {
+    if keyless_core::DEV_BUILD { DEV_ON } else { GREEN }
+}
+
+fn body_paused() -> [f32; 3] {
+    if keyless_core::DEV_BUILD { DEV_PAUSED } else { ORANGE }
+}
 /// Half the outline width.
 const STROKE: f32 = 1.1;
 
 pub fn on() -> Image {
-    draw(GREEN, |x, y| {
+    draw(body_on(), |x, y| {
         let eye = |cx: f32| ((x - cx).powi(2) + (y - 16.5).powi(2)).sqrt() - 2.6;
         eye(11.5).min(eye(20.5))
     })
 }
 
 pub fn paused() -> Image {
-    draw(ORANGE, |x, y| {
+    draw(body_paused(), |x, y| {
         let lid = |x0: f32| curve_distance(x, y, (x0, 16.3), (x0 + 3.2, 19.1), (x0 + 6.4, 16.3)) - STROKE;
         lid(8.3).min(lid(17.3))
     })
@@ -89,17 +101,18 @@ mod tests {
             assert_eq!(pixel(&icon, 31, 31).a, 0);
             assert_eq!(pixel(&icon, 16, 10).a, 255);
         }
+        let rgb = |c: [f32; 3]| (c[0] as u8, c[1] as u8, c[2] as u8);
         let body = pixel(&on(), 16, 22);
-        assert_eq!((body.r, body.g, body.b), (60, 207, 127));
+        assert_eq!((body.r, body.g, body.b), rgb(body_on()));
         let body = pixel(&paused(), 16, 22);
-        assert_eq!((body.r, body.g, body.b), (255, 79, 18));
+        assert_eq!((body.r, body.g, body.b), rgb(body_paused()));
     }
 
     #[test]
     fn open_eyes_and_closed_lids_are_dark() {
         assert!(pixel(&on(), 11, 16).r < 40);
         assert!(pixel(&paused(), 11, 17).r < 120);
-        // Where the open eye would be, the sleeping face shows orange.
-        assert_eq!(pixel(&paused(), 11, 14).r, 255);
+        // Where the open eye would be, the sleeping face shows its body color.
+        assert_eq!(pixel(&paused(), 11, 14).r, body_paused()[0] as u8);
     }
 }
