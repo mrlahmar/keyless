@@ -1,20 +1,21 @@
 # Agent guide
 
 Keyless pauses the keyboard while the mouse keeps working. It does only that: don't add
-features beyond it without the maintainer asking. Windows is supported today; macOS and
-Linux come later, so keep OS code out of the core and UI.
+features beyond it without the maintainer asking. Windows and Linux are supported today;
+macOS comes later, so keep OS code out of the core and UI.
 
 ## Layout
 
 - `crates/keyless-core`: key state machine, shortcut model, settings (TOML). Pure Rust, no
   OS calls, fully unit tested. Put any logic that doesn't need the OS here.
-- `crates/keyless-platform`: OS code behind one API. `src/windows/` is the real
-  implementation; `src/unsupported.rs` is the stub every other OS compiles against. When
-  you add an item to one, add it to the other.
+- `crates/keyless-platform`: OS code behind one API. `src/windows/` and `src/linux/` are
+  the real implementations; `src/unsupported.rs` is the stub every other OS compiles
+  against. When you add an item to one, add it to all three.
 - `crates/keyless-app`: Slint UI (`ui/*.slint`) and `src/app.rs`, the controller that owns
   windows, tray and blocker. Runs on the UI thread only.
 - `packaging/windows/keyless.iss`: Inno Setup installer. `scripts/package.ps1` builds
-  everything that ships into `dist/`.
+  everything that ships into `dist/`. On Linux, `scripts/package-linux.sh` builds the
+  `.deb` and AppImage from `packaging/linux/`. See `docs/LINUX.md`.
 - `site/index.html`: the project website, one page, no framework. `.github/workflows/pages.yml`
   publishes it to GitHub Pages with the fonts, icon and demo GIFs copied in from the repo.
 

@@ -31,7 +31,8 @@ Download the latest release from [Releases](https://github.com/mrlahmar/keyless/
 - `Keyless-Setup-x.y.z-x64.exe`: installer, no administrator rights needed
 - `Keyless-x.y.z-x64-portable.zip`: a single `keyless.exe`, nothing to install
 
-Windows 10 (1809) or later, x64. macOS and Linux are planned.
+Windows 10 (1809) or later, x64. Linux (x86_64, X11 or Wayland): a `.deb` and an
+AppImage, see [docs/LINUX.md](docs/LINUX.md). macOS is planned.
 
 Keyless isn't code-signed yet, so Windows may show "Windows protected your PC" the first
 time. Click **More info**, then **Run anyway**.

@@ -9,6 +9,13 @@
 //! - [`instance`]: single instance, with "activate the running copy".
 //! - [`layout`]: what each drawn key does under the active keyboard layout.
 //! - [`desktop`]: popup window styling and placement, links, system preferences.
+//!   Where the OS can't show a window without focus, `PASSIVE_POPUPS` is `false` and the
+//!   app shows and hides popups the normal way. Where it can't place windows,
+//!   `PLACES_WINDOWS` is `false` and the window manager moves the paused tag instead.
+//!   Where the OS title bar doesn't suit the fixed-size main window, `CUSTOM_TITLE_BAR` is
+//!   `true` and the window draws its own.
+//! - [`notice`]: "Keyboard paused" as a system notification, where that works better than
+//!   the paused tag. `Notice::start` returns `None` where the app shows the tag.
 //!
 //! To port Keyless to another OS, add a module that provides these items and select it
 //! below. The UI never calls OS APIs directly.
@@ -22,13 +29,18 @@ mod windows;
 #[cfg(windows)]
 pub use windows::*;
 
-#[cfg(not(windows))]
+#[cfg(target_os = "linux")]
+mod linux;
+#[cfg(target_os = "linux")]
+pub use linux::*;
+
+#[cfg(not(any(windows, target_os = "linux")))]
 mod unsupported;
-#[cfg(not(windows))]
+#[cfg(not(any(windows, target_os = "linux")))]
 pub use unsupported::*;
 
 /// Events reported by the [`Blocker`] from its input thread.
-/// Handlers must return quickly: they run inside the keyboard hook.
+/// Handlers must return quickly: they run while keys wait to be passed on.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum BlockerEvent {
     /// The keyboard was paused (`true`) or resumed (`false`) by the shortcut or by the

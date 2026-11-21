@@ -60,6 +60,18 @@ pub mod layout {
     }
 }
 
+pub mod notice {
+    pub struct Notice(());
+
+    impl Notice {
+        pub fn start(_on_resume: impl Fn() + Send + 'static) -> Option<Self> {
+            None
+        }
+        pub fn show(&self, _title: &str, _body: &str, _resume: Option<&str>) {}
+        pub fn hide(&self) {}
+    }
+}
+
 pub mod desktop {
     use super::*;
 
@@ -76,6 +88,12 @@ pub mod desktop {
         eprintln!("{}: {message}", keyless_core::APP_NAME);
     }
     pub fn style_popup(_window: RawWindowHandle, _kind: PopupKind) {}
+    pub const PASSIVE_POPUPS: bool = false;
+    pub const PLACES_WINDOWS: bool = false;
+    pub const CUSTOM_TITLE_BAR: bool = false;
+    pub fn tray_host_ready(_on_ready: impl FnOnce() + Send + 'static) -> bool {
+        true
+    }
     pub fn set_visible_passive(_window: RawWindowHandle, _visible: bool) {}
     pub fn bring_to_front(_window: RawWindowHandle) {}
     pub fn place(_anchor: Anchor, _logical_size: (f32, f32)) -> Option<(i32, i32)> {

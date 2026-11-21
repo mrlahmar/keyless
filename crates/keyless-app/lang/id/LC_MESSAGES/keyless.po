@@ -464,3 +464,35 @@ msgstr "Menjeda keyboard dan mouse"
 
 msgid "Keyless: keyboard and mouse paused"
 msgstr "Keyless: keyboard dan mouse dijeda"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Minimize"
+msgstr "Perkecil"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Close"
+msgstr "Tutup"
+
+#: crates\keyless-app\ui\app.slint
+msgid "NOTIFICATION"
+msgstr "NOTIFIKASI"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Notify while paused"
+msgstr "Beri tahu saat dijeda"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Startup, display, language and the notification."
+msgstr "Mulai, tampilan, bahasa, dan notifikasi."
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn off the notification?"
+msgstr "Matikan notifikasi?"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Pause the mouse with the notification off?"
+msgstr "Jeda mouse dengan notifikasi mati?"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn it off"
+msgstr "Matikan"

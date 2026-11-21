@@ -137,6 +137,27 @@ export component Icon {
         fill: transparent;
         commands: "M9 1.5 a4.5 4.5 0 0 1 4.5 4.5 v6 a4.5 4.5 0 0 1 -9 0 v-6 a4.5 4.5 0 0 1 4.5 -4.5 z M9 4.2 v2.6";
     }
+    // Window buttons, for the title bar Keyless draws itself on Linux.
+    if name == "minimize": Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 18;
+        viewbox-height: 18;
+        stroke: tint;
+        stroke-width: 1.6px;
+        fill: transparent;
+        commands: "M4 9 h10";
+    }
+    if name == "close": Path {
+        width: 100%;
+        height: 100%;
+        viewbox-width: 18;
+        viewbox-height: 18;
+        stroke: tint;
+        stroke-width: 1.6px;
+        fill: transparent;
+        commands: "M4.5 4.5 L13.5 13.5 M13.5 4.5 L4.5 13.5";
+    }
     if name == "grip": Path {
         width: 100%;
         height: 100%;
@@ -224,11 +245,15 @@ export component Button inherits Rectangle {
 export component IconButton inherits Rectangle {
     in property <string> icon;
     in property <string> accessible-name;
+    // A window's close button: red under the pointer.
+    in property <bool> close;
     callback clicked;
     width: 32px;
     height: 32px;
     border-radius: Theme.radius-small;
-    background: touch.pressed ? Theme.line : touch.has-hover ? Theme.strip : transparent;
+    background: close && touch.pressed ? Theme.close.darker(0.2)
+        : close && touch.has-hover ? Theme.close
+        : touch.pressed ? Theme.line : touch.has-hover ? Theme.strip : transparent;
     accessible-role: button;
     accessible-label: accessible-name;
     accessible-action-default => { root.clicked(); }
@@ -238,6 +263,7 @@ export component IconButton inherits Rectangle {
     }
     Icon {
         name: root.icon;
+        tint: root.close && touch.has-hover ? Theme.on-close : Theme.text;
         size: 16px;
         x: (parent.width - self.width) / 2;
         y: (parent.height - self.height) / 2;

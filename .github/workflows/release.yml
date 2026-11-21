@@ -54,3 +54,47 @@ jobs:
           body_path: release-notes.md
           prerelease: ${{ contains(github.ref_name, '-') }}
           files: dist/*
+
+  linux:
+    # Built on Debian 12 so the binary runs on glibc 2.36 and newer (Debian 12+, Ubuntu
+    # 22.10+, Fedora 37+ and others).
+    runs-on: ubuntu-latest
+    container: debian:bookworm
+    # Waits for the Windows job, which creates the release and its notes.
+    needs: windows
+    steps:
+      - name: Install build tools
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates curl git build-essential pkg-config libfontconfig1-dev file appstream
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Check tag matches Cargo version
+        run: |
+          version=$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -n1)
+          [ "v$version" = "${{ github.ref_name }}" ] || { echo "Tag ${{ github.ref_name }} does not match Cargo version $version"; exit 1; }
+
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-about
+
+      - name: Get appimagetool
+        run: |
+          curl -fsSL -o /usr/local/bin/appimagetool https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x /usr/local/bin/appimagetool
+          echo "APPIMAGETOOL=/usr/local/bin/appimagetool" >> "$GITHUB_ENV"
+          # No FUSE in containers.
+          echo "APPIMAGE_EXTRACT_AND_RUN=1" >> "$GITHUB_ENV"
+
+      - name: Build and package
+        run: sh scripts/package-linux.sh
+
+      - uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: dist/*
+
+      - uses: softprops/action-gh-release@v3
+        with:
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: dist/*

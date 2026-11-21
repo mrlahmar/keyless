@@ -464,3 +464,35 @@ msgstr "কিবোর্ড ও মাউস থামায়"
 
 msgid "Keyless: keyboard and mouse paused"
 msgstr "Keyless: কিবোর্ড ও মাউস থেমে আছে"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Minimize"
+msgstr "ছোট করুন"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Close"
+msgstr "বন্ধ করুন"
+
+#: crates\keyless-app\ui\app.slint
+msgid "NOTIFICATION"
+msgstr "বিজ্ঞপ্তি"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Notify while paused"
+msgstr "বিরতির সময় জানান"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Startup, display, language and the notification."
+msgstr "চালু হওয়া, প্রদর্শন, ভাষা ও বিজ্ঞপ্তি।"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn off the notification?"
+msgstr "বিজ্ঞপ্তি বন্ধ করবেন?"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Pause the mouse with the notification off?"
+msgstr "বিজ্ঞপ্তি বন্ধ অবস্থায় মাউসও থামাবেন?"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn it off"
+msgstr "বন্ধ করুন"

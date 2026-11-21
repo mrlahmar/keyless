@@ -464,3 +464,35 @@ msgstr "Pausa teclado e mouse"
 
 msgid "Keyless: keyboard and mouse paused"
 msgstr "Keyless: teclado e mouse pausados"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Minimize"
+msgstr "Minimizar"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Close"
+msgstr "Fechar"
+
+#: crates\keyless-app\ui\app.slint
+msgid "NOTIFICATION"
+msgstr "NOTIFICAÇÃO"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Notify while paused"
+msgstr "Notificar durante a pausa"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Startup, display, language and the notification."
+msgstr "Inicialização, exibição, idioma e notificação."
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn off the notification?"
+msgstr "Desativar a notificação?"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Pause the mouse with the notification off?"
+msgstr "Pausar o mouse com a notificação desativada?"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn it off"
+msgstr "Desativar"

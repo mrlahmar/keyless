@@ -7,6 +7,9 @@ and versions follow [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Linux support, on X11 and Wayland: a `.deb` and an AppImage. The keyboard resumes on
+  screen lock, sleep and when another user takes the screen. See docs/LINUX.md for setup
+  and for what differs from Windows.
 - Debug builds run as "Keyless Dev", with a tinted icon and their own settings,
   single-instance lock and start-at-sign-in entry, so they run next to an installed Keyless.
   Their default shortcut is Ctrl + Alt + J.

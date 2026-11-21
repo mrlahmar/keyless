@@ -56,11 +56,11 @@ slint-tr-extractor --no-default-translation-context -o crates/keyless-app/lang/k
 A new language needs a folder in `lang/` and an entry in `LANGUAGES` in
 `crates/keyless-app/src/app.rs` and `Choices.languages` in `ui/app.slint`.
 
-## Porting to macOS or Linux
+## Porting to macOS
 
 Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). A port adds one module to
-`keyless-platform` that provides the same items as `src/windows/`; the core and UI stay
-unchanged. Please open an issue first to agree on the approach for blocking input.
+`keyless-platform` that provides the same items as `src/windows/` and `src/linux/`; the
+core and UI stay unchanged. Please open an issue first to agree on the approach for blocking input.
 
 ## Releases (maintainers)
 

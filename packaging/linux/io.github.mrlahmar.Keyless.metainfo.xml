@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AppStream metadata: the app's page in Ubuntu App Center, GNOME Software and KDE Discover.
+     scripts/package-linux.sh fills in <releases> from CHANGELOG.md. -->
+<component type="desktop-application">
+  <id>io.github.mrlahmar.Keyless</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Keyless</name>
+  <summary>Pause the keyboard while the mouse keeps working</summary>
+  <developer id="io.github.mrlahmar">
+    <name>The Keyless contributors</name>
+  </developer>
+  <description>
+    <p>
+      Keyless pauses your keyboard so you can touch it without typing anything: rest your
+      hands, lean across it, put something on it, or clean it. Your mouse keeps working.
+    </p>
+    <ul>
+      <li>Pause and resume from the window, the tray or a global shortcut.</li>
+      <li>Optionally pause the mouse too.</li>
+      <li>Resumes on its own after a set time, on screen lock and on sleep.</li>
+      <li>Works on X11 and Wayland.</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">keyless.desktop</launchable>
+  <provides>
+    <id>keyless.desktop</id>
+    <binary>keyless</binary>
+  </provides>
+  <url type="homepage">https://mrlahmar.github.io/keyless/</url>
+  <url type="bugtracker">https://github.com/mrlahmar/keyless/issues</url>
+  <url type="vcs-browser">https://github.com/mrlahmar/keyless</url>
+  <url type="translate">https://github.com/mrlahmar/keyless/blob/main/CONTRIBUTING.md</url>
+  <categories>
+    <category>Utility</category>
+    <category>Accessibility</category>
+  </categories>
+  <keywords>
+    <keyword>keyboard</keyword>
+    <keyword>pause</keyword>
+    <keyword>lock</keyword>
+    <keyword>clean</keyword>
+    <keyword>cat</keyword>
+  </keywords>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <content_rating type="oars-1.1"/>
+  <releases>
+@RELEASES@
+  </releases>
+</component>
