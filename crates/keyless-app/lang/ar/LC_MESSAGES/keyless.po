@@ -464,3 +464,35 @@ msgstr "يوقف لوحة المفاتيح والماوس"
 
 msgid "Keyless: keyboard and mouse paused"
 msgstr "Keyless: لوحة المفاتيح والماوس متوقفان"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Minimize"
+msgstr "تصغير"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Close"
+msgstr "إغلاق"
+
+#: crates\keyless-app\ui\app.slint
+msgid "NOTIFICATION"
+msgstr "الإشعار"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Notify while paused"
+msgstr "إشعار أثناء الإيقاف"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Startup, display, language and the notification."
+msgstr "بدء التشغيل والعرض واللغة والإشعار."
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn off the notification?"
+msgstr "إيقاف الإشعار؟"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Pause the mouse with the notification off?"
+msgstr "إيقاف الماوس والإشعار متوقف؟"
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn it off"
+msgstr "إيقافه"

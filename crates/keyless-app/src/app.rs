@@ -11,6 +11,7 @@ use keyless_core::{
 };
 use keyless_platform::{
     Anchor, Blocker, BlockerEvent, BlockerOptions, Error, PopupKind, autostart, desktop, instance, layout,
+    notice::Notice,
 };
 use slint::winit_030::winit::event::{StartCause, WindowEvent};
 use slint::winit_030::winit::event_loop::{ActiveEventLoop, DeviceEvents};
@@ -63,6 +64,8 @@ pub fn run(background: bool) -> Result<(), String> {
         .with_winit_custom_application_handler(NoDeviceEvents)
         .select()
         .map_err(|e| format!("Could not start the user interface: {e}"))?;
+    // On Linux, lets the desktop match windows to keyless.desktop for their name and icon.
+    let _ = slint::set_xdg_app_id(keyless_core::APP_NAME.to_lowercase().replace(' ', "-"));
 
     let _instance = match instance::acquire(|| post(|app| app.show_main(None))) {
         Ok(Some(guard)) => Some(guard),
@@ -103,7 +106,10 @@ struct App {
     main: MainWindow,
     panel: Panel,
     indicator: Indicator,
-    tray: Tray,
+    /// Replaced when the desktop's tray host appears late (see `recreate_tray`).
+    tray: RefCell<Tray>,
+    /// Shows "paused" as a notification where the OS does that better than the tag.
+    notice: Option<Notice>,
     blocker: Blocker,
     settings: RefCell<Settings>,
     settings_path: Option<PathBuf>,
@@ -134,12 +140,15 @@ impl App {
                 format!("Keyless could not take control of the keyboard ({e}). Your keyboard is unchanged.")
             })?;
         let ui = |e: slint::PlatformError| e.to_string();
+        // Before the tray icon exists, so a tray host that arrives in between isn't missed.
+        desktop::tray_host_ready(|| post(App::recreate_tray));
 
         let app = Rc::new(Self {
             main: MainWindow::new().map_err(ui)?,
             panel: Panel::new().map_err(ui)?,
             indicator: Indicator::new().map_err(ui)?,
-            tray: Tray::new().map_err(ui)?,
+            tray: RefCell::new(Tray::new().map_err(ui)?),
+            notice: Notice::start(|| post(|app| app.blocker.set_locked(false))),
             blocker,
             settings: RefCell::new(settings),
             settings_path,
@@ -232,18 +241,31 @@ impl App {
             state.on_start_at_login_changed(|value| post(move |app| app.set_start_at_login(value)));
             state.on_appearance_changed(|index| post(move |app| app.set_appearance(index)));
             state.on_language_changed(|index| post(move |app| app.set_language(index)));
+            // The window manager follows the pointer until the button is released.
+            state.on_move_window(|| with_app(|app| move_window(app, |app| app.main.window())));
+            state.on_minimize_window(|| post(|app| app.with_main_winit(|w| w.set_minimized(true))));
+            state.on_close_window(|| post(App::close_main));
         });
 
         self.main.window().on_close_requested(|| {
-            post(|app| {
-                let state = app.main.global::<AppState>();
-                state.set_window_open(false);
-                // An open "Are you sure?" counts as cancelled.
-                state.set_confirm(0);
-                app.layout_timer.stop();
-            });
+            post(App::forget_main);
             CloseRequestResponse::HideWindow
         });
+
+        // The desktop can still maximize the fixed-size window, such as with Super + Up.
+        // Undo it: the window would show only part of what it is drawn on.
+        if desktop::CUSTOM_TITLE_BAR {
+            self.main.window().on_winit_window_event(|window, event| {
+                if let WindowEvent::Resized(_) = event {
+                    window.with_winit_window(|w| {
+                        if w.is_maximized() {
+                            w.set_maximized(false);
+                        }
+                    });
+                }
+                EventResult::Propagate
+            });
+        }
 
         self.panel.on_dismiss(|| post(App::hide_panel));
         self.panel.window().on_winit_window_event(|_, event| {
@@ -253,13 +275,34 @@ impl App {
             EventResult::Propagate
         });
 
-        self.tray.set_dev(keyless_core::DEV_BUILD);
-        self.tray.set_icon_on(tray_icons::on());
-        self.tray.set_icon_paused(tray_icons::paused());
-        self.tray.on_open_panel(|| post(App::toggle_panel));
-        self.tray.on_toggle(|| post(|app| app.blocker.set_locked(!app.blocker.is_locked())));
-        self.tray.on_open_page(|page| post(move |app| app.show_main(Some(page))));
-        self.tray.on_quit(|| post(App::quit));
+        self.wire_tray();
+    }
+
+    fn wire_tray(&self) {
+        let tray = self.tray.borrow();
+        tray.set_dev(keyless_core::DEV_BUILD);
+        tray.set_icon_on(tray_icons::on());
+        tray.set_icon_paused(tray_icons::paused());
+        // The panel belongs next to the tray icon. Where Keyless can't put it there, the
+        // tray opens the full window instead.
+        if desktop::PLACES_WINDOWS {
+            tray.on_open_panel(|| post(App::toggle_panel));
+        } else {
+            tray.on_open_panel(|| post(|app| app.show_main(Some(PAGE_CONTROL))));
+        }
+        tray.on_toggle(|| post(|app| app.blocker.set_locked(!app.blocker.is_locked())));
+        tray.on_open_page(|page| post(move |app| app.show_main(Some(page))));
+        tray.on_quit(|| post(App::quit));
+    }
+
+    /// The desktop's tray host appeared after Keyless started (at sign-in): the first tray
+    /// icon never showed, so make a new one.
+    fn recreate_tray(&self) {
+        let Ok(tray) = Tray::new() else { return };
+        // Dropping the old one removes it, in case it did show after all.
+        drop(self.tray.replace(tray));
+        self.wire_tray();
+        self.sync();
     }
 
     /// Applies popup styling before the first show, so popups never flash in the taskbar
@@ -270,6 +313,9 @@ impl App {
     fn prepare_popups(&self) {
         if let Some(handle) = raw_handle(self.panel.window()) {
             desktop::style_popup(handle, PopupKind::Panel);
+        }
+        if !desktop::PASSIVE_POPUPS {
+            return;
         }
         let indicator = self.indicator.window();
         indicator.set_position(slint::PhysicalPosition::new(-32000, -32000));
@@ -329,6 +375,8 @@ impl App {
             state.set_shortcut_unlocks(settings.shortcut_unlocks);
             state.set_mouse_block(mouse_index as i32);
             state.set_mouse_blocks(mouse_blocks);
+            state.set_notice(self.notice.is_some());
+            state.set_custom_title_bar(desktop::CUSTOM_TITLE_BAR);
             state.set_auto_resume_index(auto_index as i32);
             state.set_show_indicator(settings.show_indicator);
             state.set_indicator_edge(edge_index as i32);
@@ -342,8 +390,8 @@ impl App {
         });
         drop(settings);
         self.update_countdown();
-        self.tray.set_paused(paused);
-        self.tray.set_mouse(mouse_blocks);
+        self.tray.borrow().set_paused(paused);
+        self.tray.borrow().set_mouse(mouse_blocks);
     }
 
     /// Labels the drawn keyboard for the active keyboard layout, if it changed.
@@ -436,15 +484,29 @@ impl App {
 
     fn update_indicator(&self) {
         let window = self.indicator.window();
-        let Some(handle) = raw_handle(window) else { return };
         let visible = self.blocker.is_locked() && self.settings.borrow().show_indicator;
+        if let Some(notice) = &self.notice {
+            if visible {
+                let state = self.main.global::<AppState>();
+                let resume = state.get_notice_resume();
+                let can_click = self.mouse_block() == MouseBlock::Off;
+                notice.show(
+                    &state.get_notice_title(),
+                    &state.get_notice_body(),
+                    can_click.then_some(resume.as_str()),
+                );
+            } else {
+                notice.hide();
+            }
+            return;
+        }
         if visible {
             if let Some((x, y)) = self.indicator_position() {
                 window.set_position(slint::PhysicalPosition::new(x, y));
             }
             window.request_redraw();
         }
-        desktop::set_visible_passive(handle, visible);
+        set_popup_visible(window, visible);
     }
 
     /// The dragged-to spot while it is still on a screen, otherwise the chosen edge.
@@ -459,6 +521,10 @@ impl App {
     /// Moves the tag with the pointer. `dx`, `dy`: logical offset since the press.
     fn drag_indicator(&self, dx: f32, dy: f32) {
         let window = self.indicator.window();
+        if !desktop::PLACES_WINDOWS {
+            move_window(self, |app| app.indicator.window());
+            return;
+        }
         let scale = window.scale_factor();
         let position = window.position();
         window.set_position(slint::PhysicalPosition::new(
@@ -469,6 +535,9 @@ impl App {
 
     /// Remembers where the tag was dropped, kept fully on screen.
     fn drop_indicator(&self) {
+        if !desktop::PLACES_WINDOWS {
+            return;
+        }
         let window = self.indicator.window();
         let position = window.position();
         let spot =
@@ -686,14 +755,34 @@ impl App {
         }
     }
 
+    /// The main window was closed: stop what only runs while it is open.
+    fn forget_main(&self) {
+        let state = self.main.global::<AppState>();
+        state.set_window_open(false);
+        // An open "Are you sure?" counts as cancelled.
+        state.set_confirm(0);
+        self.layout_timer.stop();
+    }
+
+    /// The close button of the custom title bar.
+    fn close_main(&self) {
+        let _ = self.main.hide();
+        self.forget_main();
+    }
+
+    fn with_main_winit(&self, f: impl FnOnce(&slint::winit_030::winit::window::Window)) {
+        self.main.window().with_winit_window(f);
+    }
+
     fn quit(&self) {
         self.blocker.set_locked(false);
         let _ = self.panel.hide();
-        if let Some(handle) = raw_handle(self.indicator.window()) {
-            desktop::set_visible_passive(handle, false);
+        set_popup_visible(self.indicator.window(), false);
+        if let Some(notice) = &self.notice {
+            notice.hide();
         }
         let _ = self.main.hide();
-        let _ = self.tray.hide();
+        let _ = self.tray.borrow().hide();
         let _ = slint::quit_event_loop();
     }
 }
@@ -719,6 +808,36 @@ fn open_licenses() {
     match local {
         Some(path) => desktop::open_url(&path.to_string_lossy()),
         None => desktop::open_url(REPOSITORY),
+    }
+}
+
+/// Lets the window manager move `window` with the pointer until the button is released.
+/// Call while the left button is down.
+///
+/// The window manager keeps that release to itself, so the element that got the press
+/// would hold on to the pointer for good: no other element would see clicks or hovering
+/// again. Ending the press for the window once the move has started prevents that.
+fn move_window(app: &App, which: fn(&App) -> &slint::Window) {
+    use slint::platform::{PointerEventButton, WindowEvent as SlintEvent};
+    which(app).with_winit_window(|w| {
+        let _ = w.drag_window();
+    });
+    // After the current event: the window is in the middle of handling the press.
+    post(move |app| {
+        let window = which(app);
+        // Outside the window, so nothing counts it as a click.
+        let position = slint::LogicalPosition::new(-1.0, -1.0);
+        window.dispatch_event(SlintEvent::PointerReleased { position, button: PointerEventButton::Left });
+        window.dispatch_event(SlintEvent::PointerExited);
+    });
+}
+
+/// Shows or hides a popup without taking focus where the OS allows it, normally elsewhere.
+fn set_popup_visible(window: &slint::Window, visible: bool) {
+    if !desktop::PASSIVE_POPUPS {
+        let _ = if visible { window.show() } else { window.hide() };
+    } else if let Some(handle) = raw_handle(window) {
+        desktop::set_visible_passive(handle, visible);
     }
 }
 

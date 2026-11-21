@@ -1,0 +1,7 @@
+# Keyless pauses the keyboard by taking over keyboards (and, only while the mouse is
+# paused, mice) in /dev/input and passing allowed input on through a virtual device
+# (/dev/uinput). This gives the user at the screen access to both, the same way systemd
+# gives access to game controllers. Access ends when the user leaves the seat.
+# The name must sort before 73-seat-late.rules, which applies "uaccess".
+SUBSYSTEM=="input", KERNEL=="event*", TAG+="uaccess"
+SUBSYSTEM=="misc", KERNEL=="uinput", TAG+="uaccess", OPTIONS+="static_node=uinput"

@@ -61,6 +61,16 @@ export global AppState {
     in-out property <int> confirm-mouse-block;
     // The main window is open: its animations may run.
     in-out property <bool> window-open;
+    // "Paused" shows as a system notification instead of the paused tag (Linux).
+    in-out property <bool> notice;
+    // The notification's text. Shown only while paused.
+    out property <string> notice-title: mouse-blocks ? @tr("Both paused") : @tr("Keyboard paused");
+    out property <string> notice-body: mouse-blocks ? @tr("Press {} to resume.", shortcut-text)
+        : @tr("Rest anything on it. Your mouse still works.");
+    out property <string> notice-resume: @tr("Resume");
+    // The main window draws its own title bar (Linux): its top bar moves the window and
+    // holds minimize and close.
+    in-out property <bool> custom-title-bar;
 
     callback toggle();
     callback resume();
@@ -85,6 +95,10 @@ export global AppState {
     callback start-at-login-changed(bool);
     callback appearance-changed(int);
     callback language-changed(int);
+    // The custom title bar (`custom-title-bar`).
+    callback move-window();
+    callback minimize-window();
+    callback close-window();
 }
 
 global Choices {
@@ -689,7 +703,8 @@ component SettingsPage inherits VerticalLayout {
 
     PageHeader {
         title: @tr("Settings");
-        subtitle: @tr("Startup, display, language and the paused tag.");
+        subtitle: AppState.notice ? @tr("Startup, display, language and the notification.")
+            : @tr("Startup, display, language and the paused tag.");
     }
 
     GridLayout {
@@ -780,12 +795,13 @@ component SettingsPage inherits VerticalLayout {
 
     VerticalLayout {
         spacing: 12px;
-        SectionLabel { text: @tr("PAUSED TAG"); }
+        SectionLabel { text: AppState.notice ? @tr("NOTIFICATION") : @tr("PAUSED TAG"); }
         Card {
             GridLayout {
                 padding: 14px;
                 spacing-horizontal: 18px;
-                VerticalLayout {
+                // A notification goes where the desktop puts it: no spot to pick.
+                if !AppState.notice: VerticalLayout {
                     row: 0;
                     col: Theme.rtl ? 1 : 0;
                     alignment: start;
@@ -797,7 +813,7 @@ component SettingsPage inherits VerticalLayout {
                     spacing: 10px;
                     horizontal-stretch: 1;
                     ToggleRow {
-                        title: @tr("Show while paused");
+                        title: AppState.notice ? @tr("Notify while paused") : @tr("Show while paused");
                         description: @tr("Off: only the tray icon turns orange.");
                         checked: AppState.show-indicator;
                         toggled(value) => {
@@ -808,7 +824,7 @@ component SettingsPage inherits VerticalLayout {
                             }
                         }
                     }
-                    Row {
+                    if !AppState.notice: Row {
                         spacing: 8px;
                         height: 28px;
                         Text {
@@ -831,7 +847,7 @@ component SettingsPage inherits VerticalLayout {
                             clicked => { AppState.indicator-reset(); }
                         }
                     }
-                    Text {
+                    if !AppState.notice: Text {
                         horizontal-alignment: Theme.start-align;
                         text: AppState.mouse-blocks
                             ? @tr("Pick an edge, or drag the tag anywhere by its body. Keyless remembers where you leave it. While the mouse pauses, it shows the shortcut instead of a Resume button.")
@@ -1034,7 +1050,9 @@ component ConfirmDialog inherits Rectangle {
                 spacing: 12px;
                 card-title := Text {
                     horizontal-alignment: Theme.start-align;
-                    text: AppState.confirm == 1 ? @tr("Hide the paused tag?") : @tr("Pause the mouse with the tag hidden?");
+                    text: AppState.notice
+                        ? (AppState.confirm == 1 ? @tr("Turn off the notification?") : @tr("Pause the mouse with the notification off?"))
+                        : (AppState.confirm == 1 ? @tr("Hide the paused tag?") : @tr("Pause the mouse with the tag hidden?"));
                     font-size: 20px;
                     font-weight: 700;
                     color: Theme.text;
@@ -1052,7 +1070,7 @@ component ConfirmDialog inherits Rectangle {
                     spacing: 8px;
                     alignment: end;
                     Button {
-                        text: AppState.confirm == 1 ? @tr("Hide it") : @tr("Pause the mouse");
+                        text: AppState.confirm != 1 ? @tr("Pause the mouse") : AppState.notice ? @tr("Turn it off") : @tr("Hide it");
                         clicked => {
                             if (AppState.confirm == 1) {
                                 AppState.show-indicator-changed(false);
@@ -1080,50 +1098,85 @@ export component MainWindow inherits Window {
     title: AppState.dev ? "Keyless Dev" : AppState.beta ? @tr("Keyless (beta)") : "Keyless";
     width: 880px;
     height: 680px;
+    // Linux: the desktop's title bar would offer a maximize button for this fixed-size
+    // window. The top bar below stands in for it.
+    no-frame: AppState.custom-title-bar;
     background: Theme.window;
     default-font-family: Theme.font;
 
     VerticalLayout {
-        Row {
+        Rectangle {
             height: 52px;
-            padding-left: 24px;
-            padding-right: 24px;
-            spacing: 8px;
-            Text {
-                horizontal-alignment: Theme.start-align;
-                text: "KEYLESS";
-                font-family: Theme.mono;
-                font-size: 14px;
-                font-weight: 700;
-                letter-spacing: 2.5px * Theme.tracking;
-                color: Theme.text;
-                vertical-alignment: center;
-            }
-            if AppState.beta: VerticalLayout {
-                alignment: center;
-                padding-left: 2px;
-                padding-right: 2px;
-                BetaTag { }
-            }
-            Rectangle { horizontal-stretch: 1; }
-            VerticalLayout {
-                alignment: center;
-                Rectangle {
-                    width: 9px;
-                    height: 9px;
-                    border-radius: 4.5px;
-                    background: AppState.paused ? Theme.signal : Theme.go;
+            // Dragging the top bar moves the window.
+            if AppState.custom-title-bar: TouchArea {
+                width: 100%;
+                height: 100%;
+                pointer-event(event) => {
+                    if (event.kind == PointerEventKind.down && event.button == PointerEventButton.left) {
+                        AppState.move-window();
+                    }
                 }
             }
-            Text {
-                horizontal-alignment: Theme.start-align;
-                text: AppState.paused ? @tr("PAUSED") : @tr("ON");
-                font-family: Theme.mono;
-                font-size: Theme.small;
-                font-weight: 700;
-                letter-spacing: 1.4px * Theme.tracking;
-                color: Theme.text;
-                vertical-alignment: center;
+            Row {
+                width: 100%;
+                height: 100%;
+                padding-left: 24px;
+                padding-right: AppState.custom-title-bar ? 10px : 24px;
+                spacing: 8px;
+                Text {
+                    horizontal-alignment: Theme.start-align;
+                    text: "KEYLESS";
+                    font-family: Theme.mono;
+                    font-size: 14px;
+                    font-weight: 700;
+                    letter-spacing: 2.5px * Theme.tracking;
+                    color: Theme.text;
+                    vertical-alignment: center;
+                }
+                if AppState.beta: VerticalLayout {
+                    alignment: center;
+                    padding-left: 2px;
+                    padding-right: 2px;
+                    BetaTag { }
+                }
+                Rectangle { horizontal-stretch: 1; }
+                VerticalLayout {
+                    alignment: center;
+                    Rectangle {
+                        width: 9px;
+                        height: 9px;
+                        border-radius: 4.5px;
+                        background: AppState.paused ? Theme.signal : Theme.go;
+                    }
+                }
+                Text {
+                    horizontal-alignment: Theme.start-align;
+                    text: AppState.paused ? @tr("PAUSED") : @tr("ON");
+                    font-family: Theme.mono;
+                    font-size: Theme.small;
+                    font-weight: 700;
+                    letter-spacing: 1.4px * Theme.tracking;
+                    color: Theme.text;
+                    vertical-alignment: center;
+                }
+                if AppState.custom-title-bar: Rectangle { width: 10px; }
+                if AppState.custom-title-bar: VerticalLayout {
+                    alignment: center;
+                    IconButton {
+                        icon: "minimize";
+                        accessible-name: @tr("Minimize");
+                        clicked => { AppState.minimize-window(); }
+                    }
+                }
+                if AppState.custom-title-bar: VerticalLayout {
+                    alignment: center;
+                    IconButton {
+                        icon: "close";
+                        close: true;
+                        accessible-name: @tr("Close");
+                        clicked => { AppState.close-window(); }
+                    }
+                }
             }
         }
         Divider { }
@@ -1213,6 +1266,15 @@ export component MainWindow inherits Window {
     if AppState.confirm != 0: ConfirmDialog {
         width: root.width;
         height: root.height;
+    }
+
+    // Without the desktop's frame there is no shadow: an edge keeps the window apart from
+    // what is behind it.
+    if AppState.custom-title-bar: Rectangle {
+        width: root.width;
+        height: root.height;
+        border-width: 1px;
+        border-color: Theme.line-strong;
     }
 }
 

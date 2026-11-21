@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Keyless
+Comment=Pause the keyboard while the mouse keeps working
+Exec=keyless
+Icon=keyless
+Terminal=false
+Categories=Utility;Accessibility;
+Keywords=keyboard;pause;lock;clean;cat;
+StartupWMClass=keyless

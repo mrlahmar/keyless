@@ -104,6 +104,20 @@ pub fn style_popup(window: RawWindowHandle, kind: PopupKind) {
     }
 }
 
+/// [`set_visible_passive`] works here.
+pub const PASSIVE_POPUPS: bool = true;
+
+/// [`place`] and [`fit`] work here: the app moves the paused tag itself.
+pub const PLACES_WINDOWS: bool = true;
+
+/// The main window uses the normal Windows title bar.
+pub const CUSTOM_TITLE_BAR: bool = false;
+
+/// The taskbar is up before apps that start at sign-in: nothing to wait for.
+pub fn tray_host_ready(_on_ready: impl FnOnce() + Send + 'static) -> bool {
+    true
+}
+
 /// Shows or hides a window without ever activating it, so the app the user is working
 /// in keeps keyboard focus.
 pub fn set_visible_passive(window: RawWindowHandle, visible: bool) {

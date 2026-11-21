@@ -648,3 +648,35 @@ msgstr ""
 #: crates\keyless-app\ui\mouse.slint:164
 msgid "Clicks, scrolling and the pointer are blocked while paused"
 msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Minimize"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Close"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "NOTIFICATION"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Notify while paused"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Startup, display, language and the notification."
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn off the notification?"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Pause the mouse with the notification off?"
+msgstr ""
+
+#: crates\keyless-app\ui\app.slint
+msgid "Turn it off"
+msgstr ""

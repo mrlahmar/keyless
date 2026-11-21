@@ -5,9 +5,11 @@ crates/
   keyless-core/      Keyboard state machine, shortcut model, settings. No OS, no UI.
   keyless-platform/  Everything that needs the OS, one module per OS:
                        windows/      keyboard hook, layout labels, autostart, single instance, popups
+                       linux/        evdev grab + uinput, logind, XDG autostart, single instance
                        unsupported   compiles everywhere else and reports Unsupported
   keyless-app/       Slint UI (ui/*.slint) and the controller that wires it together.
 packaging/windows/   Inno Setup installer.
+packaging/linux/     Desktop entry and udev rule; scripts/package-linux.sh builds .deb and AppImage.
 ```
 
 ## How blocking works (Windows)
@@ -37,6 +39,36 @@ call the hook for keys typed into Keyless's own windows, which broke shortcut re
 
 The UI thread talks to the input thread through a channel; events come back through
 `slint::invoke_from_event_loop`.
+
+## How blocking works (Linux)
+
+Linux has no global keyboard hook, and Wayland lets no app see other apps' input. Below
+the display server, each keyboard is a device in `/dev/input`. A dedicated thread grabs
+every physical keyboard with `EVIOCGRAB`, so only Keyless reads it, and creates a virtual
+copy of it with uinput. Each event goes through `keyless_core::Keyboard`; the ones that
+pass are written to the copy, so the desktop sees them as typed on the copy. The thread
+sleeps in `poll()` on the devices, a wake-up socket for commands, and an inotify watch on
+`/dev/input` for keyboards plugged in later.
+
+Keyboards stay grabbed for as long as Keyless runs, because the desktop ignores a key
+release from a device that never sent the press: grabbing only while paused would leave
+held keys stuck. For the same reason a device is grabbed only when none of its keys are
+down, and the copy always gets the release of every key it pressed. Mice and touchpads
+are opened and grabbed only while the mouse is paused (and until blocked buttons are
+released); `keyless_core::Mouse` decides per event as on Windows.
+
+Devices under `/sys/devices/virtual` (uinput, including Keyless's own copies) are never
+grabbed: software-sent input passes. If the process ends, the kernel ends the grabs and
+removes the copies, releasing whatever they held.
+
+A second thread listens to systemd-logind on the system bus: `PrepareForSleep` and the
+session's `LockedHint` resume the keyboard; when the session stops being `Active`
+(another user at the screen), Keyless lets go of every device until it is back.
+
+There is no hotkey registry, so shortcut conflicts aren't detected: Keyless consumes the
+shortcut before the desktop sees it. Access to `/dev/input` and `/dev/uinput` comes from
+a udev rule with `uaccess` (`packaging/linux/70-keyless.rules`). See
+[LINUX.md](LINUX.md) for what differs from Windows.
 
 ## UI
 
@@ -81,5 +113,4 @@ A new OS needs a module in `keyless-platform` providing `Blocker`, `autostart`,
 `instance` and `desktop` with the same signatures as `src/windows/`. Expected backends:
 
 - macOS: `CGEventTap`, which requires the user to grant Accessibility permission.
-- Linux: exclusive `evdev` grab (`EVIOCGRAB`) on keyboard devices, which needs access to
-  `/dev/input` (for example the `input` group). Wayland offers no global alternative.
+- Linux: done, see above.
