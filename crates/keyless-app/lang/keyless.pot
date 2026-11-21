@@ -54,7 +54,7 @@ msgstr ""
 
 #. Each language in its own name; the order matches LANGUAGES in app.rs.
 #: crates\keyless-app\ui\app.slint:95
-msgid "Same as Windows"
+msgid "Same as system"
 msgstr ""
 
 #: crates\keyless-app\ui\app.slint:105 crates\keyless-app\ui\app.slint:1263
@@ -324,7 +324,7 @@ msgid "AUTO"
 msgstr ""
 
 #: crates\keyless-app\ui\app.slint:721
-msgid "follow Windows"
+msgid "follow the system"
 msgstr ""
 
 #: crates\keyless-app\ui\app.slint:727
@@ -348,7 +348,7 @@ msgid "LANGUAGE"
 msgstr ""
 
 #: crates\keyless-app\ui\app.slint:766
-msgid "Follows Windows unless you pick one."
+msgid "Follows your system unless you pick one."
 msgstr ""
 
 #: crates\keyless-app\ui\app.slint:783

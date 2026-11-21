@@ -14,7 +14,7 @@ import { Palette } from "std-widgets.slint";
 export global Theme {
     // 0 = follow the system, 1 = light, 2 = dark. Set from Rust.
     in-out property <int> appearance;
-    // Windows' "Show animations" setting. Off keeps the face still.
+    // The system's "Show animations" setting. Off keeps the face still.
     in-out property <bool> animations: true;
     // Right-to-left language (Arabic): rows run right to left and text starts on the right.
     in-out property <bool> rtl;

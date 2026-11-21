@@ -15,6 +15,11 @@ and versions follow [Semantic Versioning](https://semver.org/).
   it instead of the Resume button. Keyless asks first before the paused tag is hidden
   while the mouse pauses. Screen lock, sign-out, sleep and quitting free the mouse.
 
+### Changed
+
+- Settings: the language and appearance choices that follow the system say "Same as
+  system" instead of naming Windows.
+
 ## [0.1.0] - 2026-11-18
 
 ### Added

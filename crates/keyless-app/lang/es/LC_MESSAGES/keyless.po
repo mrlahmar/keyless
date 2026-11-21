@@ -39,8 +39,8 @@ msgstr "TRAS 30 MIN"
 msgid "AFTER 60 MIN"
 msgstr "TRAS 60 MIN"
 
-msgid "Same as Windows"
-msgstr "Igual que Windows"
+msgid "Same as system"
+msgstr "Igual que el sistema"
 
 msgid "Keyboard paused"
 msgstr "Teclado en pausa"
@@ -171,8 +171,8 @@ msgstr "PANTALLA"
 msgid "AUTO"
 msgstr "AUTO"
 
-msgid "follow Windows"
-msgstr "igual que Windows"
+msgid "follow the system"
+msgstr "igual que el sistema"
 
 msgid "LIGHT"
 msgstr "CLARO"
@@ -189,8 +189,8 @@ msgstr "oscuro"
 msgid "LANGUAGE"
 msgstr "IDIOMA"
 
-msgid "Follows Windows unless you pick one."
-msgstr "Sigue a Windows, salvo que elijas uno."
+msgid "Follows your system unless you pick one."
+msgstr "Sigue al sistema, salvo que elijas uno."
 
 msgid "PAUSED TAG"
 msgstr "INDICADOR DE PAUSA"

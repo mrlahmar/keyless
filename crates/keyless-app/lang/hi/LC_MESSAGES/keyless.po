@@ -39,8 +39,8 @@ msgstr "30 मिनट बाद"
 msgid "AFTER 60 MIN"
 msgstr "60 मिनट बाद"
 
-msgid "Same as Windows"
-msgstr "Windows के अनुसार"
+msgid "Same as system"
+msgstr "सिस्टम के अनुसार"
 
 msgid "Keyboard paused"
 msgstr "कीबोर्ड रुका हुआ है"
@@ -171,8 +171,8 @@ msgstr "डिस्प्ले"
 msgid "AUTO"
 msgstr "स्वतः"
 
-msgid "follow Windows"
-msgstr "Windows के अनुसार"
+msgid "follow the system"
+msgstr "सिस्टम के अनुसार"
 
 msgid "LIGHT"
 msgstr "हल्का"
@@ -189,8 +189,8 @@ msgstr "गहरा"
 msgid "LANGUAGE"
 msgstr "भाषा"
 
-msgid "Follows Windows unless you pick one."
-msgstr "जब तक आप न चुनें, Windows के अनुसार रहती है।"
+msgid "Follows your system unless you pick one."
+msgstr "जब तक आप न चुनें, सिस्टम के अनुसार रहती है।"
 
 msgid "PAUSED TAG"
 msgstr "रोक संकेतक"

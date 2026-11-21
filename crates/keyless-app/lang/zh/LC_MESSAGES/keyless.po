@@ -39,8 +39,8 @@ msgstr "30 分钟后"
 msgid "AFTER 60 MIN"
 msgstr "60 分钟后"
 
-msgid "Same as Windows"
-msgstr "跟随 Windows"
+msgid "Same as system"
+msgstr "跟随系统"
 
 msgid "Keyboard paused"
 msgstr "键盘已暂停"
@@ -171,8 +171,8 @@ msgstr "显示"
 msgid "AUTO"
 msgstr "自动"
 
-msgid "follow Windows"
-msgstr "跟随 Windows"
+msgid "follow the system"
+msgstr "跟随系统"
 
 msgid "LIGHT"
 msgstr "浅色"
@@ -189,8 +189,8 @@ msgstr "深色"
 msgid "LANGUAGE"
 msgstr "语言"
 
-msgid "Follows Windows unless you pick one."
-msgstr "默认跟随 Windows，也可自行选择。"
+msgid "Follows your system unless you pick one."
+msgstr "默认跟随系统，也可自行选择。"
 
 msgid "PAUSED TAG"
 msgstr "暂停标签"

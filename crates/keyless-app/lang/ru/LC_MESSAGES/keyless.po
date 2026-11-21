@@ -39,8 +39,8 @@ msgstr "ЧЕРЕЗ 30 МИН"
 msgid "AFTER 60 MIN"
 msgstr "ЧЕРЕЗ 60 МИН"
 
-msgid "Same as Windows"
-msgstr "Как в Windows"
+msgid "Same as system"
+msgstr "Как в системе"
 
 msgid "Keyboard paused"
 msgstr "Клавиатура на паузе"
@@ -171,8 +171,8 @@ msgstr "ОФОРМЛЕНИЕ"
 msgid "AUTO"
 msgstr "АВТО"
 
-msgid "follow Windows"
-msgstr "как в Windows"
+msgid "follow the system"
+msgstr "как в системе"
 
 msgid "LIGHT"
 msgstr "СВЕТЛАЯ"
@@ -189,8 +189,8 @@ msgstr "тёмная"
 msgid "LANGUAGE"
 msgstr "ЯЗЫК"
 
-msgid "Follows Windows unless you pick one."
-msgstr "Как в Windows, если не выбрать другой."
+msgid "Follows your system unless you pick one."
+msgstr "Как в системе, если не выбрать другой."
 
 msgid "PAUSED TAG"
 msgstr "ИНДИКАТОР ПАУЗЫ"

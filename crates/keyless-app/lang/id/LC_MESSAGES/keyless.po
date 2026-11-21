@@ -39,8 +39,8 @@ msgstr "SETELAH 30 MNT"
 msgid "AFTER 60 MIN"
 msgstr "SETELAH 60 MNT"
 
-msgid "Same as Windows"
-msgstr "Sama dengan Windows"
+msgid "Same as system"
+msgstr "Sama dengan sistem"
 
 msgid "Keyboard paused"
 msgstr "Keyboard dijeda"
@@ -171,8 +171,8 @@ msgstr "TAMPILAN"
 msgid "AUTO"
 msgstr "OTOMATIS"
 
-msgid "follow Windows"
-msgstr "ikuti Windows"
+msgid "follow the system"
+msgstr "ikuti sistem"
 
 msgid "LIGHT"
 msgstr "TERANG"
@@ -189,8 +189,8 @@ msgstr "gelap"
 msgid "LANGUAGE"
 msgstr "BAHASA"
 
-msgid "Follows Windows unless you pick one."
-msgstr "Mengikuti Windows kecuali Anda memilih."
+msgid "Follows your system unless you pick one."
+msgstr "Mengikuti sistem kecuali Anda memilih."
 
 msgid "PAUSED TAG"
 msgstr "PENANDA JEDA"

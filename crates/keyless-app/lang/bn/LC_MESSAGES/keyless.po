@@ -39,8 +39,8 @@ msgstr "30 মিনিট পরে"
 msgid "AFTER 60 MIN"
 msgstr "60 মিনিট পরে"
 
-msgid "Same as Windows"
-msgstr "Windows-এর মতো"
+msgid "Same as system"
+msgstr "সিস্টেমের মতো"
 
 msgid "Keyboard paused"
 msgstr "কীবোর্ড বিরতিতে আছে"
@@ -171,8 +171,8 @@ msgstr "প্রদর্শন"
 msgid "AUTO"
 msgstr "স্বয়ংক্রিয়"
 
-msgid "follow Windows"
-msgstr "Windows-এর মতো"
+msgid "follow the system"
+msgstr "সিস্টেমের মতো"
 
 msgid "LIGHT"
 msgstr "হালকা"
@@ -189,8 +189,8 @@ msgstr "গাঢ়"
 msgid "LANGUAGE"
 msgstr "ভাষা"
 
-msgid "Follows Windows unless you pick one."
-msgstr "আপনি বেছে না নিলে Windows অনুসরণ করে।"
+msgid "Follows your system unless you pick one."
+msgstr "আপনি বেছে না নিলে সিস্টেম অনুসরণ করে।"
 
 msgid "PAUSED TAG"
 msgstr "বিরতি নির্দেশক"

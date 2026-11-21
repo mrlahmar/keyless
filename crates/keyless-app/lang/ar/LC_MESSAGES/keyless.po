@@ -39,8 +39,8 @@ msgstr "بعد 30 دقيقة"
 msgid "AFTER 60 MIN"
 msgstr "بعد 60 دقيقة"
 
-msgid "Same as Windows"
-msgstr "مثل Windows"
+msgid "Same as system"
+msgstr "مثل النظام"
 
 msgid "Keyboard paused"
 msgstr "لوحة المفاتيح متوقفة مؤقتًا"
@@ -171,8 +171,8 @@ msgstr "العرض"
 msgid "AUTO"
 msgstr "تلقائي"
 
-msgid "follow Windows"
-msgstr "مثل Windows"
+msgid "follow the system"
+msgstr "مثل النظام"
 
 msgid "LIGHT"
 msgstr "فاتح"
@@ -189,8 +189,8 @@ msgstr "داكن"
 msgid "LANGUAGE"
 msgstr "اللغة"
 
-msgid "Follows Windows unless you pick one."
-msgstr "تتبع Windows ما لم تختر لغة."
+msgid "Follows your system unless you pick one."
+msgstr "تتبع النظام ما لم تختر لغة."
 
 msgid "PAUSED TAG"
 msgstr "مؤشر الإيقاف"

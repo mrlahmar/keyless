@@ -45,7 +45,7 @@ export global AppState {
     in-out property <bool> indicator-custom;
     in-out property <bool> start-at-login;
     in-out property <int> appearance-index;
-    // 0 follows Windows, then the languages in Choices.languages.
+    // 0 follows the system, then the languages in Choices.languages.
     in-out property <int> language-index;
     in-out property <string> version;
     // Version is 0.x or a pre-release: show the BETA tag and "(beta)" in the title.
@@ -92,7 +92,7 @@ global Choices {
     out property <[string]> auto-spoken: [@tr("never"), @tr("after 5 minutes"), @tr("after 15 minutes"), @tr("after 30 minutes"), @tr("after 60 minutes")];
     out property <[string]> auto-after: ["", @tr("AFTER 5 MIN"), @tr("AFTER 15 MIN"), @tr("AFTER 30 MIN"), @tr("AFTER 60 MIN")];
     // Each language in its own name; the order matches LANGUAGES in app.rs.
-    out property <[string]> languages: [@tr("Same as Windows"), "English", "中文（简体）", "हिन्दी", "Español", "العربية", "Français", "বাংলা", "Português", "Русский", "Bahasa Indonesia"];
+    out property <[string]> languages: [@tr("Same as system"), "English", "中文（简体）", "हिन्दी", "Español", "العربية", "Français", "বাংলা", "Português", "Русский", "Bahasa Indonesia"];
 }
 
 // ---------- Control ----------
@@ -718,7 +718,7 @@ component SettingsPage inherits VerticalLayout {
                 spacing: 8px;
                 AppearanceTile {
                     label: @tr("AUTO");
-                    spoken: @tr("follow Windows");
+                    spoken: @tr("follow the system");
                     swatch: 0;
                     selected: AppState.appearance-index == 0;
                     clicked => { AppState.appearance-changed(0); }
@@ -763,7 +763,7 @@ component SettingsPage inherits VerticalLayout {
                     }
                     Text {
                         horizontal-alignment: Theme.start-align;
-                        text: @tr("Follows Windows unless you pick one.");
+                        text: @tr("Follows your system unless you pick one.");
                         font-size: Theme.caption;
                         color: Theme.text-faint;
                         wrap: word-wrap;
